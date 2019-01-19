@@ -14,5 +14,6 @@ addons:
       - aspell-en
 before_script:
   - (cargo install mdbook --vers 0.2.0 --force || true)
+  - (cargo install mdbook-linkcheck || true)
 script:
-  - bash deploy.sh
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash deploy.sh
