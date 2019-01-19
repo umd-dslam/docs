@@ -9,7 +9,7 @@ rm -rf book
 echo 'Building...'
 mdbook build
 
-cd book
+cd book && mv html/* . && rm -rf html
 
 git init
 git config user.name "${U_NAME}"
