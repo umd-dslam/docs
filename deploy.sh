@@ -16,3 +16,4 @@ git config user.email "${U_EMAIL}"
 git add -A .
 git commit -m "rebuild pages at ${rev}"
 git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:${P_BRANCH}
+
