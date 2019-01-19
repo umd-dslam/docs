@@ -1,0 +1,9 @@
+[book]
+authors = ["Gang Liao"]
+multilingual = false
+src = "src"
+title = "CalvinDFS"
+
+[output.html]
+
+[output.linkcheck]  # enable the "mdbook-linkcheck" renderer
