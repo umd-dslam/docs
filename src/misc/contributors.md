@@ -8,3 +8,4 @@ shout-out to them!
 - [Daniel Abadi](https://github.com/abadid)
 
 If you feel you're missing from this list, feel free to add yourself in a PR.
+
