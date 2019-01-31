@@ -1,3 +1,8 @@
 # Summary
 
-- [Chapter 1](./chapter_1.md)
+
+- [Proposal](./proposal.md)
+
+---------------
+
+- [Contributors](./misc/contributors.md)
