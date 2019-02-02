@@ -18,3 +18,12 @@ Due to the complexity of this project, Hadoop compilation involves a lot of depe
 
 You can download and install Docker from this webpage: [https://docs.docker.com/install/](https://docs.docker.com/install/). Docker
 is available on multiple platforms. For example, Desktop (Mac and Windows), Server (CentOS, Debian, Fedora and Ubuntu).
+
+
+After installation, you can issue the command to verify your download version:
+
+```bash
+$ docker --version
+
+Docker version 18.05.0-ce, build f150324
+```
