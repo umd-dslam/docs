@@ -6,3 +6,4 @@
 ---------------
 
 - [Contributors](./misc/contributors.md)
+- [Setting Up Environment](./setup-env.md)
