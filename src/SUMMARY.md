@@ -2,7 +2,7 @@
 
 
 - [Proposal](./proposal.md)
-- [Setting Up Environment](./setup-env.md)
+- [Setting up Environment](./setup-env.md)
 
 
 ---------------
