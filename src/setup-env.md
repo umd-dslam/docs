@@ -85,7 +85,8 @@ These incremental commands are added in [start-build-env.sh#L67-L75](https://git
 Also, `docker run --net=host` was added [start-build-env.sh#L87](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L87) in order to reach the comparable performance for container, which will perform identically to the bare metal.
 
 
-Now, the following commands could be used to build and start Hadoop dev environment!
+Now, the following commands could be used to build and start Hadoop dev environment! The default container
+name is **hadoop-dev**.
 
 ```bash
 $ cd $project_directory  # where Dockerfile is located
@@ -103,6 +104,23 @@ a07214073fc3    hadoop-build-501    "/bin/bash"              9 hours ago    Up 9
 ### Interact with Postgres
 
 ```bash
-# Jump into container
+# Jump into hadoop-dev container
 $ docker exec -it hadoop-dev bash
+
+ _   _           _                    ______
+| | | |         | |                   |  _  \
+| |_| | __ _  __| | ___   ___  _ __   | | | |_____   __
+|  _  |/ _` |/ _` |/ _ \ / _ \| '_ \  | | | / _ \ \ / /
+| | | | (_| | (_| | (_) | (_) | |_) | | |/ /  __/\ V /
+\_| |_/\__,_|\__,_|\___/ \___/| .__/  |___/ \___| \_(_)
+                              | |
+                              |_|
+
+This is the standard Hadoop Developer build environment.
+This has all the right tools installed required to build
+Hadoop from source.
+
+# Now, you are in hadoop-dev container!
+# see prompt is changed from $ to xxx@linuxkit-025000000001 
+xxx@linuxkit-025000000001:~/hadoop$ ls
 ```
