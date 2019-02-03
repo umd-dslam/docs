@@ -11,3 +11,5 @@ There are a few distributed file systems that distribute the namespace server it
 To unlock the scalability of HDFS, we propose that the file system metadata and the directory tree structure in HDFS Namenode can be removed from memory and stored into a [deterministic database](http://www.cs.umd.edu/~abadi/papers/abadi-cacm2018.pdf). Metadata can be partitioned and replicated across a shared-nothing cluster of independent servers, and operations on file metadata transformed into distributed transactions. The difference between this project and above solutions like distributed Namenodes is that it is a deterministic database which has
 shown to be a promising direction to improving transactional database system scalability, modularity,
 throughput, and replication.
+
+The source code is currently hosted on github: [https://github.com/DSL-UMD](https://github.com/DSL-UMD).
