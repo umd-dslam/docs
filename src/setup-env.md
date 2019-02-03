@@ -54,15 +54,12 @@ Now, you can start a Postgres container (in the background):
 $ docker run -d -p 5432:5432 --name pg_test eg_postgresql
 ```
 
-Note: 
-
-```
-docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+Note: docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 - -d: Run container in background and print container ID
 - --name: Assign a name to the container
 - -p: Publish a container's port(s) to the host
-```
+
 
 `docker ps` can list all alive containers.
 
