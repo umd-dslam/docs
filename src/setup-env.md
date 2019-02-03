@@ -122,5 +122,31 @@ Hadoop from source.
 
 # Now, you are in hadoop-dev container!
 # see prompt is changed from $ to xxx@linuxkit-025000000001 
-xxx@linuxkit-025000000001:~/hadoop$ ls
+xxx@linuxkit-025000000001:~/hadoop$
+```
+
+Since we installed **postgresql-client** and **jdbc driver** in hadoop-dev image, 
+you can use them to access Postgres's service from remote server (**pg_test** container),
+for example, connect to database server, create table and insert/select tuples:
+
+```bash
+$ psql -h localhost -p 5432 -d docker -U docker
+
+Password for user docker: # password is docker
+SSL connection (protocol: TLSv1.2, cipher: DHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
+
+docker=# CREATE TABLE cities (name varchar(80), location point);
+
+CREATE TABLE
+
+docker=# INSERT INTO cities VALUES ('San Francisco', '(-194.0, 53.0)');
+
+INSERT 0 1
+
+docker=# SELECT * FROM cities;
+
+     name      | location
+---------------+-----------
+ San Francisco | (-194,53)
+(1 row)
 ```
