@@ -81,7 +81,7 @@ Fortunately, official Hadoop team already used Docker as their daily testbed.
 We added a few software (**postgresql-client** and **jdbc**) in offical script to access **postgressql-9.3** in the former container (remote server): **pg_test**.
 
 
-<img src="img/arch01-01.png" left="left 72% center" style="width: 70%;" />
+<img src="img/arch01-01.png" class="center" style="width: 70%;" />
 
 <span class="caption">Figure 1-1: The client server architecture diagram of HDFS and Postgres.</span>
 

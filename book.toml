@@ -6,6 +6,7 @@ title = "CalvinDFS"
 
 [output.html]
 mathjax-support = true
+additional-css = ["theme/docs.css"]
 
 [output.linkcheck]  # enable the "mdbook-linkcheck" renderer
 
