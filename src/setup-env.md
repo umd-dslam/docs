@@ -80,6 +80,10 @@ CONTAINER ID    IMAGE            COMMAND                  CREATED        STATUS 
 Fortunately, official Hadoop team already used Docker as their daily testbed.
 We added a few software (**postgresql-client** and **jdbc**) in offical script to access **postgressql-9.3** in the former container (remote server): **pg_test**.
 
+
+<img src="img/arch01-01.svg" class="center" style="width: 70%;" />
+<span class="caption">Figure 1-1: The client server architecture diagram of HDFS and Postgres.</span>
+
 These incremental commands are added in [start-build-env.sh#L67-L75](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L67-L75).
 
 Also, `docker run --net=host` was added [start-build-env.sh#L87](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L87) in order to reach the comparable performance for container, which will perform identically to the bare metal.
