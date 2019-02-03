@@ -75,8 +75,15 @@ a07214073fc3        hadoop-build-501    "/bin/bash"     9 hours ago    Up 9 hour
 
 ## Build a Hadoop Development Environment Docker Image
 
-Fortunately, official Hadoop team already used Docker as their general building tool. 
-We added a few software (`postgresql-client` and `jdbc`) to access `postgressql-9.3` in the previous container: **pg_test**.
+Fortunately, official Hadoop team already used Docker as their daily testbed.
+We added a few software (`postgresql-client` and `jdbc`) in offical script to access `postgressql-9.3` in the previous container: **pg_test**.
+
+These incremental commands are added in [start-build-env.sh#L67-L75](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L67-L75)
+
+Also, `docker run --net=host` was added [start-build-env.sh#L87](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L87) in order to reach the comparable performance for container, which will perform identically to the bare metal.
+
+
+Now, the following commands could be used to build and start Hadoop dev environment!
 
 ```bash
 $ cd $project_directory  # where Dockerfile is located
