@@ -4,6 +4,10 @@ In this section, you will learn how to setup the development environment. This p
 
 The setup will be organized as follows:
 
+```handlebars
+{{#toc}}{{/toc}}
+```
+
 0. Install Docker
 1. Build a Postgres Docker Image
 2. Build a Hadoop Development Environment Docker Image

@@ -13,5 +13,3 @@ shown to be a promising direction to improving transactional database system sca
 throughput, and replication.
 
 The source code is currently hosted on github: [https://github.com/DSL-UMD](https://github.com/DSL-UMD).
-
-<script type="text/javascript" id="clstr_globe" src="//cdn.clustrmaps.com/globe.js?d=3-UgySTqOXhf3FIwe1gZ9VSnYrHlvN0awA_HF5qRLo4"></script>

@@ -8,3 +8,15 @@
 ---------------
 
 - [Contributors](./misc/contributors.md)
+
+```html
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a83a9b3fed4749774fcf29f47b94cc01";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+```
