@@ -60,6 +60,9 @@ Note: docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 - --name: Assign a name to the container
 - -p: Publish a container's port(s) to the host
 
+**-p 5432:5432** means pg_test's port 5432 is mapped to the host network port 5432.
+pg_test's network port 5432 (Postgres service) is not isolated from the Docker host.
+
 
 `docker ps` can list all alive containers.
 
@@ -72,8 +75,10 @@ CONTAINER ID    IMAGE            COMMAND                  CREATED        STATUS 
 
 ## Build a Hadoop Development Environment Docker Image
 
+### Hadoop Dev Docker Image
+
 Fortunately, official Hadoop team already used Docker as their daily testbed.
-We added a few software (**postgresql-client** and **jdbc**) in offical script to access **postgressql-9.3** in the former container: **pg_test**.
+We added a few software (**postgresql-client** and **jdbc**) in offical script to access **postgressql-9.3** in the former container (remote server): **pg_test**.
 
 These incremental commands are added in [start-build-env.sh#L67-L75](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L67-L75).
 
@@ -93,8 +98,11 @@ $ docker ps
 CONTAINER ID    IMAGE               COMMAND                  CREATED        STATUS       PORTS                    NAMES
 a07214073fc3    hadoop-build-501    "/bin/bash"              9 hours ago    Up 9 hours                            hadoop-dev
 55eb5cf75643    eg_postgresql       "/usr/lib/postgresql…"   3 weeks ago    Up 9 hours   0.0.0.0:5432->5432/tcp   pg_test
+```
 
+### Interact with Postgres
+
+```bash
 # Jump into container
 $ docker exec -it hadoop-dev bash
 ```
-
