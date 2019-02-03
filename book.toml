@@ -5,5 +5,15 @@ src = "src"
 title = "CalvinDFS"
 
 [output.html]
+mathjax-support = true
 
 [output.linkcheck]  # enable the "mdbook-linkcheck" renderer
+
+[output.html.search]
+limit-results = 20
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 2
+boost-paragraph = 1
+expand = true
+heading-split-level = 2
