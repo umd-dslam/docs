@@ -14,4 +14,6 @@ throughput, and replication.
 
 The source code is currently hosted on github: [https://github.com/DSL-UMD](https://github.com/DSL-UMD).
 
+This proposal is still **in progress**!
+
 
