@@ -20,7 +20,7 @@ You can download and install Docker from this webpage: [https://docs.docker.com/
 is available on multiple platforms. For example, Desktop (Mac and Windows), Server (CentOS, Debian, Fedora and Ubuntu).
 
 
-After installation, you can issue the command to verify your download version:
+After installation, you can issue the command to verify its version:
 
 ```bash
 $ docker --version
