@@ -66,8 +66,8 @@ Note: docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```bash
 $ docker ps
 
-CONTAINER ID        IMAGE               COMMAND         CREATED        STATUS          PORTS    NAMES
-a07214073fc3        hadoop-build-501    "/bin/bash"     9 hours ago    Up 9 hours               hadoop-dev
+CONTAINER ID    IMAGE            COMMAND                  CREATED        STATUS       PORTS                    NAMES
+55eb5cf75643    eg_postgresql    "/usr/lib/postgresql…"   3 weeks ago    Up 9 hours   0.0.0.0:5432->5432/tcp   pg_test
 ```
 
 ## Build a Hadoop Development Environment Docker Image
