@@ -130,7 +130,7 @@ you can use them to access Postgres's service from remote server (**pg_test** co
 for example, connect to database server, create table and insert/select tuples:
 
 ```bash
-$ psql -h localhost -p 5432 -d docker -U docker
+xxx@linuxkit-025000000001:~/hadoop$ psql -h localhost -p 5432 -d docker -U docker
 
 Password for user docker: # password is docker
 SSL connection (protocol: TLSv1.2, cipher: DHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
