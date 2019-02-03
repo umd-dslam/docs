@@ -39,7 +39,7 @@ $ docker build -t eg_postgresql . # build a Docker image
 
 Note: `postgresql-9.3` was packaged into Docker image, to change its version, please check out [Dockerfile#L20](https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/Dockerfile#L20)!
 
-After an image was built, `docker images` can list it:
+`docker images` can list all images built locally or downloaded from registry:
 
 ```bash
 $ docker images
@@ -74,6 +74,9 @@ a07214073fc3        hadoop-build-501    "/bin/bash"     9 hours ago    Up 9 hour
 ```
 
 ## Build a Hadoop Development Environment Docker Image
+
+Fortunately, official Hadoop team already used Docker as their general building tool. 
+We added a few software (`postgresql-client` and `jdbc`) to access `postgressql-9.3` in the previous container: **pg_test**.
 
 ```bash
 $ cd $project_directory  # where Dockerfile is located
