@@ -30,34 +30,34 @@ Docker version 18.05.0-ce, build f150324
 
 ## Build a Postgres Docker Image
 
-You can build a Postgres image via Dockerfile:
+Postgres image is built by a [Dockerfile](https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/Dockerfile):
 
 ```bash
 $ cd $project_directory  # where Dockerfile is located
 $ docker build -t eg_postgresql . # build a Docker image
 ```
 
-Note: `postgresql-9.3` was packaged into Docker image, you might change it in [Dockerfile#L20](https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/Dockerfile#L20).
+Note: `postgresql-9.3` was packaged into Docker image, to change its version, please check out [Dockerfile#L20](https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/Dockerfile#L20)!
 
-Now, you can find your image via `docker images`
+After an image was built, `docker images` can list it:
 
 ```bash
 $ docker images
 
-REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
-eg_postgresql                              latest              efb054f3e4d1        8 weeks ago         421MB
+REPOSITORY             TAG          IMAGE ID            CREATED             SIZE
+eg_postgresql          latest       efb054f3e4d1        8 weeks ago         421MB
 ```
 
-After you have an image locally, you can start a Postgres container (in the background):
+Now, you can start a Postgres container (in the background):
 
 ```bash
 $ docker run -d -p 5432:5432 --name pg_test eg_postgresql
 ```
 
-Note:
+Note: 
 
-```bash
-Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+```
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 - -d: Run container in background and print container ID
 - --name: Assign a name to the container
@@ -69,8 +69,8 @@ Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```bash
 $ docker ps
 
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS              NAMES
-a07214073fc3        hadoop-build-501    "/bin/bash"              9 hours ago         Up 9 hours              hadoop-dev
+CONTAINER ID        IMAGE               COMMAND         CREATED        STATUS          PORTS    NAMES
+a07214073fc3        hadoop-build-501    "/bin/bash"     9 hours ago    Up 9 hours               hadoop-dev
 ```
 
 ## Build a Hadoop Development Environment Docker Image
@@ -83,9 +83,9 @@ $ ./start-build-env.sh
 
 $ docker ps
 
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS              NAMES
-a07214073fc3        hadoop-build-501    "/bin/bash"              9 hours ago         Up 9 hours              hadoop-dev
-55eb5cf75643        eg_postgresql       "/usr/lib/postgresql…"   3 weeks ago         Up 9 hours          0.0.0.0:5432->5432/tcp   pg_test
+CONTAINER ID    IMAGE               COMMAND                  CREATED        STATUS       PORTS                    NAMES
+a07214073fc3    hadoop-build-501    "/bin/bash"              9 hours ago    Up 9 hours                            hadoop-dev
+55eb5cf75643    eg_postgresql       "/usr/lib/postgresql…"   3 weeks ago    Up 9 hours   0.0.0.0:5432->5432/tcp   pg_test
 
 # Jump into container
 $ docker exec -it hadoop-dev bash
