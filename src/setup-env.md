@@ -228,50 +228,50 @@ The deployment process is more complicated because it involves multiple componen
 
     - **core_site.xml**:
 
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-    <configuration>
-        <property>
-            <name>fs.defaultFS</name>
-            <value>hdfs://192.168.65.3:9000</value>
-        </property>
+        ```xml
+        <?xml version="1.0" encoding="UTF-8"?>
+        <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+        <configuration>
+            <property>
+                <name>fs.defaultFS</name>
+                <value>hdfs://192.168.65.3:9000</value>
+            </property>
 
-        <property>
-            <name>hadoop.tmp.dir</name>
-            <value>/home/gangl/hadoop/tmp</value>
-        </property>
-    </configuration>
-    ```
+            <property>
+                <name>hadoop.tmp.dir</name>
+                <value>/home/gangl/hadoop/tmp</value>
+            </property>
+        </configuration>
+        ```
 
     - **hdfs-site.xml**:
 
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-    <configuration>
-        <property>
-            <name>dfs.replication</name>
-            <value>1</value>
-        </property>
+        ```xml
+        <?xml version="1.0" encoding="UTF-8"?>
+        <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+        <configuration>
+            <property>
+                <name>dfs.replication</name>
+                <value>1</value>
+            </property>
 
-        <property>
-            <name>dfs.namenode.name.dir</name>
-            <value>/home/gangl/hadoop/name</value>
-        </property>
+            <property>
+                <name>dfs.namenode.name.dir</name>
+                <value>/home/gangl/hadoop/name</value>
+            </property>
 
-        <property>
-            <name>dfs.datanode.data.dir</name>
-            <value>/home/gangl/hadoop/data</value>
-        </property>
-        <property>
-          <name>dfs.namenode.fs-limits.min-block-size</name>
-          <value>10</value>
-        </property>
-        <property>
-            <name>dfs.webhdfs.enabled</name>
-            <value>true</value>
-            <description>web permission to acccess HDFS</description>
-        </property>
-    </configuration>
-    ```
+            <property>
+                <name>dfs.datanode.data.dir</name>
+                <value>/home/gangl/hadoop/data</value>
+            </property>
+            <property>
+              <name>dfs.namenode.fs-limits.min-block-size</name>
+              <value>10</value>
+            </property>
+            <property>
+                <name>dfs.webhdfs.enabled</name>
+                <value>true</value>
+                <description>web permission to acccess HDFS</description>
+            </property>
+        </configuration>
+        ```
