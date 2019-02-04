@@ -183,34 +183,34 @@ xxx@linuxkit-025000000001$ mvn clean package -Pdist -Pnative -Dtar -DskipTests
 
 1. add **linuxkit-025000000001** as an alias of localhost in `/etc/hosts`.
 
-```bash
-# set password
-xxx@linuxkit-025000000001$ sudo passwd xxx  # user: xxx@linuxkit-025000000001
-xxx@linuxkit-025000000001$ sudo passwd root # user: root
-xxx@linuxkit-025000000001$ cat /etc/hostname
+    ```bash
+    # set password
+    xxx@linuxkit-025000000001$ sudo passwd xxx  # user: xxx@linuxkit-025000000001
+    xxx@linuxkit-025000000001$ sudo passwd root # user: root
+    xxx@linuxkit-025000000001$ cat /etc/hostname
 
-linuxkit-025000000001
+    linuxkit-025000000001
 
-xxx@linuxkit-025000000001$ cat /etc/hosts
+    xxx@linuxkit-025000000001$ cat /etc/hosts
 
-127.0.0.1       localhost
-::1     localhost ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
+    127.0.0.1       localhost
+    ::1     localhost ip6-localhost ip6-loopback
+    fe00::0 ip6-localnet
+    ff00::0 ip6-mcastprefix
+    ff02::1 ip6-allnodes
+    ff02::2 ip6-allrouters
 
-xxx@linuxkit-025000000001$ sudo vim /etc/hosts
-# add linuxkit-025000000001 into 127.0.0.1       localhost
-# 127.0.0.1       localhost linuxkit-025000000001
+    xxx@linuxkit-025000000001$ sudo vim /etc/hosts
+    # add linuxkit-025000000001 into 127.0.0.1       localhost
+    # 127.0.0.1       localhost linuxkit-025000000001
 
-xxx@linuxkit-025000000001$ cat /etc/hosts
+    xxx@linuxkit-025000000001$ cat /etc/hosts
 
-127.0.0.1       localhost linuxkit-025000000001
-::1     localhost ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-```
+    127.0.0.1       localhost linuxkit-025000000001
+    ::1     localhost ip6-localhost ip6-loopback
+    fe00::0 ip6-localnet
+    ff00::0 ip6-mcastprefix
+    ff02::1 ip6-allnodes
+    ff02::2 ip6-allrouters
+    ```
 
