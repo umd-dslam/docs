@@ -272,7 +272,7 @@ The deployment process is more complicated because it involves multiple componen
     <property>
         <name>dfs.webhdfs.enabled</name>
         <value>true</value>
-        <description>提供web访问hdfs的权限</description>
+        <description>web permission to acccess HDFS</description>
     </property>
 </configuration>
 ```
