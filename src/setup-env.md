@@ -185,8 +185,8 @@ xxx@linuxkit-025000000001$ mvn clean package -Pdist -Pnative -Dtar -DskipTests
 
 ```bash
 # set password
-xxx@linuxkit-025000000001$ sudo passwd gangl
-xxx@linuxkit-025000000001$ sudo passwd root
+xxx@linuxkit-025000000001$ sudo passwd xxx  # user: xxx@linuxkit-025000000001
+xxx@linuxkit-025000000001$ sudo passwd root # user: root
 xxx@linuxkit-025000000001$ cat /etc/hostname
 
 linuxkit-025000000001
