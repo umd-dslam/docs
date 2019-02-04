@@ -1,6 +1,6 @@
 # HDFS Metadata Management
 
-Namenode stores metadata such as a file/directory’s name, id, parent, children list, permission information and features, the number of blocks, number of replicas, a location of blocks, block IDs etc. This metadata is available in Namenode's memory for faster retrieval of data. The primary tasks of Namenode:
+Namenode stores metadata such as file and directory names, IDs, parents, children lists, permission information and features, # of blocks, block attributes, etc in memory for faster retrieval of data. The primary tasks of Namenode:
 
 - Managing file system namespace and client’s access to files;
 - Executing file system operations such as naming, closing, opening files/directories;
