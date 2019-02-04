@@ -279,3 +279,34 @@ The deployment process is more complicated because it involves multiple componen
         ```
 
         Note: `/home/gangl` should be your `HOME` directory.
+
+4. generate a new SSH key
+
+    ```bash
+    ssh-keygen -t rsa -f ~/.ssh/id_dsa  
+    cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys  
+    chmod 0600 ~/.ssh/authorized_keys
+    ```
+
+5. set environment variables
+
+    - set env variables in `hadoop-dist/target/hadoop-3.3.0-SNAPSHOT/etc/hadoop/hadoop-env.sh`:
+
+        ```bash
+        # 1. change env variables' value in hadoop-env.sh
+        # note: `/home/gangl` should be your `HOME` directory.
+        export HADOOP_ROOT_LOGGER=INFO,console
+        export HADOOP_CLASSPATH="/home/gangl/java/postgresql-42.2.5.jar:"
+        export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+        ```
+
+    - set env variables in `/etc/environment`:
+
+        ```bash
+        # add JAVA_HOME to sudo vim /etc/environment
+        sudo vim /etc/environment
+
+        # add the following line into /etc/environment 
+        JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64"
+        ```
+
