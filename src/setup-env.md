@@ -244,6 +244,8 @@ The deployment process is more complicated because it involves multiple componen
         </configuration>
         ```
 
+        Note: `/home/gangl` should be your `HOME` directory.
+
     - **hdfs-site.xml**:
 
         ```xml
@@ -275,3 +277,5 @@ The deployment process is more complicated because it involves multiple componen
             </property>
         </configuration>
         ```
+
+        Note: `/home/gangl` should be your `HOME` directory.
