@@ -349,8 +349,8 @@ More details can be found [here](https://hadoop.apache.org/docs/r3.2.0/hadoop-pr
 Please adjust the command line parameters by yourself:
 
 ```bash
+# open *
 xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op open -threads 1 -files 100000 -keepResults -logLevel INFO
-
 
 # open  *
 xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op open -threads 100 -files 100 -keepResults -logLevel INFO
