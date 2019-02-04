@@ -2,7 +2,7 @@
 
 
 - [Proposal](./proposal.md)
-- [Setting up Environment](./setup/setup-env.md)
+- [Setting up Environment](./setup/README.md)
     - [docker](./setup/install_docker.md)
     - [build](./setup/postgres_image.md)
     - [watch](./setup/hadoop_image.md)
