@@ -170,12 +170,13 @@ In **hadoop-dev** container, you can `cd hadoop-hdfs-project` and build Hadoop s
 
 ```bash
 # Build Hadoop in hadoop-dev container
-USER=$(ls /home/)
-chown -R $USER /home/$USER/.m2
-cd hadoop-hdfs-project
+$ USER=$(ls /home/)
+$ chown -R $USER /home/$USER/.m2
+$ cd hadoop-hdfs-project
 
 # Compile HDFS
-mvn clean package -Pdist -Pnative -Dtar -DskipTests
+$ mvn clean package -Pdist -Pnative -Dtar -DskipTests
 ```
 
 ### Start Hadoop HDFS in Container
+
