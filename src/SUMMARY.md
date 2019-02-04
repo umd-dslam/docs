@@ -9,6 +9,7 @@
     - [Build Source Code](./setup/build_code.md)
     - [Deploy Hadoop HDFS](./setup/deploy_hdfs.md)
     - [HDFS Namenode Test](./setup/test.md)
+    - [Rebuild Source Code](./setup/rebuild-optimization.md)
 - [Benchmark](./benchmark.md)
 
 ---------------
