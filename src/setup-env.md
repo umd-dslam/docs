@@ -324,4 +324,10 @@ The deployment process is more complicated because it involves multiple componen
 
     # deploy HDFS
     xxx@linuxkit-025000000001:~/hadoop/hadoop-dist/target/hadoop-3.3.0-SNAPSHOT$ ./sbin/start-dfs.sh
+
+    # check alive HDFS processes
+    jps
     ```
+
+    Note: using `jps` to make sure all three processes are running!
+
