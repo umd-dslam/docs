@@ -170,13 +170,47 @@ In **hadoop-dev** container, you can `cd hadoop-hdfs-project` and build Hadoop s
 
 ```bash
 # Build Hadoop in hadoop-dev container
-$ USER=$(ls /home/)
-$ chown -R $USER /home/$USER/.m2
-$ cd hadoop-hdfs-project
+xxx@linuxkit-025000000001$ USER=$(ls /home/)
+xxx@linuxkit-025000000001$ chown -R $USER /home/$USER/.m2
+xxx@linuxkit-025000000001$ cd hadoop-hdfs-project
 
 # Compile HDFS
-$ mvn clean package -Pdist -Pnative -Dtar -DskipTests
+xxx@linuxkit-025000000001$ mvn clean package -Pdist -Pnative -Dtar -DskipTests
 ```
 
 ### Start Hadoop HDFS in Container
+
+
+1. add **linuxkit-025000000001** as an alias of localhost in `/etc/hosts`.
+
+```bash
+# set password
+xxx@linuxkit-025000000001$ sudo passwd gangl
+xxx@linuxkit-025000000001$ sudo passwd root
+xxx@linuxkit-025000000001$ cat /etc/hostname
+
+linuxkit-025000000001
+
+xxx@linuxkit-025000000001$ cat /etc/hosts
+
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+xxx@linuxkit-025000000001$ sudo vim /etc/hosts
+# add linuxkit-025000000001 into 127.0.0.1       localhost
+# 127.0.0.1       localhost linuxkit-025000000001
+
+xxx@linuxkit-025000000001$ cat /etc/hosts
+
+127.0.0.1       localhost linuxkit-025000000001
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+```
 
