@@ -3,12 +3,12 @@
 
 - [Proposal](./proposal.md)
 - [Setting up Environment](./setup/README.md)
-    - [docker](./setup/install_docker.md)
-    - [build](./setup/postgres_image.md)
-    - [watch](./setup/hadoop_image.md)
-    - [serve](./setup/build_code.md)
-    - [test](./setup/deploy_hdfs.md)
-    - [clean](./setup/test.md)
+    - [Install Docker](./setup/install_docker.md)
+    - [Build a Postgres Docker Image](./setup/postgres_image.md)
+    - [Build a Hadoop Dev Docker Image](./setup/hadoop_image.md)
+    - [Build Custom Source Code](./setup/build_code.md)
+    - [Deploy Hadoop HDFS](./setup/deploy_hdfs.md)
+    - [HDFS Namenode Test](./setup/test.md)
 - [Benchmark](./benchmark.md)
 
 ---------------
