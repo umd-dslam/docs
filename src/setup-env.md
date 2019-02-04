@@ -345,3 +345,23 @@ Then, running NNThroughputBenchmark for Namenode. As its name indicates, is a na
 
 More details can be found [here](https://hadoop.apache.org/docs/r3.2.0/hadoop-project-dist/hadoop-common/Benchmarking.html).
 
+
+Please adjust the command line parameters by yourself:
+
+```bash
+./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op open -threads 1 -files 100000 -keepResults -logLevel INFO
+
+
+# open  *
+./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op open -threads 100 -files 100 -keepResults -logLevel INFO
+
+# create *
+./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op create -threads 1 -files 2 -keepResults -logLevel INFO
+
+# delete *
+./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op delete -threads 1 -files 10 -keepResults -logLevel INFO
+
+# mkdirs *
+./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op mkdirs -threads 1 -dirs 10 -keepResults -logLevel INFO
+```
+
