@@ -11,6 +11,8 @@
     - [HDFS Namenode Test](./setup/test.md)
     - [Rebuild Source Code](./setup/rebuild-optimization.md)
 - [HDFS Metadata Management](./metadata/README.md)
+    - [INode Management](./metadata/inode/README.md)
+    - [Datablock Management](./metadata/datablock/README.md)
 - [Benchmark](./benchmark.md)
 
 ---------------
