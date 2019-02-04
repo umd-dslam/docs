@@ -10,8 +10,7 @@
     - [Deploy Hadoop HDFS](./setup/deploy_hdfs.md)
     - [HDFS Namenode Test](./setup/test.md)
     - [Rebuild Source Code](./setup/rebuild-optimization.md)
-- [INode Metadata](./inode/README.md)
-- [Datablock Metadata](./datablock/README.md)
+- [HDFS Metadata Management](./metadata/README.md)
 - [Benchmark](./benchmark.md)
 
 ---------------
