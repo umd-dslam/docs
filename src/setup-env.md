@@ -7,8 +7,9 @@ The setup will be organized as follows:
 0. Install Docker
 1. Build a Postgres Docker Image
 2. Build a Hadoop Development Environment Docker Image
-3. Build new source code in Docker Container
-4. Run Hadoop Benchmark
+3. Build Custom Source Code in Container
+4. Start Hadoop HDFS in Container
+
 
 ## Install Docker
 
@@ -155,3 +156,26 @@ docker=# SELECT * FROM cities;
  San Francisco | (-194,53)
 (1 row)
 ```
+
+### Build Custom Source Code in Container
+
+Since the local directory is mounted to the internal directory of the container by default [start-build-env.sh#L88](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L88). 
+
+Note: docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+-v, --volume list                    Bind mount a volume
+
+In **hadoop-dev** container, you can `cd hadoop-hdfs-project` and build Hadoop souce code you mounted.
+
+
+```bash
+# Build Hadoop in hadoop-dev container
+USER=$(ls /home/)
+chown -R $USER /home/$USER/.m2
+cd hadoop-hdfs-project
+
+# Compile HDFS
+mvn clean package -Pdist -Pnative -Dtar -DskipTests
+```
+
+### Start Hadoop HDFS in Container
