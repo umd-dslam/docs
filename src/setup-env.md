@@ -318,13 +318,13 @@ The deployment process is more complicated because it involves multiple componen
     cd $HADOOP_HOME
 
     # reformat namenode
-    xxx@linuxkit-025000000001:~/hadoop/hadoop-dist/target/hadoop-3.3.0-SNAPSHOT$ ./bin/hdfs namenode -format
+    xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hdfs namenode -format
 
     # kill former namenode and datanode processes
-    xxx@linuxkit-025000000001:~/hadoop/hadoop-dist/target/hadoop-3.3.0-SNAPSHOT$ kill $(jps | grep '[NameNode,DataNode]' | awk '{print $1}')
+    xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ kill $(jps | grep '[NameNode,DataNode]' | awk '{print $1}')
 
     # deploy HDFS
-    xxx@linuxkit-025000000001:~/hadoop/hadoop-dist/target/hadoop-3.3.0-SNAPSHOT$ ./sbin/start-dfs.sh
+    xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./sbin/start-dfs.sh
 
     # check alive HDFS processes
     jps
@@ -337,8 +337,8 @@ The deployment process is more complicated because it involves multiple componen
 You can query IP in current container by:
 
 ```bash
-xxx@linuxkit-025000000001:~/hadoop/hadoop-dist/target/hadoop-3.3.0-SNAPSHOT$ IP=$(/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
-xxx@linuxkit-025000000001:~/hadoop/hadoop-dist/target/hadoop-3.3.0-SNAPSHOT$ cat $IP
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ IP=$(/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ cat $IP
 ```
 
 Then, running NNThroughputBenchmark for Namenode. As its name indicates, is a name-node throughput benchmark, which runs a series of client threads on a single node against a name-node. If no name-node is configured, it will firstly start a name-node in the same process (standalone mode), in which case each client repetitively performs the same operation by directly calling the respective name-node methods. Otherwise, the benchmark will perform the operations against a remote name-node via client protocol RPCs (remote mode). Either way, all clients are running locally in a single process rather than remotely across different nodes. The reason is to avoid communication overhead caused by RPC connections and serialization, and thus reveal the upper bound of pure name-node performance.
@@ -349,19 +349,19 @@ More details can be found [here](https://hadoop.apache.org/docs/r3.2.0/hadoop-pr
 Please adjust the command line parameters by yourself:
 
 ```bash
-./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op open -threads 1 -files 100000 -keepResults -logLevel INFO
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op open -threads 1 -files 100000 -keepResults -logLevel INFO
 
 
 # open  *
-./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op open -threads 100 -files 100 -keepResults -logLevel INFO
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op open -threads 100 -files 100 -keepResults -logLevel INFO
 
 # create *
-./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op create -threads 1 -files 2 -keepResults -logLevel INFO
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op create -threads 1 -files 2 -keepResults -logLevel INFO
 
 # delete *
-./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op delete -threads 1 -files 10 -keepResults -logLevel INFO
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op delete -threads 1 -files 10 -keepResults -logLevel INFO
 
 # mkdirs *
-./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op mkdirs -threads 1 -dirs 10 -keepResults -logLevel INFO
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op mkdirs -threads 1 -dirs 10 -keepResults -logLevel INFO
 ```
 
