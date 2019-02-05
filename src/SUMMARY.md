@@ -2,6 +2,7 @@
 
 
 - [Proposal](./proposal.md)
+- [Introduction](./intro.md)
 - [Setting up Environment](./setup/README.md)
     - [Install Docker](./setup/install_docker.md)
     - [Build Postgres Image](./setup/postgres_image.md)
