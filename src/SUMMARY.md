@@ -2,7 +2,9 @@
 
 
 - [Proposal](./proposal.md)
-- [Introduction](./intro.md)
+- [Introduction](./intro/README.md)
+    - [HDFS Architecture](./intro/hdfs.md)
+    - [Deterministic Database System](./intro/calvin.md)
 - [Setting up Environment](./setup/README.md)
     - [Install Docker](./setup/install_docker.md)
     - [Build Postgres Image](./setup/postgres_image.md)
