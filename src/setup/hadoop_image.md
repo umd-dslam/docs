@@ -9,7 +9,7 @@ We added a few software (**postgresql-client** and **jdbc**) in offical script t
 
 <img src="../img/arch01-01.png" class="center" style="width: 70%;" />
 
-<span class="caption">Figure 1-1: The client server architecture diagram of HDFS and Postgres.</span>
+<span class="caption">Figure 3-3-1: The client server architecture diagram of HDFS and Postgres.</span>
 
 These incremental commands are added in [start-build-env.sh#L67-L75](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L67-L75).
 
