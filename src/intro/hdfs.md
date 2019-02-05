@@ -2,7 +2,7 @@
 
 HDFS is a distributed file system from Hadoop designed for storing very large files running on a cluster of commodity hardware. It is designed on principle of storage of less number of large files rather than the huge number of small files. HDFS has 2 types of nodes that work in the cluster. They are Namenode(s) and Datanodes in master-slave fashion.
 
-<img src="./img/hdfs-arch.png" class="center" style="width: 70%;" />
+<img src="../img/hdfs-arch.png" class="center" style="width: 70%;" />
 
 <span class="caption">Figure 2-1: System Architecture of Hadoop HDFS.</span>
 
