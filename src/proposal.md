@@ -7,13 +7,7 @@ RAM available.
 
 There are a few distributed file systems that distribute the namespace server itself both for workload balancing and for reducing the single server memory footprint. [Ceph](https://ceph.com/) has a cluster of namespace servers (MDS) and uses a dynamic subtree partitioning algorithm in order to map the namespace tree to MDSes evenly. Google also announced that [GFS](https://queue.acm.org/detail.cfm?id=1594206) has evolved into a distributed namespace server system. The new GFS can have hundreds of namespace servers (Namenodes) with 100 million files per master.
 
-To unlock the scalability of HDFS, we propose that the file system metadata and the directory tree structure in HDFS Namenode can be removed from memory and stored into a [deterministic database](http://www.cs.umd.edu/~abadi/papers/abadi-cacm2018.pdf). Metadata can be partitioned and replicated across a shared-nothing cluster of independent servers, and operations on file metadata transformed into distributed transactions.
-
-The difference between this project and above solutions is that it is a deterministic database. uses a deterministic ordering guarantee to significantly reduce the normally prohibitive contention costs associated with distributed transactions which can support disk-based storage scales near-linearly on a cluster of commodity machines and has no singlepoint of failure. which has
-shown to be a promising direction to improving transactional database system scalability, modularity, throughput, and replication.
+To unlock the scalability of HDFS, we propose that the file system metadata and the directory tree structure in HDFS Namenode can be removed from memory and stored into a [deterministic database](http://www.cs.umd.edu/~abadi/papers/abadi-cacm2018.pdf). Metadata can be partitioned and replicated across a shared-nothing cluster of independent servers, and operations on file metadata transformed into distributed transactions. Deterministic database uses a deterministic ordering guarantee to significantly reduce the normally prohibitive contention costs associated with distributed transactions which can support disk-based storage scales near-linearly on a cluster of commodity machines and has no singlepoint of failure. Deterministic transaction has shown to be a promising direction to improving transactional database system scalability, modularity, throughput, and replication.
 
 The source code is currently hosted on github: [https://github.com/DSL-UMD](https://github.com/DSL-UMD).
-
-This proposal is still **in progress**!
-
 
