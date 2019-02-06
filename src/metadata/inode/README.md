@@ -62,7 +62,7 @@ Briefly speaking, the three different classes are based on `INode` class and we 
 
 `FSDirectory` can perform general operations on any `INode` via `inodeMap` and `rootDir`.
 
-For example, if we have a directory `nnThroughputBenchmark` with 10 files:
+For example, `nnThroughputBenchmark` is a directory within 10 files:
 
 ```bash
 nnThroughputBenchmark
@@ -81,8 +81,14 @@ nnThroughputBenchmark
         ├── ThroughputBench8
         └── ThroughputBench9
 
-4 directories, 10 files
+5 directories, 10 files
 ```
 
+`nnThroughputBenchmark`, `create`, `ThroughputBenchDir0`, `ThroughputBenchDir1` and `ThroughputBenchDir2` are `INodeDirectory`. `ThroughputBench[0-9]` are `INodeFile`. They all exist in memory when HDFS is running.
 
-## INode
+<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/fs-tree.png" class="center" style="width: 80%;" />
+
+<span class="caption">Figure 4-1: File System Namespace in Namenode.</span>
+
+
+
