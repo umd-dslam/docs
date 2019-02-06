@@ -6,6 +6,9 @@
     - [HDFS Architecture](./intro/hdfs.md)
     - [Deterministic Database](./intro/calvin.md)
     - [Horizontally Scale Namespace](./intro/new.md)
+- [HDFS Metadata Management](./metadata/README.md)
+    - [INode Management](./metadata/inode/README.md)
+    - [Datablock Management](./metadata/datablock/README.md)
 - [Setting up Environment](./setup/README.md)
     - [Install Docker](./setup/install_docker.md)
     - [Build Postgres Image](./setup/postgres_image.md)
@@ -14,9 +17,6 @@
     - [Deploy Hadoop HDFS](./setup/deploy_hdfs.md)
     - [HDFS Namenode Test](./setup/test.md)
     - [Rebuild Source Code](./setup/rebuild-optimization.md)
-- [HDFS Metadata Management](./metadata/README.md)
-    - [INode Management](./metadata/inode/README.md)
-    - [Datablock Management](./metadata/datablock/README.md)
 - [Benchmark](./benchmark.md)
 
 ---------------

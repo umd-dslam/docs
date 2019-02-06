@@ -88,7 +88,7 @@ nnThroughputBenchmark
 
 <img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/fs-tree.png" class="center" style="width: 80%;" />
 
-<span class="caption">Figure 4-1: File System Namespace in Namenode.</span>
+<span class="caption">Figure 3-1: File System Namespace in Namenode.</span>
 
 
 
