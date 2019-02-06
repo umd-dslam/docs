@@ -1,11 +1,14 @@
 # INode Metadata
 
-Namenode stores metadata such as a file/directory's name, id, parent, children list, permission information and features, the number of blocks, number of replicas, a location of blocks, block IDs etc. This metadata is available in Namenode's memory for faster retrieval of data. The primary tasks of Namenode:
+When clients send requests for file operations (mkdir, create, open, rename, delete) through `ClientProtocol`'s RPCs, after Namenode receives requests from clients, it will forward them to the `FSNameSystem` class to proceed.
 
-- Managing filesystem namespace and client's access to files;
-- Executing file system operations such as naming, closing, opening files/directories;
-- Receiving heartbeats and block reports from Datanode. It ensures that the Datanodes are alive. A block report contains a list of all blocks on a Datanode;
-- Responsible for taking care of the Replication Factor of all the blocks (default value is 3).
+`FSNameSystem` is a container of both transient and persisted file namespace states, and does all the book-keeping work on a Namenode. Its role is briefly described below: 
+
+- RPC calls that modify or inspect the namespace should get delegated here; 
+- anything that touches only blocks (eg. block reports) is delegated to `BlockManager`;
+- anything that touches only file information (eg. permissions, mkdirs) is delegated to `FSDirectory`, etc.
+
+`FSDirectory` is a pure in-memory data structure, all of whose operations happen entirely in memory. In contrast, `FSNameSystem` persists the operations to the disk.
 
 **Under Construction**
 
