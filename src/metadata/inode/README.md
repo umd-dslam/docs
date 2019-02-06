@@ -93,4 +93,5 @@ nnThroughputBenchmark
 <span class="caption">Figure 3-1: File System Namespace in Namenode.</span>
 
 
+If client wants to delete `ThroughputBench0`, `FSDirectory` will traverse the directory tree from `nnThroughputBenchmark` to `create` and thence `ThroughputBenchDir0`, then remove the leaf `ThroughputBench0` from its children list.
 
