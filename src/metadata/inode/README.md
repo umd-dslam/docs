@@ -105,7 +105,6 @@ Singleton pattern is used to restrict the instance of [DatabaseConnection](https
 
 ### Tables
 
-
 We already replace fields such as **id**, **parent**, **name**, **accessTime**, **modificationTime**, **permission** and **header** with `inodes table` in Postgres. All related get/set inode functions have been modified to support database. For example, 
 
 ```java
