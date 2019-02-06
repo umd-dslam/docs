@@ -146,7 +146,7 @@ The deployment process is more complicated because it involves multiple componen
     xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./sbin/start-dfs.sh
 
     # check alive HDFS processes
-    jps
+    xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ jps
     ```
 
     Note: using `jps` to make sure all three processes are running!
