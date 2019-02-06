@@ -62,7 +62,7 @@ Briefly speaking, the three different classes are based on `INode` class and we 
 
 `FSDirectory` can perform general operations on any `INode` via `inodeMap` and `rootDir`.
 
-For example, `nnThroughputBenchmark` is a directory within 10 files:
+For example, `nnThroughputBenchmark` is a directory with 10 files:
 
 ```bash
 nnThroughputBenchmark
