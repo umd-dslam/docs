@@ -56,7 +56,7 @@ INodeFile extends INode {
 }
 ```
 
-Briefly speaking, the three different classes are based on `INode` class and we store almost all the attributes here into the databaseand replace the corresponding functions with our database-based implementation.
+Briefly speaking, the three different classes are based on `INode` class and we will store almost all the attributes here into database system and replace the corresponding functions with our database-based implementation.
 
 ### File Operation
 
