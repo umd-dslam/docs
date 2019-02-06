@@ -99,3 +99,5 @@ When Namenode receives more than millions of file operations simultaneously, HDF
 
 ## Data Model
 
+In order to unlock the memory bottleneck of namenode, we propose to replace file metadata in memory with a deterministic distributed system which can improve scalability of the file system, as file metadata can be partitioned across a shared-nothing cluster of independent servers.
+
