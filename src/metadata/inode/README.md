@@ -95,3 +95,7 @@ nnThroughputBenchmark
 
 If client wants to delete `ThroughputBench0`, `FSDirectory` will traverse the directory tree from `nnThroughputBenchmark` to `create` and thence `ThroughputBenchDir0`, then remove the leaf `ThroughputBench0` from its children list.
 
+When Namenode receives more than millions of file operations simultaneously, HDFS are experiencing severe latency due to the limited memory available. Eventually, HDFS is playing a losing game in cloud computing if the scalability bottleneck persists.
+
+## Data Model
+
