@@ -103,3 +103,28 @@ In order to unlock the memory bottleneck of namenode, we propose to replace file
 
 Singleton pattern is used to restrict the instance of [DatabaseConnection](https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/DatabaseConnection.java) class to one object. This is useful when exactly one object is needed to coordinate actions across the system. The generic metadata storage layer we implemented can easily enable a different database to be plugged into HDFS. In this project, in order to keep it simple, we first integrate **Postgres** into HDFS to demonstrate how it works. Then, deterministic database systems like **Calvin** or **FaunaDB** can be considered as a backend later.
 
+### Tables
+
+
+We already replace fields such as **id**, **parent**, **name**, **accessTime**, **modificationTime**, **permission** and **header** with `inodes table` in Postgres. All related get/set inode functions have been modified to support database. For example, 
+
+```java
+public long getPermissionLong() {
+    return this.permission;
+}
+private final void setPermission(long permission) {
+    this.permission = permission;
+}
+```
+
+has been changed to
+
+```java
+public long getPermissionLong() {
+    return DatabaseConnection.getPermission(this.getId());
+}
+private final void setPermission(long permission) {
+    DatabaseConnection.setPermission(this.getId(), permission);
+}
+```
+
