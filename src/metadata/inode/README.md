@@ -19,7 +19,7 @@ When clients send requests for file operations (mkdir, create, open, rename, del
 
 `FSDirectory` contains two critical members:
 
-- `INodeMap inodeMap` is storing almost all the inodes and maintaining the mapping between `INode ID` and `INode` data structure. (When the majority of fields in one `INode` are stored in database, the rest will still in memory for now. `INode ID` in `INode` can be used to query full fields through combining the result of `inodeMap` and database to maintain the conformity between database and memory)
+- `INodeMap inodeMap` is storing almost all the inodes and maintaining the mapping between `INode ID` and `INode` data structure. (When the majority of fields in one `INode` are stored in database, the rest will still in memory for now. INode ID in `INode` can be used to query full fields through combining the result of `inodeMap` and database to maintain the conformity between database and memory)
 
 - `INodeDirectory rootDir` is the root of in-memory representation of the file/block hierarchy.
 
