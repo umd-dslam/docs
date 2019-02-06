@@ -29,6 +29,7 @@ When clients send requests for file operations (mkdir, create, open, rename, del
 
 **Note:** You can only see these fields at `truck` branch of our github repo: https://github.com/DSL-UMD/hadoop-calvin since the default branch `calvin` removed them into database.
 
+
 ```java
 INode {
     long id;                // INode identifier
