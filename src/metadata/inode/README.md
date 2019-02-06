@@ -23,32 +23,7 @@ When clients send requests for file operations (mkdir, create, open, rename, del
 
 - `INodeDirectory rootDir` is the root of in-memory representation of the file/block hierarchy.
 
-`FSDirectory` can perform general operations on any `INode` via `inodeMap` and `rootDir`.
-
-For example, if we have a directory `nnThroughputBenchmark` with 10 files:
-
-```bash
-nnThroughputBenchmark
-└── create
-    ├── ThroughputBenchDir0
-    │   ├── ThroughputBench0
-    │   ├── ThroughputBench1
-    │   ├── ThroughputBench2
-    │   └── ThroughputBench3
-    ├── ThroughputBenchDir1
-    │   ├── ThroughputBench4
-    │   ├── ThroughputBench5
-    │   ├── ThroughputBench6
-    │   └── ThroughputBench7
-    └── ThroughputBenchDir2
-        ├── ThroughputBench8
-        └── ThroughputBench9
-
-4 directories, 10 files
-```
-
-
-## INode
+### INode
 
 `INode` above is a base class containing common fields for file and directory inodes. The relationships among `INode`, `INodeFile` and `INodeDirectory` are defined as follows:
 
@@ -81,3 +56,33 @@ INodeFile extends INode {
 }
 ```
 
+Briefly speaking, the three different classes are based on `INode` class and we store almost all the attributes here into the databaseand replace the corresponding functions with our database-based implementation.
+
+### File Operation
+
+`FSDirectory` can perform general operations on any `INode` via `inodeMap` and `rootDir`.
+
+For example, if we have a directory `nnThroughputBenchmark` with 10 files:
+
+```bash
+nnThroughputBenchmark
+└── create
+    ├── ThroughputBenchDir0
+    │   ├── ThroughputBench0
+    │   ├── ThroughputBench1
+    │   ├── ThroughputBench2
+    │   └── ThroughputBench3
+    ├── ThroughputBenchDir1
+    │   ├── ThroughputBench4
+    │   ├── ThroughputBench5
+    │   ├── ThroughputBench6
+    │   └── ThroughputBench7
+    └── ThroughputBenchDir2
+        ├── ThroughputBench8
+        └── ThroughputBench9
+
+4 directories, 10 files
+```
+
+
+## INode
