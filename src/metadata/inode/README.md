@@ -152,3 +152,34 @@ INSERT INTO inodes(
 
 UPDATE inodes SET parent = ?, name = ? WHERE id = ?;
 ```
+
+#### Select
+
+To get one child since we have no children lists in the memory, we need both **parent** and **name** to fetch **INODE ID** because two inodes may have the same name under the different directories. 
+
+```sql
+SELECT id FROM inodes WHERE parent = ? AND name = ?;
+```
+
+Similarly, to get the 1st level children(immediate descendants), we can simply remove **name** from above SQL query:
+
+```sql
+SELECT id FROM inodes WHERE parent = ?;
+```
+
+#### Delete
+
+When working with hierarchical data, for example, remove all descendants(subtree) from one inode recursively, [CTE](https://en.wikipedia.org/wiki/Hierarchical_and_recursive_queries_in_SQL) is useful because CTE can continue to execute until the query returns the entire hierarchy.
+
+```sql
+DELETE FROM inodes WHERE id IN (
+    WITH RECURSIVE cte AS (
+        SELECT id, parent FROM inodes d WHERE id = ?
+    UNION ALL
+        SELECT d.id, d.parent FROM cte
+        JOIN inodes d ON cte.id = d.parent
+    )
+    SELECT id FROM cte
+);
+```
+
