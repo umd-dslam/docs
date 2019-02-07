@@ -190,7 +190,7 @@ Besides moving the logic and data model into database, we also have to modify th
 
 ### Tables
 
-If client creates the same directory `nnThroughputBenchmark` with 10 files again, all these fields will be stored into database as follows:
+If client creates the same directory `nnThroughputBenchmark` with 10 files again, all these fields in `INode` will be stored into database as follows:
 
 
 |  ID      | parent   |  name                | accesstime    | modificationtime |  header         | permission    |
