@@ -183,3 +183,4 @@ DELETE FROM inodes WHERE id IN (
 );
 ```
 
+After we have implemented such functions with database API, we already get the primitives for implementing different directory tree operators. Although some intermediate object may still take some memory, it won't stay persistently in the memory and will finally be garbage collected.
