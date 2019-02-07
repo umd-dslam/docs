@@ -183,7 +183,7 @@ DELETE FROM inodes WHERE id IN (
 );
 ```
 
-After we have implemented such functions with database API, we already get the primitives for implementing different directory tree operators. Although some intermediate object may still take some memory, it won't stay persistently in the memory and will finally be garbage collected.
+After we implemented such functions with database API, we already get the primitives for implementing different directory tree operators. Although some intermediate object may still take some memory, it won't stay persistently in the memory and will finally be garbage collected.
 
 
 Besides moving the logic and data model into database, we also have to modify the code of saving `FSImage` file and writing `EditLog` mentioned in [Section 2.1](https://dsl-umd.github.io/docs/intro/hdfs.html#persistence) to avoid read and serialize those attributes. The steps include simplifying the format of log data and protobuf image (checkpoint) and removing redundant code in saving and loading functions.
