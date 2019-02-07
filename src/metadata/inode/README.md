@@ -127,3 +127,28 @@ private final void setPermission(long permission) {
 }
 ```
 
+#### Create 
+
+When `DatabaseConnection.getInstance()` is invoked, Object will be initialized by its constructor (only once in the lifetime of the file system), and `inodes` table also will be
+created.
+
+```sql
+DROP TABLE IF EXISTS inodes;
+CREATE TABLE inodes(
+    id int primary key, parent int, name text,
+    accessTime bigint, modificationTime bigint,
+    header bigint, permission bigint
+);
+```
+
+#### Insert
+
+Inserting a new inode into database is tricky. Most of the fields such as **id**, **name**, **accessTime**, **modificationTime**, **permission** are assigned during the initialization of `INodeFile` and `INodeDirectory`. However, the rest like **header** and **parent** are updated during the runtime of file operations. Therefore, at least two SQL statements are required in here.
+
+```sql
+INSERT INTO inodes(
+    id, name, accessTime, modificationTime, permission
+) VALUES (?, ?, ?, ?, ?);
+
+UPDATE inodes SET parent = ?, name = ? WHERE id = ?;
+```
