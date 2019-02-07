@@ -2,6 +2,9 @@
 
 
 - [Proposal](./proposal.md)
+
+---------------
+
 - [Introduction](./intro/README.md)
     - [HDFS Architecture](./intro/hdfs.md)
     - [Deterministic Database](./intro/calvin.md)
