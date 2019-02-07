@@ -9,6 +9,11 @@
 - [HDFS Metadata Management](./metadata/README.md)
     - [INode Management](./metadata/inode/README.md)
     - [Datablock Management](./metadata/datablock/README.md)
+- [Advanced Optimization](./opt/README.md)
+- [Deterministic Database](./db/README.md)
+
+---------------
+
 - [Setting up Environment](./setup/README.md)
     - [Install Docker](./setup/install_docker.md)
     - [Build Postgres Image](./setup/postgres_image.md)
