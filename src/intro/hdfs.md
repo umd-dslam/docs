@@ -26,7 +26,7 @@ At a high level, the NameNode’s primary responsibility is storing the HDFS nam
 
 **Note**: `FSImage` is a file that represents a point-in-time snapshot of the filesystem’s metadata. However, while the fsimage file format is very efficient to read, it’s unsuitable for making small incremental updates like renaming a single file. Thus, rather than writing a new fsimage every time the namespace is modified, the NameNode instead records the modifying operation in the edit log for durability.
 
-<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/checkpointing.png" class="center" style="width: 70%;" />
+<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/checkpointing.png" class="center" style="width: 80%;" />
 
 <span class="caption">Figure 2-2: Checkpointing creates a new fsimage from an old fsimage and edit log.</span>
 
