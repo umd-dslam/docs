@@ -18,11 +18,15 @@ Datanodes manage storage of data. They serve read and write requests from the fi
 
 ## Persistence
 
-HDFS metadata represents the structure of HDFS directories and files in a tree in memory of Namenode. Persistence of HDFS metadata broadly breaks down into 2 categories of files:
+At a high level, the NameNode’s primary responsibility is storing the HDFS namespace. This means things like the directory tree, file permissions, and the mapping of files to block IDs. It’s important that this metadata (and all changes to it) are safely persisted to stable storage for fault tolerance. HDFS metadata represents the structure of HDFS directories and files in a tree in memory of Namenode. Persistence of HDFS metadata broadly breaks down into 2 categories of files:
 
 - `FSImage` in Namenode is an "Image file" which contains the entire filesystem namespace and is stored as a file in Namenode's local file system. It also contains a serialized form of all the directories and children inodes in the filesystem. Each inode is an internal representation of a file or directory's metadata;
 
-- `EditLogs` contains all the recent modifications made to the file system on the most recent `FSImage`. Namenode receives a create/update/delete request from the client. After that this request is first recorded to edits file. 
+- `EditLogs` contains all the recent modifications made to the file system on the most recent `FSImage`. Namenode receives a create/update/delete request from the client. After that this request is first recorded to edits file. This way, if the NameNode crashes, it can restore its state by first loading the `FSImage` then replaying all the operations (also called edits or transactions) in the edit log to catch up to the most recent state of the namesystem.  
 
-- Checkpointing is the process of merging the content of the most recent `FSImage` with all edits applied after that `FSImage` is merged in order to create a new `FSImage`. Checkpointing is triggered automatically by configuration policies or manually by HDFS administration commands.
+**Note**: `FSImage` is a file that represents a point-in-time snapshot of the filesystem’s metadata. However, while the fsimage file format is very efficient to read, it’s unsuitable for making small incremental updates like renaming a single file. Thus, rather than writing a new fsimage every time the namespace is modified, the NameNode instead records the modifying operation in the edit log for durability.
+
+## Checkpointng
+
+Checkpointing is an essential part of maintaining and persisting filesystem metadata in HDFS. It’s crucial for efficient NameNode recovery and restart, and is an important indicator of overall cluster health. Checkpointing is the process of merging the content of the most recent `FSImage` with all edits applied `EditLogs` after that `FSImage` is merged in order to create a new `FSImage`. Checkpointing is triggered automatically by configuration policies or manually by HDFS administration commands.
 
