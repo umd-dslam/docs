@@ -32,5 +32,5 @@ At a high level, the NameNode’s primary responsibility is storing the HDFS nam
 
 ## Checkpointng
 
-Checkpointing is an essential part of maintaining and persisting filesystem metadata in HDFS. It’s crucial for efficient NameNode recovery and restart, and is an important indicator of overall cluster health. Checkpointing is the process of merging the content of the most recent `FSImage` with all edits applied `EditLogs` after that `FSImage` is merged in order to create a new `FSImage`. Checkpointing is triggered automatically by configuration policies or manually by HDFS administration commands.
+[Checkpointing](https://blog.cloudera.com/blog/2014/03/a-guide-to-checkpointing-in-hadoop/) is an essential part of maintaining and persisting filesystem metadata in HDFS. It’s crucial for efficient NameNode recovery and restart, and is an important indicator of overall cluster health. Checkpointing is the process of merging the content of the most recent `FSImage` with all edits applied `EditLogs` after that `FSImage` is merged in order to create a new `FSImage`. Checkpointing is triggered automatically by configuration policies or manually by HDFS administration commands.
 
