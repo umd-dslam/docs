@@ -34,7 +34,7 @@ public class Block implements Writable, Comparable<Block> {
 - **generationStamp** is the timestamp of this data block.
 
 `BlockInfo` extends from Block class and is a supplementary of Block class. For a given block, BlockInfo class maintains BlockCollection and datanodes
-where the replicas of the block are stored. [The following fields](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockInfo.java#L41-L64) are the most interesting fields:
+where the replicas of the block are stored. [The following fields](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockInfo.java#L41-L64) are the most meaningful to us:
 
 ```java
 public abstract class BlockInfo extends Block {
