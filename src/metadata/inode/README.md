@@ -9,7 +9,7 @@ When clients send requests for file operations (mkdir, create, open, rename, del
 - The container for BlockManager, DatanodeManager, LeaseManager, etc. services;
 - RPC calls that modify or inspect the namespace should get delegated here; 
 - Anything that touches only blocks (eg. block reports) is delegated to BlockManager;
-- Anything that touches only file information (eg. permissions, mkdirs) is delegated to FSDirectory`
+- Anything that touches only file information (eg. permissions, mkdirs) is delegated to `FSDirectory`;
 - Logs mutations to `FSEditLog`. (FSEditLog already been introduced in [Section 2.1](https://dsl-umd.github.io/docs/intro/hdfs.html#persistence)).
 
 
