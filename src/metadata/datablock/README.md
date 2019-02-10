@@ -18,6 +18,8 @@ Namenode maintains the two most important relations in HDFS:
 
 ## Block and BlockInfo
 
+### Block
+
 `Block` is used to uniquely identify data blocks in Namenode and is the most basic abstract interface of the data block in HDFS. Block class defines [three fields](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs-client/src/main/java/org/apache/hadoop/hdfs/protocol/Block.java#L92-L94):
 
 ```java
@@ -32,6 +34,8 @@ public class Block implements Writable, Comparable<Block> {
 - **blockId** uniquely identifies this Block object;
 - **numBytes** is the size of this data block (in bytes);
 - **generationStamp** is the timestamp of this data block.
+
+### BlockInfo
 
 `BlockInfo` extends from Block class and is a supplementary of Block class. For a given block, BlockInfo class maintains BlockCollection and datanodes
 where the replicas of the block are stored. [The following fields](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockInfo.java#L41-L64) are the most meaningful to us:
