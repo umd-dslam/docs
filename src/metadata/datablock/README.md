@@ -17,4 +17,4 @@ Namenode maintains the two most important relations in HDFS:
 
 [INodeFIle.blocks](https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeFile.java#L251) field records all data blocks a file contains. It is also through this field that HDFS associates the first relation with the second relation.
 
-`INodeFIle.blocks` is an array of `BlockInfo`, BlockInfo inherits from `Block`, HDFS uses Block class to abstract the data structure in NameNode.
+INodeFIle.blocks is an array of `BlockInfo` which inherits from `Block` class, HDFS uses `Block` to abstract the data structure in Namenode.
