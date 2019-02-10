@@ -4,9 +4,7 @@ Each DataNode in a cluster is configured with a set of data directories. You can
 The storage policy dictates which storage types to use when storing the file or directory. There are some reasons to consider using different types of storage: 
 
 - You have datasets with temporal locality. The latest data can be loaded initially into SSD for improved performance, then migrated out to disk as it ages;
-- You need to move cold data to denser archival storage because the data will rarely be accessed and archival storage is much cheaper. 
-
-Many systems like Facebook's f4 used the same similar idea to provide low latency and sufficient throughput.
+- You need to move cold data to denser archival storage because the data will rarely be accessed and archival storage is much cheaper. Storage systems like Facebook's f4 also used a similar idea to provide low latency and sufficient throughput.
 
 ## DatanodeStorageInfo
 
