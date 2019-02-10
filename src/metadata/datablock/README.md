@@ -49,4 +49,4 @@ public abstract class BlockInfo extends Block {
 ```
 
 - **replication**: If the replication factor was set to 3 (default value in HDFS), there would be one original block and two replicas. For each block stored in HDFS, there will be n – 1 duplicated blocks distributed across the cluster.
-- **bcId**: Block collection ID is an INode ID which can uniquely identifies the INode object of the HDFS file through `INodeMap` (see [Section 3.1 - FSDirectory](https://dsl-umd.github.io/docs/metadata/inode/index.html#fsdirectory)).
+- **bcId**: Block collection ID is an alias for INode ID which can uniquely identifies the INode object of the HDFS file through `INodeMap` (see [Section 3.1 - FSDirectory](https://dsl-umd.github.io/docs/metadata/inode/index.html#fsdirectory)).
