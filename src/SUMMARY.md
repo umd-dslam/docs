@@ -12,6 +12,11 @@
 - [HDFS Metadata Management](./metadata/README.md)
     - [INode Management](./metadata/inode/README.md)
     - [Datablock Management](./metadata/datablock/README.md)
+        - [Data Block](./metadata/datablock/datablock.md)
+        - [Block and BlockInfo](./metadata/datablock/blockinfo.md)
+        - [DatanodeStorageInfo](./metadata/datablock/datanodeinfo.md)
+        - [BlockManager](./metadata/datablock/blockmanager.md)
+        - [Data Model](./metadata/datablock/datamodel.md)
 - [Advanced Optimization](./opt/README.md)
 - [Deterministic Database](./db/README.md)
 
