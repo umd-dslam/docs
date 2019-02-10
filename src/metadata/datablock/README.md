@@ -11,8 +11,8 @@ Hadoop HDFS stores terabytes and petabytes of data which far exceeds the size of
 
 Namenode maintains the two most important relations in HDFS:
 
-- Directory tree of HDFS file system and data block indexes of files (inodes **<->** data block indexes);
-- The mapping relationship between data blocks and datanodes, that is, the information on which datanodes a datablock is stored (data blocks **<->** datanodes).
+- Directory tree of HDFS file system and data block indexes of files (inodes **<-->** data block indexes);
+- The mapping relationship between data blocks and datanodes, that is, the information on which datanodes a datablock is stored (data blocks **<-->** datanodes).
 
 [INodeFile.blocks](https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeFile.java#L251) field records all data blocks a file contains. It is also through this field that HDFS associates the first relation with the second relation. INodeFile.blocks is an array of `BlockInfo` which inherits from `Block` class, HDFS uses `Block` to abstract the data structure in Namenode.
 
@@ -48,5 +48,5 @@ public abstract class BlockInfo extends Block {
 }
 ```
 
-- **replication**: if the replication factor was set to 3 (default value in HDFS), there would be one original block and two replicas. For each block stored in HDFS, there will be n – 1 duplicated blocks distributed across the cluster.
-
+- **replication**: If the replication factor was set to 3 (default value in HDFS), there would be one original block and two replicas. For each block stored in HDFS, there will be n – 1 duplicated blocks distributed across the cluster.
+- **bcId**: Block collection ID is an INode ID which can uniquely identifies the INode object of the HDFS file through `INodeMap` (see [Section 3.1 - FSDirectory](https://dsl-umd.github.io/docs/metadata/inode/index.html#fsdirectory)).
