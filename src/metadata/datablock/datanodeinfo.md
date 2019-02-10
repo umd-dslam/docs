@@ -1,4 +1,8 @@
-# DatanodeStorageInfo and DatanodeDescriptor
+# Heterogeneous Storage
+
+## DatanodeStorageInfo
+
+## DatanodeDescriptor
 
 
 

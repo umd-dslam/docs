@@ -18,7 +18,7 @@
     - [Datablock Management](./metadata/datablock/README.md)
         - [Data Block](./metadata/datablock/datablock.md)
         - [Block and BlockInfo](./metadata/datablock/blockinfo.md)
-        - [DatanodeStorageInfo](./metadata/datablock/datanodeinfo.md)
+        - [Heterogeneous Storage](./metadata/datablock/datanodeinfo.md)
         - [BlockManager](./metadata/datablock/blockmanager.md)
         - [Data Model](./metadata/datablock/datamodel.md)
 - [Advanced Optimization](./opt/README.md)
