@@ -17,4 +17,5 @@ Many systems like Facebook's f4 used the same similar idea to provide low latenc
 ## References
 
 1. Heterogeneous Storage for HDFS: [https://issues.apache.org/jira/browse/HDFS-2832](https://issues.apache.org/jira/browse/HDFS-2832)
+
 2. Subramanian Muralidhar, Wyatt Lloyd, Sabyasachi Roy, Cory Hill, Ernest Lin, Weiwen Liu, Satadru Pan, Shiva Shankar, Viswanath Sivakumar, Linpeng Tang, and Sanjeev Kumar. 2014. f4: Facebook's warm BLOB storage system. In Proceedings of the 11th USENIX conference on Operating Systems Design and Implementation (OSDI'14). USENIX Association, Berkeley, CA, USA, 383-398.
