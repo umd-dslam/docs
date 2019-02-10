@@ -8,24 +8,24 @@ When clients send requests for file operations (mkdir, create, open, rename, del
 
 - The container for BlockManager, DatanodeManager, LeaseManager, etc. services;
 - RPC calls that modify or inspect the namespace should get delegated here; 
-- Anything that touches only blocks (eg. block reports) is delegated to `BlockManager`;
-- Anything that touches only file information (eg. permissions, mkdirs) is delegated to `FSDirectory`.
-- Logs mutations to `FSEditLog`. (`FSEditLog` already been introduced in [Section 2.1](https://dsl-umd.github.io/docs/intro/hdfs.html#persistence)).
+- Anything that touches only blocks (eg. block reports) is delegated to BlockManager;
+- Anything that touches only file information (eg. permissions, mkdirs) is delegated to FSDirectory`
+- Logs mutations to `FSEditLog`. (FSEditLog already been introduced in [Section 2.1](https://dsl-umd.github.io/docs/intro/hdfs.html#persistence)).
 
 
 ## FSDirectory
 
-[FSDirectory](https://github.com/gangliao/hadoop-calvin/blob/36471ed4e9c25a5e92f48f8ff6602309e217cfc4/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/FSDirectory.java#L98-L106) is a pure in-memory data structure, all of whose operations happen entirely in memory. In contrast, `FSNameSystem` persists the operations to the disk.
+[FSDirectory](https://github.com/gangliao/hadoop-calvin/blob/36471ed4e9c25a5e92f48f8ff6602309e217cfc4/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/FSDirectory.java#L98-L106) is a pure in-memory data structure, all of whose operations happen entirely in memory. In contrast, FSNameSystem persists the operations to the disk.
 
-`FSDirectory` contains two critical members:
+FSDirectory contains two critical members:
 
-- `INodeMap inodeMap` is storing almost all the inodes and maintaining the mapping between `INode ID` and `INode` data structure. (When the majority of fields in one `INode` are stored in database, the rest will still in memory for now. INode ID in `INode` can be used to query full fields through combining the result of `inodeMap` and database to maintain the conformity between database and memory)
+- `INodeMap inodeMap` is storing almost all the inodes and maintaining the mapping between `INode ID` and `INode` data structure. (When the majority of fields in one INode are stored in database, the rest will still in memory for now. INode ID in INode can be used to query full fields through combining the result of inodeMap and database to maintain the conformity between database and memory)
 
 - `INodeDirectory rootDir` is the root of in-memory representation of the file/block hierarchy.
 
 ### INode
 
-`INode` above is a base class containing common fields for file and directory inodes. The relationships among `INode` ([INode.java#L62](https://github.com/DSL-UMD/hadoop-calvin/blob/trunk/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INode.java#L62), [INodeWithAdditionalFields.java#L98-L124](https://github.com/DSL-UMD/hadoop-calvin/blob/6c852f2a3757129491c21a9ba3b315a7a00c0c28/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeWithAdditionalFields.java#L98-L124)), `INodeFile` ([INodeFile.java#L251-L253](https://github.com/DSL-UMD/hadoop-calvin/blob/6c852f2a3757129491c21a9ba3b315a7a00c0c28/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeFile.java#L251-L253)) and `INodeDirectory` ([INodeDirectory.java#L74](https://github.com/DSL-UMD/hadoop-calvin/blob/6c852f2a3757129491c21a9ba3b315a7a00c0c28/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeDirectory.java#L74)) are defined as follows:
+INode above is a base class containing common fields for file and directory inodes. The relationships among INode ([INode.java#L62](https://github.com/DSL-UMD/hadoop-calvin/blob/trunk/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INode.java#L62), [INodeWithAdditionalFields.java#L98-L124](https://github.com/DSL-UMD/hadoop-calvin/blob/6c852f2a3757129491c21a9ba3b315a7a00c0c28/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeWithAdditionalFields.java#L98-L124)), INodeFile ([INodeFile.java#L251-L253](https://github.com/DSL-UMD/hadoop-calvin/blob/6c852f2a3757129491c21a9ba3b315a7a00c0c28/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeFile.java#L251-L253)) and INodeDirectory ([INodeDirectory.java#L74](https://github.com/DSL-UMD/hadoop-calvin/blob/6c852f2a3757129491c21a9ba3b315a7a00c0c28/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeDirectory.java#L74)) are defined as follows:
 
 **Note:** You can only see these fields at `truck` branch of our github repo: [DSL-UMD/hadoop-calvin](https://github.com/DSL-UMD/hadoop-calvin), since the default branch `calvin` removed them into database.
 
@@ -58,11 +58,11 @@ INodeFile extends INode {
 }
 ```
 
-Briefly speaking, the three different classes are based on `INode` class and we will store almost all the attributes here into database system and replace the corresponding functions with our database-based implementation.
+Briefly speaking, the three different classes are based on INode class and we will store almost all the attributes here into database system and replace the corresponding functions with our database-based implementation.
 
 ### File Operation
 
-`FSDirectory` can perform general operations on any `INode` via `inodeMap` and `rootDir`.
+`FSDirectory` can perform general operations on any INode via `inodeMap` and `rootDir`.
 
 For example, `nnThroughputBenchmark` is a directory with 10 files:
 
@@ -86,14 +86,14 @@ nnThroughputBenchmark
 5 directories, 10 files
 ```
 
-`nnThroughputBenchmark`, `create`, `ThroughputBenchDir0`, `ThroughputBenchDir1` and `ThroughputBenchDir2` are `INodeDirectory`. `ThroughputBench[0-9]` are `INodeFile`. They all exist in memory when HDFS is running.
+`nnThroughputBenchmark`, `create`, `ThroughputBenchDir0`, `ThroughputBenchDir1` and `ThroughputBenchDir2` are INodeDirectory. `ThroughputBench[0-9]` are INodeFile. They all exist in memory when HDFS is running.
 
 <img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/fs-tree.png" class="center" style="width: 80%;" />
 
 <span class="caption">Figure 3-1: File System Namespace in Namenode.</span>
 
 
-If client wants to delete `ThroughputBench0`, `FSDirectory` will traverse the directory tree from `nnThroughputBenchmark` to `create` and thence `ThroughputBenchDir0`, then remove the leaf `ThroughputBench0` from its children list.
+If client wants to delete `ThroughputBench0`, FSDirectory will traverse the directory tree from `nnThroughputBenchmark` to `create` and thence `ThroughputBenchDir0`, then remove the leaf `ThroughputBench0` from its children list.
 
 When Namenode receives more than millions of file operations simultaneously, HDFS are experiencing severe latency due to the limited memory available. Eventually, HDFS is playing a losing game in cloud computing if the scalability bottleneck persists.
 
@@ -129,7 +129,7 @@ private final void setPermission(long permission) {
 
 #### Create 
 
-When `DatabaseConnection.getInstance()` is invoked, Object will be initialized by its constructor (only once in the lifetime of the file system), and `inodes` table also will be
+When [DatabaseConnection.getInstance()](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/DatabaseConnection.java#L70-L77) is invoked, Object will be initialized by its constructor (only once in the lifetime of the file system), and `inodes` table also will be
 created.
 
 ```sql
@@ -143,7 +143,7 @@ CREATE TABLE inodes(
 
 #### Insert
 
-Inserting a new inode into database is tricky. Most of the fields such as **id**, **name**, **accessTime**, **modificationTime**, **permission** are assigned during the initialization of `INodeFile` and `INodeDirectory`. However, the rest like **header** and **parent** are updated during the runtime of file operations. Therefore, at least two SQL statements are required in here.
+Inserting a new inode into database is tricky. Most of the fields such as **id**, **name**, **accessTime**, **modificationTime**, **permission** are assigned during the initialization of INodeFile and INodeDirectory. However, the rest like **header** and **parent** are updated during the runtime of file operations. Therefore, at least two SQL statements are required in here.
 
 ```sql
 INSERT INTO inodes(
@@ -186,11 +186,11 @@ DELETE FROM inodes WHERE id IN (
 After we implemented such functions with database API, we already get the primitives for implementing different directory tree operators. Although some intermediate object may still take some memory, it won't stay persistently in the memory and will finally be garbage collected.
 
 
-Besides moving the logic and data model into database, we also have to modify the code of saving `FSImage` file and writing `EditLog` mentioned in [Section 2.1](https://dsl-umd.github.io/docs/intro/hdfs.html#persistence) to avoid read and serialize those attributes. The steps include simplifying the format of log data and protobuf image (checkpoint) and removing redundant code in saving and loading functions.
+Besides moving the logic and data model into database, we also have to modify the code of saving FSImage file and writing EditLog mentioned in [Section 2.1](https://dsl-umd.github.io/docs/intro/hdfs.html#persistence) to avoid read and serialize those attributes. The steps include simplifying the format of log data and protobuf image (checkpoint) and removing redundant code in saving and loading functions.
 
 ### Tables
 
-If client creates the same directory `nnThroughputBenchmark` with 10 files again, all these fields in `INode` will be stored into database as follows:
+If client creates the same directory `nnThroughputBenchmark` with 10 files again, all these fields in INode will be stored into database as follows:
 
 
 |  ID      | parent   |  name                | accesstime    | modificationtime |  header         | permission    |
