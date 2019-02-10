@@ -72,6 +72,10 @@ public abstract class BlockInfo extends Block {
 as NAS) etc. A storage in the Datanode is represented by this class.
 
 
+## DatanodeStorageInfo
+
+
+
 ## References
 
-1. Heterogeneous Storage for HDFS: (https://issues.apache.org/jira/browse/HDFS-2832)[https://issues.apache.org/jira/browse/HDFS-2832]
+1. Heterogeneous Storage for HDFS: [https://issues.apache.org/jira/browse/HDFS-2832](https://issues.apache.org/jira/browse/HDFS-2832)
