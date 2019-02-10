@@ -13,11 +13,11 @@ Namenode allocates files access to the clients. It maintains and manages the dir
 
 ## Datanode
 
-Datanodes manage storage of data. They serve read and write requests from the file system's clients. They also perform block creation, deletion, and replication upon instruction from the namenode. Once a block is written on a datanode, it replicates it to other datanode and process continues until the number of replicas mentioned is created. After the definite interval of time, all these dataNodes sends heartbeat messages to the namenode. If the namenode stops receiving heartbeat messages from any of these datanodes, then it assumes it to be dead. After that, it checks for the data present in those nodes and then gives commands to the other datanode to create a replica of that data to other datanodes. Therefore data is always available.
+Datanodes manage storage of data. They serve read and write requests from the file system's clients. They also perform block creation, deletion, and replication upon instruction from the namenode. Once a block is written on a datanode, it replicates it to other datanode and process continues until the number of replicas mentioned is created. After the definite interval of time, all these datanodes sends heartbeat messages to the namenode. If the namenode stops receiving heartbeat messages from any of these datanodes, then it assumes it to be dead. After that, it checks for the data present in those nodes and then gives commands to the other datanode to create a replica of that data to other datanodes. Therefore data is always available.
 
 ## High Availability
 
-Hadoop HDFS is a distributed file system. HDFS distributes data among the nodes in the Hadoop cluster by creating a replica of the file. Hadoop framework store these replicas of files on the other machines present in the cluster. So, when an HDFS client wants to access his data, he can easily access that data from a number of machines present in the cluster. Data is easily available in the closest node in the cluster. At some unfavorable conditions like a failure of a node, the client can easily access their data from the other nodes.
+Hadoop HDFS is a distributed file system. HDFS distributes data among the nodes in the Hadoop cluster by creating a replica of the file. Hadoop framework stores these replicas of files on the other machines present in the cluster. When a client wants to access his data, he can easily access that data from a number of machines present in the cluster. Data is easily available in the closest node in the cluster. At some unfavorable conditions like a failure of a node, the client can easily access their data from the other nodes.
 
 ## Checkpointng
 
