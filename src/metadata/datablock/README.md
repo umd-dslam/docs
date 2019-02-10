@@ -15,19 +15,11 @@ Namenode maintains the two most important relations in HDFS:
 
 - The mapping relationship between data blocks and datanodes, that is, the information on which datanodes a datablock is stored (`data blocks <-> datanodes`).
 
-[INodeFile.blocks](https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeFile.java#L251) field records all data blocks a file contains. It is also through this field that HDFS associates the first relation with the second relation.
-
-INodeFile.blocks is an array of `BlockInfo` which inherits from `Block` class, HDFS uses `Block` to abstract the data structure in Namenode.
+[INodeFile.blocks](https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeFile.java#L251) field records all data blocks a file contains. It is also through this field that HDFS associates the first relation with the second relation. INodeFile.blocks is an array of `BlockInfo` which inherits from `Block` class, HDFS uses `Block` to abstract the data structure in Namenode.
 
 ## Block and BlockInfo
 
 `Block` is used to uniquely identify data blocks in Namenode and is the most basic abstract interface of the data block in HDFS. Block class defines [three fields](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs-client/src/main/java/org/apache/hadoop/hdfs/protocol/Block.java#L92-L94):
-
-- **blockId** uniquely identifies this Block object;
-
-- **numBytes** is the size of this data block (in bytes);
-
-- **generationStamp** is the timestamp of this data block.
 
 ```java
 public class Block implements Writable, Comparable<Block> {
@@ -37,3 +29,9 @@ public class Block implements Writable, Comparable<Block> {
     ...
 }
 ```
+
+- **blockId** uniquely identifies this Block object;
+- **numBytes** is the size of this data block (in bytes);
+- **generationStamp** is the timestamp of this data block.
+
+`BlockInfo` extends from Block class and is a supplementary of Block class.
