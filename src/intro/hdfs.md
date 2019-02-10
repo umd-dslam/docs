@@ -16,8 +16,9 @@ Namenode allocates files access to the clients. It maintains and manages the dir
 Datanodes manage storage of data. They serve read and write requests from the file system's clients. They also perform block creation, deletion, and replication upon instruction from the namenode. Once a block is written on a datanode, it replicates it to other datanode and process continues until the number of replicas mentioned is created.
 
 
-## Persistence
+## Checkpointng
 
+[Checkpointing](https://blog.cloudera.com/blog/2014/03/a-guide-to-checkpointing-in-hadoop/) is an essential part of maintaining and persisting filesystem metadata in HDFS. It’s crucial for efficient NameNode recovery and restart, and is an important indicator of overall cluster health.
 At a high level, the NameNode’s primary responsibility is storing the HDFS namespace. This means things like the directory tree, file permissions, and the mapping of files to block IDs. It’s important that this metadata (and all changes to it) are safely persisted to stable storage for fault tolerance. HDFS metadata represents the structure of HDFS directories and files in a tree in memory of Namenode. Persistence of HDFS metadata broadly breaks down into 2 categories of files:
 
 - `FSImage` in Namenode is an "Image file" which contains the entire filesystem namespace and is stored as a file in Namenode's local file system. It also contains a serialized form of all the directories and children inodes in the filesystem. Each inode is an internal representation of a file or directory's metadata;
@@ -30,7 +31,5 @@ At a high level, the NameNode’s primary responsibility is storing the HDFS nam
 
 <span class="caption">Figure 2-2: Checkpointing creates a new fsimage from an old fsimage and edit log.</span>
 
-## Checkpointng
-
-[Checkpointing](https://blog.cloudera.com/blog/2014/03/a-guide-to-checkpointing-in-hadoop/) is an essential part of maintaining and persisting filesystem metadata in HDFS. It’s crucial for efficient NameNode recovery and restart, and is an important indicator of overall cluster health. Checkpointing is the process of merging the content of the most recent FSImage with all edits applied (EditLogs) after that FSImage is merged in order to create a new FSImage. Checkpointing is triggered automatically by configuration policies or manually by HDFS administration commands.
+ Checkpointing is the process of merging the content of the most recent FSImage with all edits applied (EditLogs) after that FSImage is merged in order to create a new FSImage. Checkpointing is triggered automatically by configuration policies or manually by HDFS administration commands.
 
