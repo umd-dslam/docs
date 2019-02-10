@@ -13,7 +13,7 @@ Namenode allocates files access to the clients. It maintains and manages the dir
 
 ## Datanode
 
-Datanodes manage storage of data. They serve read and write requests from the file system's clients. They also perform block creation, deletion, and replication upon instruction from the namenode. Once a block is written on a datanode, it replicates it to other datanode and process continues until the number of replicas mentioned is created. After the definite interval of time, all these DataNodes sends heartbeat messages to the NameNode. If the NameNode stops receiving heartbeat messages from any of these DataNodes, then it assumes it to be dead. After that, it checks for the data present in those nodes and then gives commands to the other datanode to create a replica of that data to other datanodes. Therefore data is always available.
+Datanodes manage storage of data. They serve read and write requests from the file system's clients. They also perform block creation, deletion, and replication upon instruction from the namenode. Once a block is written on a datanode, it replicates it to other datanode and process continues until the number of replicas mentioned is created. After the definite interval of time, all these dataNodes sends heartbeat messages to the namenode. If the namenode stops receiving heartbeat messages from any of these datanodes, then it assumes it to be dead. After that, it checks for the data present in those nodes and then gives commands to the other datanode to create a replica of that data to other datanodes. Therefore data is always available.
 
 ## High Availability
 
