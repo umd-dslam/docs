@@ -8,7 +8,7 @@ HDFS is a distributed file system from Hadoop designed for storing very large fi
 
 ## Namenode
 
-Namenode allocates files access to the clients. It maintains and manages the directory tree, relations between blocks and files, Datanodes and assigns tasks to Datanodes. Namenode executes file system namespace operations like opening, closing, and renaming files and directories. When a client asks for a data access in HDFS, first of all, NameNode searches for the data in that datanodes, in which data is quickly available. And then provides access to that data to the client. HDFS Namenode itself makes data availability easy to the clients by providing the address of the datanode from where a user can directly read.
+Namenode allocates files access to the clients. It maintains and manages the directory tree, relations among files, blocks and Datanodes, and assigns tasks to Datanodes. Namenode executes file system namespace operations like opening, closing, and renaming files and directories. When a client asks for a data access in HDFS, first of all, NameNode searches for the data in that datanodes, in which data is quickly available. And then provides access to that data to the client. HDFS Namenode itself makes data availability easy to the clients by providing the address of the datanode from where a user can directly read.
 
 
 ## Datanode
