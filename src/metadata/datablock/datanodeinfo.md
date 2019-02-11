@@ -34,7 +34,7 @@ public class DatanodeStorageInfo {
 
 - **capacity**: This storage volume's capacity;
 
-- **blockReportCount**: The number of block reports received from Datanode. 
+- **blockReportCount**: The number of block reports received from the Datanode.
 
 - **DatanodeDescriptor dn**:  This class extends the DatanodeInfo class with **ephemeral** information (e.g. health, capacity, what blocks are associated with the Datanode) that is private to the Namenode, i.e. this class is not exposed to clients.
 
