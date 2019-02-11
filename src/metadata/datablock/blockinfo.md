@@ -35,7 +35,7 @@ public abstract class BlockInfo extends Block {
 ```
 
 - **replication**: If the replication factor was set to 3 (default value in HDFS), there would be one original block and two replicas. For each block stored in HDFS, there will be n – 1 duplicated blocks distributed across the cluster.
-- **bcId**: Block collection ID is an alias for INode ID which can uniquely identifies the INode object of the HDFS file through `INodeMap` (see [Section 3.1 - FSDirectory](https://dsl-umd.github.io/docs/metadata/inode/index.html#fsdirectory)). With this design, both data blocks and inode can easily find each other. For example, FSNameSystem ([FSNamesystem.java#L3640-L3648](https://github.com/DSL-UMD/hadoop-calvin/blob/88528d2ef1ac4926c7716d35ad6c7cd3aa2bc5f0/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/FSNamesystem.java#L3640-L3648)) has a member function `getBlockCollection` to find INode from BlockInfo:
+- **bcId**: Block collection ID is an alias for INode ID which can uniquely identifies the INode object of the HDFS file through `INodeMap` (see [Section 3.1.1 - FSDirectory](https://dsl-umd.github.io/docs/metadata/inode/fsdirectory.html#fsdirectory)). With this design, both data blocks and inode can easily find each other. For example, FSNameSystem ([FSNamesystem.java#L3640-L3648](https://github.com/DSL-UMD/hadoop-calvin/blob/88528d2ef1ac4926c7716d35ad6c7cd3aa2bc5f0/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/FSNamesystem.java#L3640-L3648)) has a member function `getBlockCollection` to find INode from BlockInfo:
 
     ```java
     // hadoop/hdfs/server/namenode/FSNamesystem.java

@@ -8,6 +8,8 @@ The storage policy dictates which storage types to use when storing the file or 
 
 ## DatanodeStorageInfo
 
+As shown in the former [Section 3.2.2 - BlockInfo](https://dsl-umd.github.io/docs/metadata/datablock/blockinfo.html#blockinfo)
+
 ## DatanodeDescriptor
 
 
