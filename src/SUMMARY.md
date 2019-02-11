@@ -22,7 +22,7 @@
         - [BlockManager](./metadata/datablock/blockmanager.md)
     - [Data Model](./metadata/datamodel/README.md)
         - [Quantitative Analysis](./metadata/datamodel/1.analysis.md)
-        - [Data Model](./metadata/datamodel/2.datamodel.md)
+        - [Tables and CRUD Operations](./metadata/datamodel/2.crud.md)
 - [Advanced Optimization](./opt/README.md)
 
 - [Deterministic Database](./db/README.md)
