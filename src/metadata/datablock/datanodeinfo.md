@@ -45,6 +45,7 @@ Neither is it stored persistently in the `FSImage`.
 
 In this project, all fields of DatanodeDescriptor will be stored into the database system. We only introduce a few special fields here, more details can be found in [[DatanodeDescriptor.java#L150-L232](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/DatanodeDescriptor.java#L150-L232)].
 
+`DatanodeDescriptor` extends from `DatanodeInfo` which extends from `DatanodeID`.
 
 ```java
 public class DatanodeID implements Comparable<DatanodeID> {
