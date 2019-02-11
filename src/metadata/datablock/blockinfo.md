@@ -52,3 +52,6 @@ public abstract class BlockInfo extends Block {
 
 - **storages** is an array of `DatanodeStorageInfo`. A Datanode has one or more types of storages such as HDD, SSD, RAM, RAID, tape, remote storage (such
 as NAS) etc. A storage in the Datanode is represented by this class.
+
+## BlocksMap
+
