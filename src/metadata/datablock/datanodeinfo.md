@@ -8,8 +8,27 @@ The storage policy dictates which storage types to use when storing the file or 
 
 ## DatanodeStorageInfo
 
-As shown in the former [Section 3.2.2 - BlockInfo](https://dsl-umd.github.io/docs/metadata/datablock/blockinfo.html#blockinfo), [BlockInfo.storages](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockInfo.java#L62) is an array of `DatanodeStorageInfo`. A storage in the Datanode is represented by DatanodeStorageInfo. 
-A Datanode has one or more types of storages such as HDD, SSD, RAM, and so on.
+As shown in the former [Section 3.2.2](https://dsl-umd.github.io/docs/metadata/datablock/blockinfo.html#blockinfo), [BlockInfo.storages](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockInfo.java#L62) is an array of DatanodeStorageInfo. A storage in the Datanode is represented by DatanodeStorageInfo. 
+A Datanode has one or more types of storages such as HDD, SSD, RAM, and so on.  HDFS distinguishes different storage types and hence applications can  selectively use storage media with different performance characteristics.
+
+`DatanodeStorageInfo` class contains many variables, we only introduce the most relevant ones, but you can check out [DatanodeStorageInfo.java#L90-L120](https://github.com/DSL-UMD/hadoop-calvin/blob/88528d2ef1ac4926c7716d35ad6c7cd3aa2bc5f0/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/DatanodeStorageInfo.java#L90-L120) for more information.
+
+```java
+public class DatanodeStorageInfo {
+    private final DatanodeDescriptor dn;
+    private final String storageID;
+    private StorageType storageType;
+    private State state;
+
+    private long capacity;
+
+    /** The number of block reports received */
+    private int blockReportCount = 0;
+    ...
+}
+```
+
+- **storageID**
 
 ## DatanodeDescriptor
 
