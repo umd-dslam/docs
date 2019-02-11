@@ -4,7 +4,7 @@ HDFS is a distributed file system from Hadoop designed for storing very large fi
 
 <img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/hdfs-arch.png" class="center" style="width: 80%;" />
 
-<span class="caption">Figure 2-1: System Architecture of Hadoop HDFS.</span>
+<span class="caption">Figure 1: System Architecture of Hadoop HDFS.</span>
 
 ## Namenode
 
