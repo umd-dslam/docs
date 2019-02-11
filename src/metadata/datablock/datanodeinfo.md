@@ -18,17 +18,22 @@ public class DatanodeStorageInfo {
     private final DatanodeDescriptor dn;
     private final String storageID;
     private StorageType storageType;
-    private State state;
-
     private long capacity;
-
-    /** The number of block reports received */
     private int blockReportCount = 0;
     ...
 }
 ```
 
-- **storageID**
+- **storageID** identifies a single storage directory/volume used for storing blocks;
+- **storageType** identifies the underlying storage media. The default storage medium is assumed to be DISK;
+    - ARCHIVE: Archival storage is for very dense storage and is useful for rarely accessed data. This storage type is typically cheaper per TB than normal hard disks.
+    - DISK: Hard disk drives are relatively inexpensive and provide sequential I/O performance. This is the default storage type.
+    - SSD: Solid state drives are useful for storing hot data and I/O-intensive applications.
+    - RAM_DISK: This special in-memory storage type is used to accelerate low-durability, single-replica writes.
+- **capacity**: This storage volume's capacity;
+- **blockReportCount**: The number of block reports received from Datanode. 
+
+https://github.com/DSL-UMD/hadoop-calvin/blob/88528d2ef1ac4926c7716d35ad6c7cd3aa2bc5f0/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/fs/StorageType.java#L29-L41
 
 ## DatanodeDescriptor
 
