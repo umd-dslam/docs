@@ -8,7 +8,8 @@ The storage policy dictates which storage types to use when storing the file or 
 
 ## DatanodeStorageInfo
 
-As shown in the former [Section 3.2.2 - BlockInfo](https://dsl-umd.github.io/docs/metadata/datablock/blockinfo.html#blockinfo)
+As shown in the former [Section 3.2.2 - BlockInfo](https://dsl-umd.github.io/docs/metadata/datablock/blockinfo.html#blockinfo), [BlockInfo.storages](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockInfo.java#L62) is an array of `DatanodeStorageInfo`. A storage in the Datanode is represented by DatanodeStorageInfo. 
+A Datanode has one or more types of storages such as HDD, SSD, RAM, and so on.
 
 ## DatanodeDescriptor
 
