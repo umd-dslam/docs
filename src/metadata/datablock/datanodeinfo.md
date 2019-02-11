@@ -9,9 +9,9 @@ The storage policy dictates which storage types to use when storing the file or 
 ## DatanodeStorageInfo
 
 As shown in the former [Section 3.2.2](https://dsl-umd.github.io/docs/metadata/datablock/blockinfo.html#blockinfo), [BlockInfo.storages](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockInfo.java#L62) is an array of `DatanodeStorageInfo`. A storage in Datanode is represented by DatanodeStorageInfo.
-A Datanode has one or more types of storages such as HDD, SSD, RAM, and so on. HDFS distinguishes different storage types and hence applications can  selectively use storage media with different performance characteristics. Awareness of storage media can allow HDFS to make better decisions about the placement of block data with input from applications. An application can choose the distribution of replicas based on its performance and durability requirements.
+A Datanode has one or more types of storages such as HDD, SSD, RAM, and so on. each Datanode must be treated as a collection of storages. HDFS distinguishes different storage types and hence applications can  selectively use storage media with different performance characteristics. Awareness of storage media can allow HDFS to make better decisions about the placement of block data with input from applications. An application can choose the distribution of replicas based on its performance and durability requirements.
 
-`DatanodeStorageInfo` class contains many variables, we only introduce the most relevant ones, but you can check out [DatanodeStorageInfo.java#L90-L120](https://github.com/DSL-UMD/hadoop-calvin/blob/88528d2ef1ac4926c7716d35ad6c7cd3aa2bc5f0/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/DatanodeStorageInfo.java#L90-L120) for more information.
+`DatanodeStorageInfo` class contains many variables, we only introduce the most relevant ones, but you can check out [[DatanodeStorageInfo.java#L90-L120](https://github.com/DSL-UMD/hadoop-calvin/blob/88528d2ef1ac4926c7716d35ad6c7cd3aa2bc5f0/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/DatanodeStorageInfo.java#L90-L120)] for more information.
 
 ```java
 public class DatanodeStorageInfo {
