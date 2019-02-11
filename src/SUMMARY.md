@@ -15,15 +15,14 @@
         - [FSDirectory](./metadata/inode/1.fsdirectory.md)
         - [INode](./metadata/inode/2.inode.md)
         - [File Operations](./metadata/inode/3.fsop.md)
-        - [Quantitative Analysis](./metadata/inode/4.analysis.md)
-        - [Data Model](./metadata/inode/5.datamodel.md)
     - [Datablock Management](./metadata/datablock/README.md)
         - [Data Block](./metadata/datablock/datablock.md)
         - [Block and BlockInfo](./metadata/datablock/blockinfo.md)
         - [Heterogeneous Storage](./metadata/datablock/datanodeinfo.md)
         - [BlockManager](./metadata/datablock/blockmanager.md)
-        - [Data Model](./metadata/datablock/datamodel.md)
-
+    - [Data Model](./metadata/datamodel/README.md)
+        - [Quantitative Analysis](./metadata/datamodel/1.analysis.md)
+        - [Data Model](./metadata/datamodel/2.datamodel.md)
 - [Advanced Optimization](./opt/README.md)
 
 - [Deterministic Database](./db/README.md)
