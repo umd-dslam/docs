@@ -40,8 +40,11 @@ public class DatanodeStorageInfo {
 
 ## DatanodeDescriptor
 
-`DatanodeDescriptor` tracks stats on a given datanode, such as available storage capacity, last update time, etc., and maintains a set of blocks stored on the datanode. This data structure is a data structure that is internal to the namenode. It is not sent over-the-wire to the Client or the Datnodes.
+`DatanodeDescriptor` tracks stats on a given datanode, such as available storage capacity, last update time, etc., and maintains a set of blocks stored on the datanode. This data structure is a data structure that is internal to the namenode. It is not sent over-the-wire to the Client or the Datanodes.
 Neither is it stored persistently in the `FSImage`.
+
+In this project, all fields of DatanodeDescriptor will be stored into the database system. We only introduce a few special fields here, more details can be found in [DatanodeDescriptor.java#L150-L232](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/DatanodeDescriptor.java#L150-L232)
+
 
 ## References
 
