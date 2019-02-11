@@ -43,31 +43,31 @@ public class DatanodeStorageInfo {
 `DatanodeDescriptor` tracks stats on a given datanode, such as available storage capacity, last update time, etc., and maintains a set of blocks stored on the datanode. This data structure is a data structure that is internal to the namenode. It is not sent over-the-wire to the Client or the Datanodes.
 Neither is it stored persistently in the `FSImage`.
 
-In this project, all fields of DatanodeDescriptor will be stored into the database system. We only introduce a few special fields here, more details can be found in [[DatanodeDescriptor.java#L150-L232](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/DatanodeDescriptor.java#L150-L232)].
+In this project, all fields of DatanodeDescriptor will be stored into the database system. We only introduce a few special fields here, more details can be found in [[DatanodeDescriptor.java#L150-L232](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/DatanodeDescriptor.java#L150-L232), [DatanodeID.java#L42-L65](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/hadoop-hdfs-project/hadoop-hdfs-client/src/main/java/org/apache/hadoop/hdfs/protocol/DatanodeID.java#L42-L65)].
 
-`DatanodeDescriptor` extends from `DatanodeInfo` which extends from `DatanodeID`.
+`DatanodeDescriptor` extends from `DatanodeInfo` which extends from `DatanodeID`:
 
 ```java
 public class DatanodeID implements Comparable<DatanodeID> {
-  private String ipAddr;            // IP address
-  private ByteString ipAddrBytes;   // ipAddr ByteString to save on PB serde
-  private String hostName;          // hostname claimed by datanode
-  private ByteString hostNameBytes; // hostName ByteString to save on PB serde
-  private String peerHostName;      // hostname from the actual connection
-  private int xferPort;             // data streaming port
-  private int infoPort;             // info server port
-  private int infoSecurePort;       // info server port
-  private int ipcPort;              // IPC server port
-  private String xferAddr;
-  /**
-   * UUID identifying a given datanode. For upgraded Datanodes this is the
-   * same as the StorageID that was previously used by this Datanode.
-   * For newly formatted Datanodes it is a UUID.
-   */
-  private final String datanodeUuid;
-  // datanodeUuid ByteString to save on PB serde
-  private final ByteString datanodeUuidBytes;
-  ...
+    private String ipAddr;            // IP address
+    private ByteString ipAddrBytes;   // ipAddr ByteString to save on PB serde
+    private String hostName;          // hostname claimed by datanode
+    private ByteString hostNameBytes; // hostName ByteString to save on PB serde
+    private String peerHostName;      // hostname from the actual connection
+    private int xferPort;             // data streaming port
+    private int infoPort;             // info server port
+    private int infoSecurePort;       // info server port
+    private int ipcPort;              // IPC server port
+    private String xferAddr;
+    /**
+    * UUID identifying a given datanode. For upgraded Datanodes this is the
+    * same as the StorageID that was previously used by this Datanode.
+    * For newly formatted Datanodes it is a UUID.
+    */
+    private final String datanodeUuid;
+    // datanodeUuid ByteString to save on PB serde
+    private final ByteString datanodeUuidBytes;
+    ...
 }
 
 /**
@@ -76,38 +76,39 @@ public class DatanodeID implements Comparable<DatanodeID> {
  * network location that is communicated to clients.
  */
 public class DatanodeInfo extends DatanodeID implements Node {
-  private long capacity;
-  private long dfsUsed;
-  private long nonDfsUsed;
-  private long remaining;
-  private long blockPoolUsed;
-  private long cacheCapacity;
-  private long cacheUsed;
-  private long lastUpdate;
-  private long lastUpdateMonotonic;
-  private int xceiverCount;
-  private volatile String location = NetworkTopology.DEFAULT_RACK;
-  private String softwareVersion;
-  private List<String> dependentHostNames = new LinkedList<>();
-  private String upgradeDomain;
-  public static final DatanodeInfo[] EMPTY_ARRAY = {};
-  private int numBlocks;
+    private long capacity;
+    private long dfsUsed;
+    private long nonDfsUsed;
+    private long remaining;
+    private long blockPoolUsed;
+    private long cacheCapacity;
+    private long cacheUsed;
+    private long lastUpdate;
+    private long lastUpdateMonotonic;
+    private int xceiverCount;
+    private volatile String location = NetworkTopology.DEFAULT_RACK;
+    private String softwareVersion;
+    private List<String> dependentHostNames = new LinkedList<>();
+    private String upgradeDomain;
+    private int numBlocks;
+    ...
 }
 
 public class DatanodeDescriptor extends DatanodeInfo {
-  protected final Map<String, DatanodeStorageInfo> storageMap = new HashMap<>();
+    protected final Map<String, DatanodeStorageInfo> storageMap = new HashMap<>();
 
-  /** A queue of blocks to be replicated by this datanode */
-  private final BlockQueue<BlockTargetPair> replicateBlocks =
-      new BlockQueue<>();
-  /** A queue of blocks to be erasure coded by this datanode */
-  private final BlockQueue<BlockECReconstructionInfo> erasurecodeBlocks =
-      new BlockQueue<>();
-  /** A queue of blocks to be recovered by this datanode */
-  private final BlockQueue<BlockInfo> recoverBlocks = new BlockQueue<>();
-  /** A set of blocks to be invalidated by this datanode */
-  private final LightWeightHashSet<Block> invalidateBlocks =
-      new LightWeightHashSet<>();
+    /** A queue of blocks to be replicated by this datanode */
+    private final BlockQueue<BlockTargetPair> replicateBlocks =
+        new BlockQueue<>();
+    /** A queue of blocks to be erasure coded by this datanode */
+    private final BlockQueue<BlockECReconstructionInfo> erasurecodeBlocks =
+        new BlockQueue<>();
+    /** A queue of blocks to be recovered by this datanode */
+    private final BlockQueue<BlockInfo> recoverBlocks = new BlockQueue<>();
+    /** A set of blocks to be invalidated by this datanode */
+    private final LightWeightHashSet<Block> invalidateBlocks =
+        new LightWeightHashSet<>();
+    ...
 }
 ```
 
