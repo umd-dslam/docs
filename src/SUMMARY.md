@@ -9,19 +9,23 @@
     - [HDFS Architecture](./intro/hdfs.md)
     - [Deterministic Database](./intro/calvin.md)
     - [Horizontally Scale Namespace](./intro/new.md)
+
 - [HDFS Metadata Management](./metadata/README.md)
     - [INode Management](./metadata/inode/README.md)
-        - [FSDirectory](./metadata/inode/fsdirectory.md)
-        - [INode](./metadata/inode/inode.md)
-        - [File Operations](./metadata/inode/fsop.md)
-        - [Data Model](./metadata/inode/datamodel.md)
+        - [FSDirectory](./metadata/inode/1.fsdirectory.md)
+        - [INode](./metadata/inode/2.inode.md)
+        - [File Operations](./metadata/inode/3.fsop.md)
+        - [Quantitative Analysis](./metadata/inode/4.analysis.md)
+        - [Data Model](./metadata/inode/5.datamodel.md)
     - [Datablock Management](./metadata/datablock/README.md)
         - [Data Block](./metadata/datablock/datablock.md)
         - [Block and BlockInfo](./metadata/datablock/blockinfo.md)
         - [Heterogeneous Storage](./metadata/datablock/datanodeinfo.md)
         - [BlockManager](./metadata/datablock/blockmanager.md)
         - [Data Model](./metadata/datablock/datamodel.md)
+
 - [Advanced Optimization](./opt/README.md)
+
 - [Deterministic Database](./db/README.md)
 
 ---------------
@@ -34,6 +38,8 @@
     - [Deploy Hadoop HDFS](./setup/deploy_hdfs.md)
     - [HDFS Namenode Test](./setup/test.md)
     - [Rebuild Source Code](./setup/rebuild-optimization.md)
+
+
 - [Benchmark](./benchmark.md)
 
 ---------------
