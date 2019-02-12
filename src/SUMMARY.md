@@ -12,14 +12,10 @@
 
 - [HDFS Metadata Management](./metadata/README.md)
     - [Namespace Management](./metadata/namespace/README.md)
-        - [INode](./metadata/namespace/1.inode.md)
-        - [File Operations](./metadata/namespace/2.fsop.md)
     - [Datablock Management](./metadata/datablock/README.md)
     - [DataNode Management](./metadata/datenode/README.md)
-        - [Heterogeneous Storage](./metadata/datanode/1.datanodeinfo.md)
-    - [Data Model](./metadata/datamodel/README.md)
-        - [Quantitative Analysis](./metadata/datamodel/1.analysis.md)
-        - [Tables and CRUD Operations](./metadata/datamodel/2.crud.md)
+    - [Quantitative Analysis](./metadata/analysis.md)
+    - [Data Model](./metadata/datamodel/datemodel.md)
 
 - [Advanced Optimization](./opt/README.md)
 
