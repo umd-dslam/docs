@@ -13,9 +13,9 @@
 - [HDFS Metadata Management](./metadata/README.md)
     - [Namespace Management](./metadata/namespace/README.md)
     - [Datablock Management](./metadata/datablock/README.md)
-    - [Datanode Management](./metadata/datenode/README.md)
-    - [Quantitative Analysis](./metadata/analysis.md)
-    - [Data Model](./metadata/datamodel/datemodel.md)
+    - [Datanode Management](./metadata/datanode/README.md)
+    - [Quantitative Analysis](./analysis.md)
+    - [Data Model](./datemodel.md)
 
 - [Advanced Optimization](./opt/README.md)
 
