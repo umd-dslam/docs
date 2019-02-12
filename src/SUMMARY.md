@@ -15,7 +15,7 @@
     - [Data Blocks](./metadata/datablock/README.md)
     - [Datanode Storage](./metadata/datanode/README.md)
     - [Quantitative Analysis](./analysis.md)
-    - [Data Model](./datemodel.md)
+    - [Data Model](./datamodel.md)
 
 - [Advanced Optimization](./opt/README.md)
 
