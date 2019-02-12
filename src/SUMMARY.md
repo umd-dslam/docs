@@ -16,7 +16,6 @@
         - [File Operations](./metadata/namespace/2.fsop.md)
     - [Datablock Management](./metadata/datablock/README.md)
         - [Block and BlockInfo](./metadata/datablock/1.blockinfo.md)
-        - [BlockManager](./metadata/datablock/2.blockmanager.md)
     - [DataNode Management](./metadata/datenode/README.md)
         - [Heterogeneous Storage](./metadata/datanode/1.datanodeinfo.md)
     - [Data Model](./metadata/datamodel/README.md)
