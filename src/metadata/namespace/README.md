@@ -79,13 +79,14 @@ public class INodeFile extends INodeWithAdditionalFields
 - **accessTime**: The last access time;
 - **children**: directory's children list;
 - **header**: Storage policy encoded using [HeaderFormat](https://github.com/DSL-UMD/hadoop-calvin/blob/6c852f2a3757129491c21a9ba3b315a7a00c0c28/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeFile.java#L95-L123) where the 64-bit format represents 4-bit storagePolicyID, 12-bit BLOCK_LAYOUT_AND_REDUNDANCY and 48-bit preferredBlockSize;
-- **blocks**: BlockInfo maintains where the replicas of the block are stored. More details can be found in [Section 3.2.2 Block and BlockInfo](https://dsl-umd.github.io/docs/metadata/datablock/2.blockinfo.html).
+- **blocks**: BlockInfo maintains where the replicas of the block are stored. More details can be found in [Section 3.2 Datablock Management
+](https://dsl-umd.github.io/docs/metadata/datablock/index.html#blockinfo).
 
 
  The directory is represented by the INodeDirectory object in memory, and `List<INode> children` is used to describe subdirectories or files in the directory; File is represented by the INodeFile object in memory, and `BlockInfo[] blocks` is used to indicate which blocks of the file are composed.
 
 
-In [Section 3.4.2 - Data Model](https://dsl-umd.github.io/docs/metadata/datamodel/2.crud.html), We will store all their attributes into database system and replace the corresponding functions with our database-based implementation.
+In [Section 3.5 - Data Model](https://dsl-umd.github.io/docs/metadata/datamodel/datemodel.html), We will store all their attributes into database system and replace the corresponding functions with our database-based implementation.
 
 
 ## File Operation
