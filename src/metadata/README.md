@@ -7,4 +7,4 @@ Namenode stores the metadata of filesystem namespaces and data blocks in memory 
 - Receiving heartbeats and block reports from Datanode. It ensures that the Datanodes are alive. A block report contains a list of all blocks on a Datanode;
 - Responsible for taking care of the Replication Factor of all the blocks (default value is 3).
 
-This section is divided into four main parts. The first part focuses on how HDFS represents inodes and maintains a directory tree. The second part is how to put the relations of `files - data blocks` and data block - datanodes from Namenode to database systems.
+This section is divided into four main parts. The first part focuses on how HDFS represents inodes and maintains a directory tree. The second part is how to put the relations of `files - data blocks` and `data block - datanodes` from the Namenode to the database systems. The third part is how to maintain a network topology of the entire cluster. In the final part, we quantify the memory consumption of various data structures in the Namenode and propose a new data model to store metadata in the database.
