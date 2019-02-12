@@ -11,9 +11,9 @@
     - [Horizontally Scale Namespace](./intro/new.md)
 
 - [HDFS Metadata Management](./metadata/README.md)
-    - [Namespace Management](./metadata/namespace/README.md)
-    - [Datablock Management](./metadata/datablock/README.md)
-    - [Datanode Management](./metadata/datanode/README.md)
+    - [File and Directory](./metadata/namespace/README.md)
+    - [Data Blocks](./metadata/datablock/README.md)
+    - [Datanode Storage](./metadata/datanode/README.md)
     - [Quantitative Analysis](./analysis.md)
     - [Data Model](./datemodel.md)
 
