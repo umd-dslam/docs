@@ -72,6 +72,22 @@ All arrays have an extra integer `length` field stored in their header, which me
 | Padding      |      | pad             |
 | Total        |      | 24 + size + pad |
 
+### Example
+
+Consider the following example:
+
+```java
+class Person {
+  String name;
+  int age;
+  boolean female;
+}
+```
+
+Let's calculate its memory usage:
+
+16 bytes (object header) + 8 bytes (reference to String) + 4 bytes (int) + 1 byte (boolean) + 3 bytes (padding) = 32 bytes
+
 
 ## File and Directory
 
