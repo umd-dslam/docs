@@ -82,20 +82,45 @@ All arrays have an extra integer `length` field stored in their header, which me
 
 [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) is a resizable-array implementation of the `List` interface. It has more default fields than an array such as type and capacity.
 
-ArrayList's internal structure looks like below:
+ArrayList's [internal structure](https://github.com/openjdk-mirror/jdk7u-jdk/blob/f4d80957e89a19a29bb9f9807d2a28351ed7f7df/src/share/classes/java/util/ArrayList.java#L105-L118) looks like below:
 
-```bash
-ArrayList
-├── default
-│
-└── Object[]
-    ├── entry
-    ├── entry
-    ├── entry
-    └── entry
+```java
+public class ArrayList<E> extends AbstractList<E>
+        implements List<E>, RandomAccess, Cloneable, java.io.Serializable
+{
+    private static final long serialVersionUID = 8683452581122892189L;
+
+    /**
+     * The array buffer into which the elements of the ArrayList are stored.
+     * The capacity of the ArrayList is the length of this array buffer.
+     */
+    private transient Object[] elementData;
+
+    /**
+     * The size of the ArrayList (the number of elements it contains).
+     *
+     * @serial
+     */
+    private int size;
 ```
 
-> The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry [4]. However, getObjectSize(Object) can only get 40 bytes (no reference object size).
+The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry.
+
+|       Field      |     Type     |    Size (bytes)    |
+|:----------------:|:------------:|:------------------:|
+| Header           |              | 16                 |
+| serialVersionUID | long         | 8                  |
+| size             | int          | 4                  |
+| elementData      | Object[] Ref | 8                  |
+| Padding          |              | pad                |
+| Total            |              | min(36+pad)=**40** |
+
+
+> However, getObjectSize(Object) can only get 40 bytes (no reference object size).
+
+### String Object
+
+ It contains the following properties in this order: char[], int offset, int count, int hash.
 
 ### Example
 
@@ -217,7 +242,7 @@ The memory usage of each attribute in inode is shown in the table.
 
 ## References
 
-1. [How to Get the Size of an Object in Java](https://www.baeldung.com/java-size-of-object)
-2. [Java Object Size Calculations in 64-bit](http://btoddb-java-sizing.blogspot.com/)
-3. [Java objects memory size](http://iryndin.net/post/java_objects_memory_size/)
-4. Nick Mitchell, Gary Sevitsky, [Building Memory-efficient Java Applications: Practices and Challenges](http://www.iro.umontreal.ca/~dufour/cours/ift3912/docs/12-memory-efficient-java.pdf) 
+1. How to Get the Size of an Object in Java, https://www.baeldung.com/java-size-of-object
+2. Java Object Size Calculations in 64-bit, http://btoddb-java-sizing.blogspot.com/
+3. Java objects memory size, http://iryndin.net/post/java_objects_memory_size/
+4. Nick Mitchell, Gary Sevitsky, Building Memory-efficient Java Applications: Practices and Challenges, http://www.iro.umontreal.ca/~dufour/cours/ift3912/docs/12-memory-efficient-java.pdf
