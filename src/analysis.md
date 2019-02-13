@@ -38,11 +38,11 @@ OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
 
 ### Object References
 
-References have a typical size of 4 bytes on 32-bit platforms and on 64-bits platforms with heap boundary less than 32GB, and 8 bytes for this boundary above 32GB. We are working with large heaps and need to assume that all references are 8 bytes (You can disable it through **-XX:-UseCompressedOops**, [UseCompressedOops](https://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html) is on by default).
+References have a typical size of 4 bytes on 32-bit platforms and on 64-bits platforms with heap boundary less than 32GB, and 8 bytes for this boundary above 32GB. We are working with large heaps and need to assume that all references are **8 bytes** (You can disable it through **-XX:-UseCompressedOops**, [UseCompressedOops](https://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html) is on by default).
 
 ### Object Header
 
-In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is 16 bytes in the following form [3]:
+In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is **16 bytes** in the following form [3]:
 
 ```bash
 |------------------------------------------------------------------------------------------------------------|--------------------|
