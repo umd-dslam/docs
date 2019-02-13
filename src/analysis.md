@@ -64,6 +64,9 @@ In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 
 
 ### Array and ArrayList
 
+
+#### Array
+
 All arrays have an extra integer `length` field stored in their header, which means that an array's header uses 24 bytes even if it has no data - 16 bytes for header, 4 bytes for integer length, and 4 bytes for padding. JVM will allocate a block of memory, 8 byte aligned, to contain all the elements and only padding after the end of the last element. The layout looks like this:
 
 |     Field    | Type |   Size (bytes)  |
@@ -74,6 +77,8 @@ All arrays have an extra integer `length` field stored in their header, which me
 | Memory Block |      | size            |
 | Padding      |      | pad             |
 | Total        |      | 24 + size + pad |
+
+#### ArrayList
 
 [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) is a resizable-array implementation of the `List` interface. It has more default fields than an array such as type and capacity.
 
