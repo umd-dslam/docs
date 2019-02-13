@@ -79,7 +79,7 @@ as NAS) etc. A storage in the Datanode is represented by this class. More inform
 
 ## BlocksMap
 
-`BlocksMap` is the most important class associated with data blocks. It manages the metadata of data blocks on the Namenode, including which HDFS file the current data block belongs to, and which Datanodes the current data block is stored on. When the Datanode starts, it scans the local disk and reports the data block information to the Namenode. After the Namenode receives the block report from the Datanode, it will establish the correspondence between the data block and the Datanode that holds the data block, and save this information in the BlocksMap. Whether to obtain the HDFS file corresponding to a certain data block or to acquire which Datanodes the data block is stored on, it is necessary to use BlocksMap object.
+`BlocksMap` is the most important class associated with data blocks. It manages the metadata of data blocks on the Namenode, including which HDFS file the current data block belongs to, and which Datanodes the current data block is stored on. When the Datanode starts, it scans the local disk and reports the data block information to the Namenode. After the Namenode receives the block report from the Datanode, it wi).ll establish the correspondence between the data block and the Datanode that holds the data block, and save this information in the BlocksMap. Whether to obtain the HDFS file corresponding to a certain data block or to acquire which Datanodes the data block is stored on, it is necessary to use BlocksMap object.
 
 ```java
 class BlocksMap {
@@ -88,4 +88,4 @@ class BlocksMap {
 }
 ```
 
-We will analyse the memory consumption of `BlocksMap` in [Section 3.4 - Quantitative Analysis](https://dsl-umd.github.io/docs/analysis.html).
+We will analyse the memory consumption of `BlocksMap` in [Section 3.4 - Quantitative Analysis](https://dsl-umd.github.io/docs/analysis.html
