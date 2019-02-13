@@ -191,6 +191,9 @@ Object type: class java.util.ArrayList, size: 40 bytes
 Object type: class java.util.ArrayList, size: 40 bytes
 Object type: class java.util.ArrayList, size: 40 bytes
 Object type: class java.util.ArrayList, size: 40 bytes
+Object type: class java.lang.String, size: 32 bytes
+Object type: class java.lang.String, size: 32 bytes
+Object type: class java.lang.String, size: 32 bytes
 ```
 
 Let's manually analyse and calculate their memory usage:
@@ -200,22 +203,27 @@ Let's manually analyse and calculate their memory usage:
 
 To calculate arrays using `24 + size + pad`.
 
-- **int[] a0 = {}**: 24 bytes (size = 0, pad = 0).
-- **int[] a1 = {1}**: 32 bytes (size = 4, pad = 4).
-- **int[] a2 = {1, 2}**: 32 bytes (size = 4 * 2, pad = 0).
-- **int[] a3 = new int[100]**: 424 bytes (size = 4 * 100, pad = 0).
+- **int[] a0 = {}**: output: 24 bytes (size = 0, pad = 0).
+- **int[] a1 = {1}**: output: 32 bytes (size = 4, pad = 4).
+- **int[] a2 = {1, 2}**: output: 32 bytes (size = 4 * 2, pad = 0).
+- **int[] a3 = new int[100]**: output: 424 bytes (size = 4 * 100, pad = 0).
 
-- **String[] b0 = {}**: 24 bytes (size = 0, pad = 0).
-- **String[] b1 = {"1"}**: 32 bytes (size = 8, pad = 0).
-- **String[] b2 = {"1", "2"}**: 40 bytes (size = 8 * 2, pad = 0).
-- **String[] b3 = new String[100]**: 824 bytes (size = 8 * 100, pad = 0).
+- **String[] b0 = {}**: output: 24 bytes (size = 0, pad = 0).
+- **String[] b1 = {"1"}**: output: 32 bytes (size = 8, pad = 0).
+- **String[] b2 = {"1", "2"}**: output: 40 bytes (size = 8 * 2, pad = 0).
+- **String[] b3 = new String[100]**: output: 824 bytes (size = 8 * 100, pad = 0).
 
 We assume that all Person references are different in `List<Person>` (40 bytes + 8 bytes/entry):
 
-- **List<Person> al0**: 40 bytes.
-- **List<Person> al1**: 40 bytes, real size: 40 + 8 = 48 bytes. Total size: 48 + 104 = 152 bytes.
-- **List<Person> al2**: 40 bytes, real size: 40 + 8 * 2 = 56 bytes. Total size: 56 + 104 * 2 = 264 bytes.
-- **List<Person> al3**: 40 bytes, real size: 40 + 8 * 100 = 840 bytes. Total size: 840 + 104 * 100 = 11240 bytes.
+- **List<Person> al0**: output: 40 bytes, real size = total size = 40 bytes.
+- **List<Person> al1**: output: 40 bytes, real size: 40 + 8 = 48 bytes. Total size: 48 + 104 = 152 bytes.
+- **List<Person> al2**: output: 40 bytes, real size: 40 + 8 * 2 = 56 bytes. Total size: 56 + 104 * 2 = 264 bytes.
+- **List<Person> al3**: output: 40 bytes, real size: 40 + 8 * 100 = 840 bytes. Total size: 840 + 104 * 100 = 11240 bytes.
+
+To calculate strings using 32 fixed bytes + 16 bytes/entry:
+
+- **String s0 = ""**: output: 32 bytes, total size = 32 bytes.
+- **String s1 = "hello"**: output: 32 bytes, total size = 32 + 16 * 5 = 112 bytes.
 
 After studying the size of the Java object, let's estimate the various Java objects in the Namenode.
 
