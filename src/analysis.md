@@ -80,27 +80,22 @@ All arrays have an extra integer `length` field stored in their header, which me
 
 #### ArrayList
 
-[ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) is a resizable-array implementation of the `List` interface. It has more default fields than an array. Its [internal structure](https://github.com/openjdk-mirror/jdk7u-jdk/blob/f4d80957e89a19a29bb9f9807d2a28351ed7f7df/src/share/classes/java/util/ArrayList.java#L105-L118) looks like below:
+[ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) is a resizable-array implementation of the `List` interface. It has more default fields than an array such as [[AbstractList.java#L348](https://github.com/ZenOfAutumn/jdk8/blob/de6c37469e54d46841838423400144f7b9dc4cf1/java/util/AbstractList.java#L348)] and [[ArrayList.java#L106-L141](https://github.com/ZenOfAutumn/jdk8/blob/de6c37469e54d46841838423400144f7b9dc4cf1/java/util/ArrayList.java#L106-L141)].
 
-```java
-public class ArrayList<E> extends AbstractList<E>
-        implements List<E>, RandomAccess, Cloneable, java.io.Serializable
-{
-    private static final long serialVersionUID = 8683452581122892189L;
-
-    /**
-     * The array buffer into which the elements of the ArrayList are stored.
-     * The capacity of the ArrayList is the length of this array buffer.
-     */
-    private transient Object[] elementData;
-
-    /**
-     * The size of the ArrayList (the number of elements it contains).
-     *
-     * @serial
-     */
-    private int size;
-}
+```bash
+java.util.ArrayList object internals:
+ OFFSET  SIZE     TYPE DESCRIPTION                    VALUE
+      0     4          (object header)                05 00 00 00 (00000101 00000000 00000000 00000000) (5)
+      4     4          (object header)                00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+      8     4          (object header)                f0 ad e9 23 (11110000 10101101 11101001 00100011) (602516976)
+     12     4          (object header)                02 00 00 00 (00000010 00000000 00000000 00000000) (2)
+     16     4      int AbstractList.modCount          0
+     20     4          (alignment/padding gap)        N/A
+     24     4      int ArrayList.size                 0
+     28     4          (alignment/padding gap)        N/A
+     32     8 Object[] ArrayList.elementData          []
+Instance size: 40 bytes
+Space losses: 8 bytes internal + 0 bytes external = 8 bytes total
 ```
 
 The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry.
@@ -108,10 +103,11 @@ The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry.
 |       Field      |     Type     |    Size (bytes)    |
 |:----------------:|:------------:|:------------------:|
 | Header           |              | 16                 |
-| serialVersionUID | long         | 8                  |
-| size             | int          | 4                  |
-| elementData      | Object[] Ref | 8                  |
+| modCount         | int          | 4                  |
 | Padding          |              | 4                  |
+| size             | int          | 4                  |
+| Padding          |              | 4                  |
+| elementData      | Object[] Ref | 8                  |
 | Total            |              | **40**             |
 
 
@@ -119,22 +115,7 @@ The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry.
 
 ### String Object
 
-To understand how much heap a String object uses, we must look at [String's source code](https://github.com/openjdk-mirror/jdk7u-jdk/blob/f4d80957e89a19a29bb9f9807d2a28351ed7f7df/src/share/classes/java/lang/String.java#L110-L126). The following table shows the properties and their sizes:
-
-```java
-public final class String
-    implements java.io.Serializable, Comparable<String>, CharSequence
-{
-    /** The value is used for character storage. */
-    private final char value[];
-
-    /** Cache the hash code for the string */
-    private int hash; // Default to 0
-
-    /** use serialVersionUID from JDK 1.0.2 for interoperability */
-    private static final long serialVersionUID = -6849794470754667710L;
-}
-```
+To understand how much heap a String object uses, we must look at [String's source code](https://github.com/ZenOfAutumn/jdk8/blob/de6c37469e54d46841838423400144f7b9dc4cf1/java/lang/String.java#L111-L120). The following table shows the properties and their sizes:
 
 The cost of String is **32 bytes fixed** + 16 bytes/entry.
 
