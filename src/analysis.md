@@ -2,7 +2,7 @@
 
 The purpose of this session is to find the memory bottleneck by quantifying the memory footprint of various data structures in HDFS. Data structures that are not bottlenecks will remain in the Namenode's memory, but the bottleneck part needs to be transferred to the distributed deterministic database to improve the overall scalability of HDFS.
 
-> Note: Here we only make a rough estimate of the size of different objects. Optimizatins like reordering object properties and memory layout of super/subclasses in JVM heap allocation were not considered. But this does not affect the final result.
+> Here we only make a rough estimate of the size of different objects. Optimizatins like reordering object properties and memory layout of super/subclasses in JVM heap allocation were not considered. But this does not affect the final result.
 
 ## Java Object Size
 
