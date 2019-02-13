@@ -357,7 +357,7 @@ The memory usage of each attribute in inode is shown in the table.
 </table>
 
 
-In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. In most cases, `INodeFile`, `INodeDirectory` and `withQuotaFeature` will suffice. 
+In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. If the cluster has features such as ACL/Snapshotd, you need to increase this memory overhead. In most cases, `INodeFile`, `INodeDirectory` and `withQuotaFeature` will suffice. 
 
 An estimating formula for the total size:
 
@@ -373,8 +373,10 @@ Total = Total(files) + Total(directories)
       = 400 * num(diretories) + 344 * num(files) + 8 * num(blocks)
 ```
 
-> If the cluster has features such as ACL/Snapshotd, you need to increase this memory overhead.
-> From the parent-child relationship of the directory tree, **num(children) = num(directories) + num(files)**.
+> Note: From the parent-child relationship of the directory tree, **num(children) = num(directories) + num(files)**.
+
+
+By assuming the number of directories, files, and data blocks, we estimate how much memory these data structures consume.
 
 | # directories | # files     | # blocks    | Total Size |
 |---------------|-------------|-------------|------------|
