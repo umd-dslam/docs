@@ -88,3 +88,4 @@ class BlocksMap {
 }
 ```
 
+We will analyse the memory consumption of `BlocksMap` in [Section 3.4 - Quantitative Analysis](https://dsl-umd.github.io/docs/analysis.html).
