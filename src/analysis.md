@@ -7,7 +7,8 @@ The purpose of this session is to find the memory bottleneck by quantifying the 
 ## Java Object Size
 
 One way to get an estimate of an object's size in Java is to use `getObjectSize(Object)` method of the [Instrumentation interface](https://docs.oracle.com/javase/7/docs/api/java/lang/instrument/Instrumentation.html) introduced in Java. We provide the [InstrumentationAgent](https://github.com/DSL-UMD/hadoop-calvin/pull/1/files#diff-5cbfd1caf17137e9459de168b90ef12e) is based on that.
-However, this approach **only supports** size estimation of the considered object itself and not the sizes of objects it references. To estimate a total size of the object, we have to go over those references and calculate the estimated size.
+
+> However, this approach **only supports** size estimation of the considered object itself and not the sizes of objects it references. To estimate a total size of the object, we have to go over those references and calculate the estimated size.
 
 ### Primitives
 
@@ -74,7 +75,22 @@ All arrays have an extra integer `length` field stored in their header, which me
 | Padding      |      | pad             |
 | Total        |      | 24 + size + pad |
 
-[ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) is a resizable-array implementation of the `List` interface. Compared to array, it has more defualt fields than an array such as type and capacity.
+[ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) is a resizable-array implementation of the `List` interface. It has more default fields than an array such as type and capacity.
+
+ArrayList's internal structure looks like below:
+
+```bash
+ArrayList
+├── default
+│
+└── Object[]
+    ├── entry
+    ├── entry
+    ├── entry
+    └── entry
+```
+
+> The cost of ArrayList is 40 bytes fixed + 8 bytes/entry. However, getObjectSize(Object) can only get 40 bytes (no reference sizes).
 
 ### Example
 
