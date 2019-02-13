@@ -302,7 +302,7 @@ The memory usage of each attribute in inode is shown in the table.
     <td class="tg-0lax">#</td>
     <td class="tg-0lax">Object header</td>
     <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="3">48+16*num(block)</td>
+    <td class="tg-0lax" rowspan="3">56+8*num(block)</td>
   </tr>
   <tr>
     <td class="tg-0lax">long</td>
@@ -319,7 +319,7 @@ The memory usage of each attribute in inode is shown in the table.
     <td class="tg-0lax">#</td>
     <td class="tg-0lax">Object header</td>
     <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="2">44+8*num(children)</td>
+    <td class="tg-0lax" rowspan="2">64+8*num(children)</td>
   </tr>
   <tr>
     <td class="tg-0lax">ArrayList</td>
