@@ -356,7 +356,7 @@ The memory usage of each attribute in inode is shown in the table.
   </tbody>
 </table>
 
-In addition to the attribute information mentioned in the figure, some additional non-generic attributes such as ACL are not in the statistical range. In the default scenario, INodeFile and INodeDirectory.withQuotaFeature are two structures that are relatively versatile and widely used.
+In addition to the attributes mentioned in the table, some non-generic attributes like ACL (Access Control Lists) are not counted. In most cases, INodeFile, INodeDirectory and INodeDirectory.withQuotaFeature will suffice.
 
 ## Data Block
 
