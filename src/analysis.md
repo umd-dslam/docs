@@ -233,130 +233,126 @@ Namenode maintains a directory tree for HDFS and a mapping of file blocks to dat
 
 The memory usage of each attribute in inode is shown in the table.
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
-.tg .tg-0lax{text-align:left;vertical-align:top}
-</style>
-<table class="tg">
+<table>
+  <thead><tr>
+    <th>Class</th>
+    <th>Type</th>
+    <th>Members</th>
+    <th>Size (bytes)</th>
+    <th>Total</th>
+  </tr></thead>
+  <tbody>
   <tr>
-    <th class="tg-0lax">Class</th>
-    <th class="tg-0lax">Type</th>
-    <th class="tg-0lax">Members</th>
-    <th class="tg-0lax">Size (bytes)</th>
-    <th class="tg-0lax">Total</th>
+    <td align="center">Inode</td>
+    <td align="center">#</td>
+    <td align="center">Object header</td>
+    <td align="center">16</td>
+    <td align="center">24</td>
   </tr>
   <tr>
-    <td class="tg-0lax" rowspan="2">Inode</td>
-    <td class="tg-0lax">#</td>
-    <td class="tg-0lax">Object header</td>
-    <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="2">24</td>
+    <td align="center">INode ref</td>
+    <td align="center">parent</td>
+    <td align="center">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">INode ref</td>
-    <td class="tg-0lax">parent</td>
-    <td class="tg-0lax">8</td>
+    <td align="center">INodeWithAdditionalFields</td>
+    <td align="center">#</td>
+    <td align="center">Object header</td>
+    <td align="center">16</td>
+    <td align="center">96</td>
   </tr>
   <tr>
-    <td class="tg-0lax" rowspan="8">INodeWithAdditionalFields</td>
-    <td class="tg-0lax">#</td>
-    <td class="tg-0lax">Object header</td>
-    <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="8">96</td>
+    <td align="center">long</td>
+    <td align="center">id</td>
+    <td align="center">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">long</td>
-    <td class="tg-0lax">id</td>
-    <td class="tg-0lax">8</td>
+    <td align="center">byte[]</td>
+    <td align="center">name</td>
+    <td align="center">8 + 24 + 1*num(bytes) + pad</td>
   </tr>
   <tr>
-    <td class="tg-0lax">byte[]</td>
-    <td class="tg-0lax">name</td>
-    <td class="tg-0lax">8 + 24 + 1*num(bytes) + pad</td>
+    <td align="center">long</td>
+    <td align="center">permission</td>
+    <td align="center">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">long</td>
-    <td class="tg-0lax">permission</td>
-    <td class="tg-0lax">8</td>
+    <td align="center">long</td>
+    <td align="center">modificationTime</td>
+    <td align="center">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">long</td>
-    <td class="tg-0lax">modificationTime</td>
-    <td class="tg-0lax">8</td>
+    <td align="center">long</td>
+    <td align="center">accessTime</td>
+    <td align="center">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">long</td>
-    <td class="tg-0lax">accessTime</td>
-    <td class="tg-0lax">8</td>
+    <td align="center">LinkedElement ref</td>
+    <td align="center">next</td>
+    <td align="center">8 + 16 = 24</td>
   </tr>
   <tr>
-    <td class="tg-0lax">LinkedElement ref</td>
-    <td class="tg-0lax">next</td>
-    <td class="tg-0lax">8 + 16 = 24</td>
+    <td align="center">Feature[]</td>
+    <td align="center">features</td>
+    <td align="center">8 + 24 + 8*num(feature)</td>
   </tr>
   <tr>
-    <td class="tg-0lax">Feature[]</td>
-    <td class="tg-0lax">features</td>
-    <td class="tg-0lax">8 + 24 + 8*num(feature)</td>
+    <td align="center">INodeFile</td>
+    <td align="center">#</td>
+    <td align="center">Object header</td>
+    <td align="center">16</td>
+    <td align="center">48+16*num(block)</td>
   </tr>
   <tr>
-    <td class="tg-0lax" rowspan="3">INodeFile</td>
-    <td class="tg-0lax">#</td>
-    <td class="tg-0lax">Object header</td>
-    <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="3">48+16*num(block)</td>
+    <td align="center">long</td>
+    <td align="center">header</td>
+    <td align="center">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">long</td>
-    <td class="tg-0lax">header</td>
-    <td class="tg-0lax">8</td>
+    <td align="center">BlockInfo[]</td>
+    <td align="center">blocks</td>
+    <td align="center">8 + 24 + 8*num(block)</td>
   </tr>
   <tr>
-    <td class="tg-0lax">BlockInfo[]</td>
-    <td class="tg-0lax">blocks</td>
-    <td class="tg-0lax">8 + 24 + 8*num(block)</td>
+    <td align="center">INodeDirectory</td>
+    <td align="center">#</td>
+    <td align="center">Object header</td>
+    <td align="center">16</td>
+    <td align="center">44+8*num(children)</td>
   </tr>
   <tr>
-    <td class="tg-0lax" rowspan="2">INodeDirectory</td>
-    <td class="tg-0lax">#</td>
-    <td class="tg-0lax">Object header</td>
-    <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="2">44+8*num(children)</td>
+    <td align="center">ArrayList</td>
+    <td align="center">children</td>
+    <td align="center">8 + 40 + 8*num(children)</td>
   </tr>
   <tr>
-    <td class="tg-0lax">ArrayList</td>
-    <td class="tg-0lax">children</td>
-    <td class="tg-0lax">8 + 40 + 8*num(children)</td>
+    <td align="center">INodeDirectory.withQuotaFeature</td>
+    <td align="center">#</td>
+    <td align="center">Object header</td>
+    <td align="center">16</td>
+    <td align="center">48</td>
   </tr>
   <tr>
-    <td class="tg-0lax" rowspan="5">INodeDirectory.withQuotaFeature</td>
-    <td class="tg-0lax">#</td>
-    <td class="tg-0lax">Object header</td>
-    <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="5">48</td>
+    <td align="center">long</td>
+    <td align="center">nsQuota</td>
+    <td align="center">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">long</td>
-    <td class="tg-0lax">nsQuota</td>
-    <td class="tg-0lax">8</td>
+    <td align="center">long</td>
+    <td align="center">NameSpace</td>
+    <td align="center">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">long</td>
-    <td class="tg-0lax">NameSpace</td>
-    <td class="tg-0lax">8</td>
+    <td align="center">long</td>
+    <td align="center">ssQuota</td>
+    <td align="center">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">long</td>
-    <td class="tg-0lax">ssQuota</td>
-    <td class="tg-0lax">8</td>
+    <td align="center">long</td>
+    <td align="center">StorageSpace</td>
+    <td align="center">8</td>
   </tr>
-  <tr>
-    <td class="tg-0lax">long</td>
-    <td class="tg-0lax">StorageSpace</td>
-    <td class="tg-0lax">8</td>
-  </tr>
+</tbody>
 </table>
 
 
