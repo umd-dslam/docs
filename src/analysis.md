@@ -382,7 +382,10 @@ Total = Total(files) + Total(directories)
 | 100 Million   | 100 Million | 1 Billion   | 767.41 GB  |
 | 1 Billion     | 1 Billion   | 10 Billion  | 7674.10 GB |
 
-The namespace is resident in the JVM heap memory. To ensure the reliability of the data, the Namenode periodically make a checkpoint and materializes the namespace to the external storage device. When data continues to grow exponentially, the number of files/directories will also increase, and eventually, memory will grow linearly proportional to the number of files/directories.
+
+The namespace is resident in the JVM heap memory. To ensure the reliability of the data, the Namenode periodically make a checkpoint and materializes the namespace to the external storage device. When data continues to grow exponentially, the number of files/directories will also increase, and eventually, memory will grow linearly proportional to the number of files/directories. The 2nd tuple from the above table shows that the total memory consumed (767.41 GB) has far exceeded the capacity of a typical server.
+
+**From this we can conclude that the bottleneck of HDFS is here!**
 
 ## Data Block
 
