@@ -34,19 +34,6 @@ OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
 | double     | 8            | 8                      |
 | char       | 16           | 16                     |
 
-### Array and ArrayList
-
-All arrays have an extra integer `length` field stored in their header, which means that an array's header uses 24 bytes even if it has no data - 16 bytes for header, 4 bytes for integer length, and 4 bytes for padding. JVM will allocate a block of memory, 8 byte aligned, to contain all the elements and only padding after the end of the last element. The layout looks like this:
-
-|     Field    | Type |   Size (bytes)  |
-|:------------:|:----:|:---------------:|
-| Header       |      | 16              |
-| Length       | int  | 4               |
-| Padding      |      | 4               |
-| Memory Block |      | size            |
-| Padding      |      | pad             |
-| Total        |      | 24 + size + pad |
-
 
 ### Object References
 
@@ -71,6 +58,20 @@ In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
 |                                                                     | lock:2 |    OOP to metadata object   |    Marked for GC   |
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
+
+### Array and ArrayList
+
+All arrays have an extra integer `length` field stored in their header, which means that an array's header uses 24 bytes even if it has no data - 16 bytes for header, 4 bytes for integer length, and 4 bytes for padding. JVM will allocate a block of memory, 8 byte aligned, to contain all the elements and only padding after the end of the last element. The layout looks like this:
+
+|     Field    | Type |   Size (bytes)  |
+|:------------:|:----:|:---------------:|
+| Header       |      | 16              |
+| Length       | int  | 4               |
+| Padding      |      | 4               |
+| Memory Block |      | size            |
+| Padding      |      | pad             |
+| Total        |      | 24 + size + pad |
+
 
 ## File and Directory
 
