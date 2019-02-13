@@ -43,6 +43,7 @@ References have a typical size of 4 bytes on 32-bit platforms and on 64-bits pla
 
 In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is 16 bytes in the following form:
 
+```bash
 |------------------------------------------------------------------------------------------------------------|--------------------|
 |                                            Object Header (128 bits)                                        |        State       |
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
@@ -58,6 +59,7 @@ In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
 |                                                                     | lock:2 |    OOP to metadata object   |    Marked for GC   |
 |------------------------------------------------------------------------------|-----------------------------|--------------------|
+```
 
 ### Array and ArrayList
 
