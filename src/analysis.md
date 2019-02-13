@@ -110,3 +110,4 @@ The memory usage of each attribute in inode is shown in the table.
 
 1. How to Get the Size of an Object in Java: https://www.baeldung.com/java-size-of-object
 2. Java Object Size Calculations in 64-bit: http://btoddb-java-sizing.blogspot.com/
+3. Java objects memory size: http://iryndin.net/post/java_objects_memory_size/
