@@ -95,7 +95,7 @@ ArrayList
     └── entry
 ```
 
-> The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry [4]. However, getObjectSize(Object) can only get 40 bytes (no reference sizes).
+> The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry [4]. However, getObjectSize(Object) can only get 40 bytes (no reference object size).
 
 ### Example
 
