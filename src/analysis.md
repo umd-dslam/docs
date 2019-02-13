@@ -359,7 +359,7 @@ The memory usage of each attribute in inode is shown in the table.
 
 In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. In most cases, INodeFile, INodeDirectory and INodeDirectory.withQuotaFeature will suffice. 
 
-The formula for the total size:
+An estimating formula for the total size:
 
 ```bash
 Total(files) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
@@ -368,9 +368,13 @@ Total(files) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
 Total(directories) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
                    = 392 * num(diretories) + 8 * num(children)
                    = 400 * num(diretories) + 8 * num(files)
+
+Total = Total(files) + Total(directories)
+      = 400 * num(diretories) + 344 * num(files) + 8 * num(blocks)
 ```
 
-> Note: num(children) = num(directories) + num(files)
+> If the cluster has features such as ACL/Snapshotd, you need to increase this memory overhead.
+> From the parent-child relationship of the directory tree, **num(children) = num(directories) + num(files)**.
 
 # directories        # files            # blocks        Total Size (Bytes)
 10 Million           10 Million         100 Million     
@@ -379,6 +383,8 @@ Total(directories) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
 
 If 
 Total(Directory) = (24 + 96 + 44 + 48) ∗ 100M + 8 ∗ num(total children) Total(Files) = (24 + 96 + 48) ∗ 100M + 8 ∗ num(total blocks) Total = (24 + 96 + 44 + 48) ∗ 100M + 8 ∗ num(total children) + (24 + 96 + 48) ∗ 100M + 8 ∗ num(total blocks) = ~38GB
+
+The namespace is resident in the JVM heap memory. To ensure the reliability of the data, the Namenode periodically make a checkpoint and materializes the namespace to the external storage device. When data continues to grow exponentially, the number of files/directories will also increase, and eventually, memory will grow linearly proportional to the number of files/directories.
 
 ## Data Block
 
