@@ -376,10 +376,11 @@ Total = Total(files) + Total(directories)
 > If the cluster has features such as ACL/Snapshotd, you need to increase this memory overhead.
 > From the parent-child relationship of the directory tree, **num(children) = num(directories) + num(files)**.
 
-# directories        # files            # blocks        Total Size (Bytes)
-10 Million           10 Million         100 Million     
-100 Million          100 Million        1 Billion
-1 Billion            1 Billion          10 Billion
+| # directories | # files     | # blocks    | Total Size |
+|---------------|-------------|-------------|------------|
+| 10 Million    | 10 Million  | 100 Million | 76.74 GB   |
+| 100 Million   | 100 Million | 1 Billion   | 767.41 GB  |
+| 1 Billion     | 1 Billion   | 10 Billion  | 7674.10 GB |
 
 The namespace is resident in the JVM heap memory. To ensure the reliability of the data, the Namenode periodically make a checkpoint and materializes the namespace to the external storage device. When data continues to grow exponentially, the number of files/directories will also increase, and eventually, memory will grow linearly proportional to the number of files/directories.
 
