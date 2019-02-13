@@ -302,7 +302,7 @@ The memory usage of each attribute in inode is shown in the table.
     <td class="tg-0lax">#</td>
     <td class="tg-0lax">Object header</td>
     <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="3">56+8*num(block)</td>
+    <td class="tg-0lax" rowspan="3">56+8*num(blocks)</td>
   </tr>
   <tr>
     <td class="tg-0lax">long</td>
@@ -312,7 +312,7 @@ The memory usage of each attribute in inode is shown in the table.
   <tr>
     <td class="tg-0lax">BlockInfo[]</td>
     <td class="tg-0lax">blocks</td>
-    <td class="tg-0lax">8 + 24 + 8*num(block)</td>
+    <td class="tg-0lax">8 + 24 + 8*num(blocks)</td>
   </tr>
   <tr>
     <td class="tg-0lax" rowspan="2">INodeDirectory</td>
@@ -357,7 +357,28 @@ The memory usage of each attribute in inode is shown in the table.
 </table>
 
 
-In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. In most cases, INodeFile, INodeDirectory and INodeDirectory.withQuotaFeature will suffice.
+In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. In most cases, INodeFile, INodeDirectory and INodeDirectory.withQuotaFeature will suffice. 
+
+The formula for the total size:
+
+```bash
+Total(files) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
+             = 336 * num(files) + 8 * num(blocks)
+
+Total(directories) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
+                   = 392 * num(diretories) + 8 * num(children)
+                   = 400 * num(diretories) + 8 * num(files)
+```
+
+> Note: num(children) = num(directories) + num(files)
+
+# directories        # files            # blocks        Total Size (Bytes)
+10 Million           10 Million         100 Million     
+100 Million          100 Million        1 Billion
+1 Billion            1 Billion          10 Billion
+
+If 
+Total(Directory) = (24 + 96 + 44 + 48) ∗ 100M + 8 ∗ num(total children) Total(Files) = (24 + 96 + 48) ∗ 100M + 8 ∗ num(total blocks) Total = (24 + 96 + 44 + 48) ∗ 100M + 8 ∗ num(total children) + (24 + 96 + 48) ∗ 100M + 8 ∗ num(total blocks) = ~38GB
 
 ## Data Block
 
