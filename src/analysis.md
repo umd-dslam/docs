@@ -222,6 +222,7 @@ We assume that all Person references are different in `List<Person>` (40 bytes +
 - **List<Person> al2**: 40 bytes, real size: 40 + 8 * 2 = 56 bytes. Total size: 56 + 104 * 2 = 264 bytes.
 - **List<Person> al3**: 40 bytes, real size: 40 + 8 * 100 = 840 bytes. Total size: 840 + 104 * 100 = 11240 bytes.
 
+After studying the size of the Java object, let's estimate the various Java objects in the Namenode.
 
 ## File and Directory
 
