@@ -175,9 +175,27 @@ Object type: class java.util.ArrayList, size: 40 bytes
 Object type: class java.util.ArrayList, size: 40 bytes
 ```
 
-
 Let's manually analyse and calculate their memory usage:
 
+class Person {
+    String name;
+    int age;
+    long phone;
+    boolean female;
+    byte[] password = {1, 2, 3, 4};
+}
+
+- Person p: 16 bytes (object header) + 8 bytes (string reference) + 4 bytes (int) + 8 bytes (long) + 1 byte (boolean) + 8 bytes (byte reference) + 3 bytes (padding) = 48 bytes. But, the real object size should be 48 + 24 + 4 * 8 (24+size+pad) = 104 bytes.
+
+int[] a0 = {};
+int[] a1 = {1};
+int[] a2 = {1, 2};
+int[] a3 = new int[100];
+
+String[] b0 = {};
+String[] b1 = {"1"};
+String[] b2 = {"1", "2"};
+String[] b3 = new String[100];
 16 bytes (object header) + 8 bytes (1 reference) + 4 bytes (int) + 1 byte (boolean) + 3 bytes (padding) = 32 bytes.
 
 
