@@ -260,7 +260,7 @@ The memory usage of each attribute in inode is shown in the table.
     <td class="tg-0lax">#</td>
     <td class="tg-0lax">Object header</td>
     <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="8">96</td>
+    <td class="tg-0lax" rowspan="8">256 (assume num(bytes) = 104, num(feature) = 2)</td>
   </tr>
   <tr>
     <td class="tg-0lax">long</td>
