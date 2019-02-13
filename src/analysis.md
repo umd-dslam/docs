@@ -112,10 +112,10 @@ The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry.
 | size             | int          | 4                  |
 | elementData      | Object[] Ref | 8                  |
 | Padding          |              | 4                  |
-| Total            |              | 40                 |
+| Total            |              | **40**             |
 
 
-> However, getObjectSize(Object) can only get 40 bytes (no reference object size).
+> The heap space taken by the `elementData` field is only the reference to the Object[], not including the data. `getObjectSize(List)` only returns 40 bytes.
 
 ### String Object
 
@@ -128,12 +128,6 @@ public final class String
     /** The value is used for character storage. */
     private final char value[];
 
-    /** The offset is the first index of the storage that is used. */
-    private final int offset;
-
-    /** The count is the number of characters in the String. */
-    private final int count;
-
     /** Cache the hash code for the string */
     private int hash; // Default to 0
 
@@ -142,19 +136,17 @@ public final class String
 }
 ```
 
-The cost of String is **40 bytes fixed** + 16 bytes/entry.
+The cost of String is **32 bytes fixed** + 16 bytes/entry.
 
 |  Field  |    Type    | Size (bytes) |
 |:-------:|:----------:|:------------:|
 | Header  |            | 16           |
 | value   | char[] Ref | 8            |
-| offset  | int        | 4            |
-| count   | int        | 4            |
 | hash    | int        | 4            |
 | Padding |            | 4            |
-| Total   |            | 40           |
+| Total   |            | **32**       |
 
-> The heap space taken by the `value` field is only the reference to the char[], not including the data.
+> In Java JDK 7.0, String also included `int offset` and `int count`. The heap space taken by the `value` field is only the reference to the char[], not including the data. `getObjectSize(String)` only returns 32 bytes.
 
 ### Example
 
