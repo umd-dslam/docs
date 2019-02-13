@@ -154,6 +154,9 @@ String[] b1 = {"1"};
 String[] b2 = {"1", "2"};
 String[] b3 = new String[100];
 
+String s0 = "";
+String s1 = "hello";
+
 List<Person> al0 = new ArrayList<>(0);
 List<Person> al1 = new ArrayList<>(1);
 al1.add(new Person());
@@ -164,23 +167,6 @@ List<Person> al3 = new ArrayList<>(100);
 for (int i = 0; i < 100; i++) {
     al3.add(new Person());
 }
-
-printObjectSize(p);
-
-printObjectSize(a0);
-printObjectSize(a1);
-printObjectSize(a2);
-printObjectSize(a3);
-
-printObjectSize(b0);
-printObjectSize(b1);
-printObjectSize(b2);
-printObjectSize(b3);
-
-printObjectSize(al0);
-printObjectSize(al1);
-printObjectSize(al2);
-printObjectSize(al3);
 ```
 
 The output of this example:
