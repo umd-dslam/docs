@@ -1,10 +1,11 @@
 # Quantitative Analysis
 
+The purpose of this session is to find the memory bottleneck by quantifying the memory footprint of various data structures in HDFS. Data structures that are not bottlenecks will remain in the Namenode's memory, but the bottleneck part needs to be transferred to the distributed deterministic database to improve the overall scalability of HDFS.
+
 ## Java Object Size
 
 One way to get an estimate of an object's size in Java is to use `getObjectSize(Object)` method of the [Instrumentation interface](https://docs.oracle.com/javase/7/docs/api/java/lang/instrument/Instrumentation.html) introduced in Java. We provide the [InstrumentationAgent](https://github.com/DSL-UMD/hadoop-calvin/pull/1/files#diff-5cbfd1caf17137e9459de168b90ef12e) is based on that.
 However, this approach **only supports** size estimation of the considered object itself and not the sizes of objects it references. To estimate a total size of the object, we have to go over those references and calculate the estimated size.
-
 
 
 **Note:** In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is **16 bytes**. References have a typical size of 4 bytes on 32-bit platforms and on 64-bits platforms with heap boundary less than 32Gb (-Xmx32G), and **8 bytes** for this boundary above 32GB.
@@ -27,3 +28,4 @@ The memory usage of each attribute in inode is shown in the table.
 ## References
 
 1. How to Get the Size of an Object in Java: https://www.baeldung.com/java-size-of-object
+2. Java Object Size Calculations in 64-bit: http://btoddb-java-sizing.blogspot.com/
