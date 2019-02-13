@@ -54,8 +54,23 @@ References have a typical size of 4 bytes on 32-bit platforms and on 64-bits pla
 
 ### Object Header
 
-In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is 16 bytes.
+In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is 16 bytes in the following form:
 
+|------------------------------------------------------------------------------------------------------------|--------------------|
+|                                            Object Header (128 bits)                                        |        State       |
+|------------------------------------------------------------------------------|-----------------------------|--------------------|
+|                                  Mark Word (64 bits)                         |    Klass Word (64 bits)     |                    |
+|------------------------------------------------------------------------------|-----------------------------|--------------------|
+| unused:25 | identity_hashcode:31 | unused:1 | age:4 | biased_lock:1 | lock:2 |    OOP to metadata object   |       Normal       |
+|------------------------------------------------------------------------------|-----------------------------|--------------------|
+| thread:54 |       epoch:2        | unused:1 | age:4 | biased_lock:1 | lock:2 |    OOP to metadata object   |       Biased       |
+|------------------------------------------------------------------------------|-----------------------------|--------------------|
+|                       ptr_to_lock_record:62                         | lock:2 |    OOP to metadata object   | Lightweight Locked |
+|------------------------------------------------------------------------------|-----------------------------|--------------------|
+|                     ptr_to_heavyweight_monitor:62                   | lock:2 |    OOP to metadata object   | Heavyweight Locked |
+|------------------------------------------------------------------------------|-----------------------------|--------------------|
+|                                                                     | lock:2 |    OOP to metadata object   |    Marked for GC   |
+|------------------------------------------------------------------------------|-----------------------------|--------------------|
 
 ## File and Directory
 
