@@ -76,7 +76,7 @@ All arrays have an extra integer `length` field stored in their header, which me
 | Padding      |      | 4               |
 | Memory Block |      | size            |
 | Padding      |      | pad             |
-| Total        |      | 24 + size + pad |
+| Total        |      | **24+size+pad** |
 
 #### ArrayList
 
@@ -95,7 +95,7 @@ ArrayList
     └── entry
 ```
 
-> The cost of ArrayList is 40 bytes fixed + 8 bytes/entry [4]. However, getObjectSize(Object) can only get 40 bytes (no reference sizes).
+> The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry [4]. However, getObjectSize(Object) can only get 40 bytes (no reference sizes).
 
 ### Example
 
