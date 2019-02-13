@@ -151,16 +151,36 @@ printObjectSize(al2);
 printObjectSize(al3);
 ```
 
+The output of this example:
+
+```bash
+$ cd bench
+$ javac InstrumentationAgent.java
+$ jar cmf MANIFEST.MF InstrumentationAgent.jar InstrumentationAgent.class
+$ javac InstrumentationExample.java
+$ java -javaagent:InstrumentationAgent.jar -XX:-UseCompressedOops InstrumentationExample
+
+Object type: class InstrumentationExample$1Person, size: 48 bytes
+Object type: class [I, size: 24 bytes
+Object type: class [I, size: 32 bytes
+Object type: class [I, size: 32 bytes
+Object type: class [I, size: 424 bytes
+Object type: class [Ljava.lang.String;, size: 24 bytes
+Object type: class [Ljava.lang.String;, size: 32 bytes
+Object type: class [Ljava.lang.String;, size: 40 bytes
+Object type: class [Ljava.lang.String;, size: 824 bytes
+Object type: class java.util.ArrayList, size: 40 bytes
+Object type: class java.util.ArrayList, size: 40 bytes
+Object type: class java.util.ArrayList, size: 40 bytes
+Object type: class java.util.ArrayList, size: 40 bytes
+```
 
 
 Let's manually analyse and calculate their memory usage:
 
 16 bytes (object header) + 8 bytes (1 reference) + 4 bytes (int) + 1 byte (boolean) + 3 bytes (padding) = 32 bytes.
 
-2. Arrays of Primitives/Objects
 
-    - int[100]: 16 bytes (object header) + 4 bytes (length) + 400 bytes (100 ints) + 4 (padding) = 424 bytes.
-    - String[10]: 16 bytes (object header) + 4 bytes (length) + 80 bytes (10 references) + 4 (padding) = 104 bytes.
 
 ## File and Directory
 
