@@ -37,7 +37,7 @@ OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
 
 ### Object References
 
-References have a typical size of 4 bytes on 32-bit platforms and on 64-bits platforms with heap boundary less than 32GB, and 8 bytes for this boundary above 32GB. We are working with large heaps and need to assume that all references are 8 bytes (You can disable it through -XX:-UseCompressedOops,[UseCompressedOops](https://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html) is on by default).
+References have a typical size of 4 bytes on 32-bit platforms and on 64-bits platforms with heap boundary less than 32GB, and 8 bytes for this boundary above 32GB. We are working with large heaps and need to assume that all references are 8 bytes (You can disable it through **-XX:-UseCompressedOops**, [UseCompressedOops](https://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html) is on by default).
 
 ### Object Header
 
@@ -74,9 +74,13 @@ All arrays have an extra integer `length` field stored in their header, which me
 | Padding      |      | pad             |
 | Total        |      | 24 + size + pad |
 
+[ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) is a resizable-array implementation of the `List` interface. Compared to array, it has more defualt fields than an array such as type and capacity.
+
 ### Example
 
-Consider the following example:
+Consider the following examples, let's calculate their memory usage:
+
+1. Class Object
 
 ```java
 class Person {
@@ -86,10 +90,12 @@ class Person {
 }
 ```
 
-Let's calculate its memory usage:
+16 bytes (object header) + 8 bytes (1 reference) + 4 bytes (int) + 1 byte (boolean) + 3 bytes (padding) = 32 bytes.
 
-16 bytes (object header) + 8 bytes (reference to String) + 4 bytes (int) + 1 byte (boolean) + 3 bytes (padding) = 32 bytes
+2. Arrays of Primitives/Objects
 
+    - int[100]: 16 bytes (object header) + 4 bytes (length) + 400 bytes (100 ints) + 4 (padding) = 424 bytes.
+    - String[10]: 16 bytes (object header) + 4 bytes (length) + 80 bytes (10 references) + 4 (padding) = 104 bytes.
 
 ## File and Directory
 
@@ -108,6 +114,7 @@ The memory usage of each attribute in inode is shown in the table.
 
 ## References
 
-1. How to Get the Size of an Object in Java: https://www.baeldung.com/java-size-of-object
-2. Java Object Size Calculations in 64-bit: http://btoddb-java-sizing.blogspot.com/
-3. Java objects memory size: http://iryndin.net/post/java_objects_memory_size/
+1. [How to Get the Size of an Object in Java](https://www.baeldung.com/java-size-of-object)
+2. [Java Object Size Calculations in 64-bit](http://btoddb-java-sizing.blogspot.com/)
+3. [Java objects memory size](http://iryndin.net/post/java_objects_memory_size/)
+4. Nick Mitchell, Gary Sevitsky, [Building Memory-efficient Java Applications: Practices and Challenges](http://www.iro.umontreal.ca/~dufour/cours/ift3912/docs/12-memory-efficient-java.pdf) 
