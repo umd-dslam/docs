@@ -13,7 +13,7 @@ However, this approach **only supports** size estimation of the considered objec
 
 We know the size of each primitive from the Java specification. What isn't stated in the specification is how much heap space they use. It seems to be JVM implementation dependent.
 Below is a table that shows each primitive's size and how much heap it may use on my JVM.
-Be aware because of "8 byte alignment" and "padding" that a primitive such as a byte or boolean, can be packed together to take up less memory, and this table only shows the maximum space it can use.
+Be aware because of `8 byte alignment` and `padding` that a primitive such as a byte or boolean, can be packed together to take up less memory, and this table only shows the maximum space it can use.
 
 ```bash
 $ java -version
@@ -34,9 +34,23 @@ OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
 | double     | 8            | 8                      |
 | char       | 16           | 16                     |
 
+### Array and ArrayList
+
+All arrays have an extra integer `length` field stored in their header, which means that an array's header uses 24 bytes even if it has no data - 16 bytes for header, 4 bytes for integer length, and 4 bytes for padding. JVM will allocate a block of memory, 8 byte aligned, to contain all the elements and only padding after the end of the last element. The layout looks like this:
+
+|     Field    | Type |   Size (bytes)  |
+|:------------:|:----:|:---------------:|
+| Header       |      | 16              |
+| Length       | int  | 4               |
+| Padding      |      | 4               |
+| Memory Block |      | size            |
+| Padding      |      | pad             |
+| Total        |      | 24 + size + pad |
+
+
 ### Object References
 
-References have a typical size of 4 bytes on 32-bit platforms and on 64-bits platforms with heap boundary less than 32GB, and 8 bytes for this boundary above 32GB. We are working with large heaps and need to assume that all references are 8 bytes ([UseCompressedOops](https://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html) is false).
+References have a typical size of 4 bytes on 32-bit platforms and on 64-bits platforms with heap boundary less than 32GB, and 8 bytes for this boundary above 32GB. We are working with large heaps and need to assume that all references are 8 bytes (You can disable it through -XX:-UseCompressedOops,[UseCompressedOops](https://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html) is on by default).
 
 ### Object Header
 
