@@ -80,9 +80,7 @@ All arrays have an extra integer `length` field stored in their header, which me
 
 #### ArrayList
 
-[ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) is a resizable-array implementation of the `List` interface. It has more default fields than an array such as type and capacity.
-
-ArrayList's [internal structure](https://github.com/openjdk-mirror/jdk7u-jdk/blob/f4d80957e89a19a29bb9f9807d2a28351ed7f7df/src/share/classes/java/util/ArrayList.java#L105-L118) looks like below:
+[ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) is a resizable-array implementation of the `List` interface. It has more default fields than an array. Its [internal structure](https://github.com/openjdk-mirror/jdk7u-jdk/blob/f4d80957e89a19a29bb9f9807d2a28351ed7f7df/src/share/classes/java/util/ArrayList.java#L105-L118) looks like below:
 
 ```java
 public class ArrayList<E> extends AbstractList<E>
