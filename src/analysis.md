@@ -42,7 +42,7 @@ References have a typical size of 4 bytes on 32-bit platforms and on 64-bits pla
 
 ### Object Header
 
-In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is 16 bytes in the following form:
+In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is 16 bytes in the following form [3]:
 
 ```bash
 |------------------------------------------------------------------------------------------------------------|--------------------|
@@ -90,7 +90,7 @@ ArrayList
     └── entry
 ```
 
-> The cost of ArrayList is 40 bytes fixed + 8 bytes/entry. However, getObjectSize(Object) can only get 40 bytes (no reference sizes).
+> The cost of ArrayList is 40 bytes fixed + 8 bytes/entry [4]. However, getObjectSize(Object) can only get 40 bytes (no reference sizes).
 
 ### Example
 
