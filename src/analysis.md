@@ -177,27 +177,27 @@ Object type: class java.util.ArrayList, size: 40 bytes
 
 Let's manually analyse and calculate their memory usage:
 
-class Person {
-    String name;
-    int age;
-    long phone;
-    boolean female;
-    byte[] password = {1, 2, 3, 4};
-}
+- **Person p**: 16 bytes (object header) + 8 bytes (string reference) + 4 bytes (int) + 8 bytes (long) + 1 byte (boolean) + 8 bytes (byte reference) + 3 bytes (padding) = 48 bytes. Total size: 48 + (24 + 4 * 8) = 104 bytes (`password`: 24 + size + pad, size = 0, pad = 0).
 
-- **Person p**: 16 bytes (object header) + 8 bytes (string reference) + 4 bytes (int) + 8 bytes (long) + 1 byte (boolean) + 8 bytes (byte reference) + 3 bytes (padding) = 48 bytes. But, the real object size should be 48 + 24 + 4 * 8 (24+size+pad) = 104 bytes.
 
-int[] a0 = {};
-int[] a1 = {1};
-int[] a2 = {1, 2};
-int[] a3 = new int[100];
+To calculate arrays using `24 + size + pad`.
 
-String[] b0 = {};
-String[] b1 = {"1"};
-String[] b2 = {"1", "2"};
-String[] b3 = new String[100];
-16 bytes (object header) + 8 bytes (1 reference) + 4 bytes (int) + 1 byte (boolean) + 3 bytes (padding) = 32 bytes.
+- **int[] a0 = {}**: 24 bytes (size = 0, pad = 0).
+- **int[] a1 = {1}**: 32 bytes (size = 4, pad = 4).
+- **int[] a2 = {1, 2}**: 32 bytes (size = 4 * 2, pad = 0).
+- **int[] a3 = new int[100]**: 424 bytes (size = 4 * 100, pad = 0).
 
+- **String[] b0 = {}**: 24 bytes (size = 0, pad = 0).
+- **String[] b1 = {"1"}**: 32 bytes (size = 8, pad = 0).
+- **String[] b2 = {"1", "2"}**: 40 bytes (size = 8 * 2, pad = 0).
+- **String[] b3 = new String[100]**: 824 bytes (size = 8 * 100, pad = 0).
+
+We assume that all Person references are different in `List<Person>` (40 bytes + 8 bytes/entry):
+
+- **List<Person> al0**: 40 bytes.
+- **List<Person> al1**: 40 bytes, real size: 40 + 8 = 48 bytes. Total size: 48 + 104 = 152 bytes.
+- **List<Person> al2**: 40 bytes, real size: 40 + 8 * 2 = 56 bytes. Total size: 56 + 104 * 2 = 264 bytes.
+- **List<Person> al3**: 40 bytes, real size: 40 + 8 * 100 = 840 bytes. Total size: 840 + 104 * 100 = 11240 bytes.
 
 
 ## File and Directory
