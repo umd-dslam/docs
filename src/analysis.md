@@ -357,7 +357,7 @@ The memory usage of each attribute in inode is shown in the table.
 </table>
 
 
-In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. In most cases, INodeFile, INodeDirectory and INodeDirectory.withQuotaFeature will suffice. 
+In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. In most cases, INodeFile, INodeDirectory and withQuotaFeature will suffice. 
 
 An estimating formula for the total size:
 
@@ -380,9 +380,6 @@ Total = Total(files) + Total(directories)
 10 Million           10 Million         100 Million     
 100 Million          100 Million        1 Billion
 1 Billion            1 Billion          10 Billion
-
-If 
-Total(Directory) = (24 + 96 + 44 + 48) ∗ 100M + 8 ∗ num(total children) Total(Files) = (24 + 96 + 48) ∗ 100M + 8 ∗ num(total blocks) Total = (24 + 96 + 44 + 48) ∗ 100M + 8 ∗ num(total children) + (24 + 96 + 48) ∗ 100M + 8 ∗ num(total blocks) = ~38GB
 
 The namespace is resident in the JVM heap memory. To ensure the reliability of the data, the Namenode periodically make a checkpoint and materializes the namespace to the external storage device. When data continues to grow exponentially, the number of files/directories will also increase, and eventually, memory will grow linearly proportional to the number of files/directories.
 
