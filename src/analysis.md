@@ -100,6 +100,7 @@ public class ArrayList<E> extends AbstractList<E>
      * @serial
      */
     private int size;
+}
 ```
 
 The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry.
@@ -110,15 +111,50 @@ The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry.
 | serialVersionUID | long         | 8                  |
 | size             | int          | 4                  |
 | elementData      | Object[] Ref | 8                  |
-| Padding          |              | pad                |
-| Total            |              | min(36+pad)=**40** |
+| Padding          |              | 4                  |
+| Total            |              | 40                 |
 
 
 > However, getObjectSize(Object) can only get 40 bytes (no reference object size).
 
 ### String Object
 
- It contains the following properties in this order: char[], int offset, int count, int hash.
+To understand how much heap a String object uses, we must look at [String's source code](https://github.com/openjdk-mirror/jdk7u-jdk/blob/f4d80957e89a19a29bb9f9807d2a28351ed7f7df/src/share/classes/java/lang/String.java#L110-L126). The following table shows the properties and their sizes:
+
+```java
+public final class String
+    implements java.io.Serializable, Comparable<String>, CharSequence
+{
+    /** The value is used for character storage. */
+    private final char value[];
+
+    /** The offset is the first index of the storage that is used. */
+    private final int offset;
+
+    /** The count is the number of characters in the String. */
+    private final int count;
+
+    /** Cache the hash code for the string */
+    private int hash; // Default to 0
+
+    /** use serialVersionUID from JDK 1.0.2 for interoperability */
+    private static final long serialVersionUID = -6849794470754667710L;
+}
+```
+
+The cost of String is **40 bytes fixed** + 16 bytes/entry.
+
+|  Field  |    Type    | Size (bytes) |
+|:-------:|:----------:|:------------:|
+| Header  |            | 16           |
+| value   | char[] Ref | 8            |
+| offset  | int        | 4            |
+| count   | int        | 4            |
+| hash    | int        | 4            |
+| Padding |            | 4            |
+| Total   |            | 40           |
+
+> The heap space taken by the `value` field is only the reference to the char[], not including the data.
 
 ### Example
 
@@ -229,6 +265,7 @@ After studying the size of the Java object, let's estimate the various Java obje
 Namenode maintains a directory tree for HDFS and a mapping of file blocks to datanodes where the data is stored. Similar to the traditional stand-alone file system, the directory structure of HDFS is also a tree structure. HDFS Namespace stores all the attributes of each directory/file node in the directory tree, including: name, number (id), user, group, permission, modification time, access time, subdirectory/file (children) and other information which exist in the Namenode's memory at runtime. You can find more details in [Section 3.1](https://dsl-umd.github.io/docs/metadata/namespace/index.html).
 
 The memory usage of each attribute in inode is shown in the table.
+
 
 
 ## Data Block
