@@ -356,7 +356,8 @@ The memory usage of each attribute in inode is shown in the table.
   </tbody>
 </table>
 
-In addition to the attributes mentioned in the table, some non-generic attributes like ACL (Access Control Lists) are not counted. In most cases, INodeFile, INodeDirectory and INodeDirectory.withQuotaFeature will suffice.
+
+In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. In most cases, INodeFile, INodeDirectory and INodeDirectory.withQuotaFeature will suffice.
 
 ## Data Block
 
