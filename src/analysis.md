@@ -8,7 +8,9 @@ One way to get an estimate of an object's size in Java is to use `getObjectSize(
 However, this approach **only supports** size estimation of the considered object itself and not the sizes of objects it references. To estimate a total size of the object, we have to go over those references and calculate the estimated size.
 
 
-**Note:** In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is **16 bytes**. References have a typical size of 4 bytes on 32-bit platforms and on 64-bits platforms with heap boundary less than 32Gb (-Xmx32G), and **8 bytes** for this boundary above 32GB.
+In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes, so the minimum object size is 16 bytes. References have a typical size of 4 bytes on 32-bit platforms and on 64-bits platforms with heap boundary less than 32GB, and 8 bytes for this boundary above 32GB.
+
+**Note:** Here we only make a rough estimate of the size of different objects. Optimizatins like reordering object properties and memory layout of super/subclasses in JVM heap allocation were not considered. But this does not affect the final result.
 
 ## File and Directory
 
