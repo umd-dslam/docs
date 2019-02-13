@@ -15,6 +15,10 @@
     - [Data Blocks](./metadata/datablock/README.md)
     - [Datanode Storage](./metadata/datanode/README.md)
     - [Quantitative Analysis](./analysis.md)
+        - [Java Object Size](./analysis.md#java-object-size)
+        - [File and Directory](./analysis.md#file-and-directory)
+        - [Data Block](./analysis.md#data-block)
+        - [tanode Storage](./analysis.md#datanode-storage)
     - [Data Model](./datamodel.md)
 
 - [Advanced Optimization](./opt/README.md)
