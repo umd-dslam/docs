@@ -85,8 +85,8 @@ public class INodeFile extends INodeWithAdditionalFields
 
  The directory is represented by the INodeDirectory object in memory, and `List<INode> children` is used to describe subdirectories or files in the directory; File is represented by the INodeFile object in memory, and `BlockInfo[] blocks` is used to indicate which blocks of the file are composed.
 
+ In [Section 3.4 - Quantitative Analysis - File and Directory](https://dsl-umd.github.io/docs/analysis.html#file-and-directory), we will analyse the memory consumption of `INode`, `INodeFile` and `INodeDirectory`.
 
-In [Section 3.5 - Data Model](https://dsl-umd.github.io/docs/metadata/datamodel/datemodel.html), We will store all their attributes into database system and replace the corresponding functions with our database-based implementation.
 
 
 ## File Operation
@@ -125,3 +125,4 @@ If client wants to delete `ThroughputBench0`, FSDirectory will traverse the dire
 
 When the Namenode maintains billions of files, HDFS are experiencing severe latency or even crashes due to the limited memory available. Eventually, HDFS is playing a losing game in cloud computing if the scalability bottleneck persists.  
 
+In [Section 3.5 - Data Model](https://dsl-umd.github.io/docs/metadata/datamodel/datemodel.html), We will store all their attributes into database system and replace the corresponding functions with our database-based implementation.
