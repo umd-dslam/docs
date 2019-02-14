@@ -915,39 +915,33 @@ Total = (406 + 556 + 544) * num(datanodes) / 2^30 (GB)
 
 In this section, we quantify the memory usage of various objects. The memory consumption comes mainly from the size of the objects themselves (`INodeFile`, `INodeDirectory`, `Block` and `BlockInfo`) and their references in two hash tables, that is, `INodesMap` and `BlocksMap`.
 
-The metadata of Datanode (`DatanodeStorageInfo` and `DatanodeDescriptor`) is not a bottleneck because the number of horizontal expansion of the Datanode grows very slowly compared to the exponential growth of the data (files and blocks).
+The metadata of Datanode (`DatanodeStorageInfo` and `DatanodeDescriptor`) is not a bottleneck because the number of horizontal expansion of the Datanode grows very slowly compared to the exponential growth of the data (files and blocks). The relation for Datanode metadata can be discarded.
 
-    The relation for Datanode metadata can be discarded.
+<pre><S><code class="language-sql">
+CREATE TABLE datanodeStorageInfo(
+    storageID text primary key, storageType int, State int,
+    capacity bigint, dfsUsed bigint, nonDfsUsed bigint, remaining bigint,
+    blockPoolUsed bigint, blockReportCount int, heartbeatedSinceFailover boolean,
+    blockContentsStale boolean, datanodeUuid text
+);
 
-    <S>
+CREATE TABLE datanodeDescriptor(
+    datanodeUuid text primary key, datanodeUuidBytes bytea, ipAddr text,
+    ipAddrBytes bytea, hostName text, hostNameBytes bytea, peerHostName text,
+    xferPort int, infoPort int, infoSecurePort int, ipcPort int, xferAddr text, 
+    capacity bigint, dfsUsed bigint, nonDfsUsed bigint, remaining bigint,
+    blockPoolUsed bigint, cacheCapacity bigint, cacheUsed bigint, lastUpdate bigint, 
+    lastUpdateMonotonic bigint, xceiverCount int, location text, softwareVersion text,
+    dependentHostNames text[], upgradeDomain text, numBlocks int, adminState text,
+    maintenanceExpireTimeInMS bigint, lastBlockReportTime bigint, lastBlockReportMonotonic bigint,
+    lastCachingDirectiveSentTimeMs bigint, isAlive boolean, needKeyUpdate boolean,
+    forceRegistration boolean, bandwidth bigint, lastBlocksScheduledRollTime bigint,
+    disallowed boolean, pendingReplicationWithoutTargets int, heartbeatedSinceRegistration boolean 
+);
+</code></S></pre>
+    
 
-    ```sql
-    CREATE TABLE datanodeStorageInfo(
-        storageID text primary key, storageType int, State int,
-        capacity bigint, dfsUsed bigint, nonDfsUsed bigint, remaining bigint,
-        blockPoolUsed bigint, blockReportCount int, heartbeatedSinceFailover boolean,
-        blockContentsStale boolean, datanodeUuid text
-    );
-
-    DROP TABLE IF EXISTS datanodeDescriptor;
-    CREATE TABLE datanodeDescriptor(
-        datanodeUuid text primary key, datanodeUuidBytes bytea, ipAddr text,
-        ipAddrBytes bytea, hostName text, hostNameBytes bytea, peerHostName text,
-        xferPort int, infoPort int, infoSecurePort int, ipcPort int, xferAddr text, 
-        capacity bigint, dfsUsed bigint, nonDfsUsed bigint, remaining bigint,
-        blockPoolUsed bigint, cacheCapacity bigint, cacheUsed bigint, lastUpdate bigint, 
-        lastUpdateMonotonic bigint, xceiverCount int, location text, softwareVersion text,
-        dependentHostNames text[], upgradeDomain text, numBlocks int, adminState text,
-        maintenanceExpireTimeInMS bigint, lastBlockReportTime bigint, lastBlockReportMonotonic bigint,
-        lastCachingDirectiveSentTimeMs bigint, isAlive boolean, needKeyUpdate boolean,
-        forceRegistration boolean, bandwidth bigint, lastBlocksScheduledRollTime bigint,
-        disallowed boolean, pendingReplicationWithoutTargets int, heartbeatedSinceRegistration boolean 
-    );
-    ```
-
-    </S>
-
-We can solve this problem in two directions:
+We can solve the HDFS bottleneck from two directions without sacrificing performance:
 
 - Objects: We can remove all attributes of `INodeFile`, `INodeDirectory`, `Block` and `BlockInfo` and put them into the deterministic database system. Their data models are as follows:
 
