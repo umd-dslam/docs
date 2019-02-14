@@ -917,13 +917,64 @@ In this section, we quantify the memory usage of various objects. The memory con
 
 The metadata of Datanode (`DatanodeStorageInfo` and `DatanodeDescriptor`) is not a bottleneck because the number of horizontal expansion of the Datanode grows very slowly compared to the exponential growth of the data (files and blocks).
 
+The former tables for them is useless.
+
+    <S>
+
+    ```sql
+    CREATE TABLE datanodeStorageInfo(
+        storageID text primary key, storageType int, State int,
+        capacity bigint, dfsUsed bigint, nonDfsUsed bigint, remaining bigint,
+        blockPoolUsed bigint, blockReportCount int, heartbeatedSinceFailover boolean,
+        blockContentsStale boolean, datanodeUuid text
+    );
+
+    DROP TABLE IF EXISTS datanodeDescriptor;
+    CREATE TABLE datanodeDescriptor(
+        datanodeUuid text primary key, datanodeUuidBytes bytea, ipAddr text,
+        ipAddrBytes bytea, hostName text, hostNameBytes bytea, peerHostName text,
+        xferPort int, infoPort int, infoSecurePort int, ipcPort int, xferAddr text, 
+        capacity bigint, dfsUsed bigint, nonDfsUsed bigint, remaining bigint,
+        blockPoolUsed bigint, cacheCapacity bigint, cacheUsed bigint, lastUpdate bigint, 
+        lastUpdateMonotonic bigint, xceiverCount int, location text, softwareVersion text,
+        dependentHostNames text[], upgradeDomain text, numBlocks int, adminState text,
+        maintenanceExpireTimeInMS bigint, lastBlockReportTime bigint, lastBlockReportMonotonic bigint,
+        lastCachingDirectiveSentTimeMs bigint, isAlive boolean, needKeyUpdate boolean,
+        forceRegistration boolean, bandwidth bigint, lastBlocksScheduledRollTime bigint,
+        disallowed boolean, pendingReplicationWithoutTargets int, heartbeatedSinceRegistration boolean 
+    );
+    ```
+
+    </S>
+
 We can solve this problem in two directions:
 
-- Objects: We can remove all attributes of `INodeFile`, `INodeDirectory`, `Block` and `BlockInfo` and put them into the deterministic database system.
+- Objects: We can remove all attributes of `INodeFile`, `INodeDirectory`, `Block` and `BlockInfo` and put them into the deterministic database system. Their data models are as follows:
+
+```sql
+CREATE TABLE inodes(
+    id int primary key, parent int, name text,
+    accessTime bigint, modificationTime bigint,
+    header bigint, permission bigint, blockIds bigint[]
+);
+```
+
+|  ID      | parent   |  name    | accesstime  | modificationtime |  header  | permission  | blockId |
+|----------|----------|----------|-------------|------------------|----------|-------------|---------|
+
+```sql
+CREATE TABLE datablocks(
+    blockId bigint primary key, numBytes bigint, generationStamp bigint,
+    eplication int, bcId bigint
+);
+```
+
+|  blockId | numBytes   |  generationStamp    | eplication  | bcId |
+|----------|------------|---------------------|-------------|------|
+
 
 - Object References: We might also put serialized key-value into the deterministic database system.
 Or, implement a DHT (distributed hash table) to replace `INodesMap` and `BlocksMap`.
-
 
 
 
