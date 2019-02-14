@@ -391,7 +391,139 @@ The namespace is resident in the JVM heap memory. To ensure the reliability of t
 
 HDFS splits a file into multiple data blocks. To ensure data reliability, each block has multiple replicas and are stored on different Datanodes in the cluster. In addition to maintaining the information of the `Block` itself, the Namenode also needs to maintain the correspondence from the data block to Datanodes, which is used to describe the physical location of each replica. The `BlocksMap` structure in the BlockManager is used for the mapping relation between `Block` and `BlockInfo`. You can find more details in [Section 3.2](https://dsl-umd.github.io/docs/metadata/datablock/index.html) we introduced before.
 
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Class</th>
+    <th class="tg-0lax">Type</th>
+    <th class="tg-0lax">Members</th>
+    <th class="tg-0lax">Size (bytes)</th>
+    <th class="tg-0lax">Total</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+    <td class="tg-0lax" rowspan="4">Block</td>
+    <td class="tg-0lax">#</td>
+    <td class="tg-0lax">Object header</td>
+    <td class="tg-0lax">16</td>
+    <td class="tg-0lax" rowspan="4">40</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">long</td>
+    <td class="tg-0lax">blockid</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">long</td>
+    <td class="tg-0lax">numBytes</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">long</td>
+    <td class="tg-0lax">generationStamp</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" rowspan="6">BlockInfo</td>
+    <td class="tg-0lax">#</td>
+    <td class="tg-0lax">Object header</td>
+    <td class="tg-0lax">16</td>
+    <td class="tg-0lax" rowspan="6">~90</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">short</td>
+    <td class="tg-0lax">replication</td>
+    <td class="tg-0lax">2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">long</td>
+    <td class="tg-0lax">bcId</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">LinkedElement Ref</td>
+    <td class="tg-0lax">nextLinkedElement</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">DatanodeStorageInfo[]</td>
+    <td class="tg-0lax">storages</td>
+    <td class="tg-0lax">8 + 24 + 8 * replicas (3) = 56</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">BlockUnderConstructionFeature Ref</td>
+    <td class="tg-0lax">uc</td>
+    <td class="tg-0lax">not counted (dynamic)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" rowspan="7">LightWeightGSet&lt;Block, BlockInfo&gt;</td>
+    <td class="tg-0lax">#</td>
+    <td class="tg-0lax">Object header</td>
+    <td class="tg-0lax">16</td>
+    <td class="tg-0lax" rowspan="7">68 + 2% * size(total memory)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">LinkedElement[]</td>
+    <td class="tg-0lax">entries</td>
+    <td class="tg-0lax">8 + 24</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">int</td>
+    <td class="tg-0lax">hash_mask</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">int</td>
+    <td class="tg-0lax">size</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">int</td>
+    <td class="tg-0lax">modification</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">interface Collection&lt;E&gt;</td>
+    <td class="tg-0lax">values</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Index Space</td>
+    <td class="tg-0lax">2% * size(total memory)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax" rowspan="5">BlocksMap</td>
+    <td class="tg-0lax">#</td>
+    <td class="tg-0lax">Object header</td>
+    <td class="tg-0lax">16</td>
+    <td class="tg-0lax" rowspan="5">116 + 2% * size(total memory)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">int</td>
+    <td class="tg-0lax">capacity</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">LightWeightGSet&lt;Block, BlockInfo&gt; Ref</td>
+    <td class="tg-0lax">blocks</td>
+    <td class="tg-0lax">8 + 68 + 2% * size(total memory)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">LongAdder</td>
+    <td class="tg-0lax">totalReplicatedBlocks</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">LongAdder</td>
+    <td class="tg-0lax">totalECBlockGroups</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  </tbody>
+</table>
+
 ## Datanode Storage
+
 
 
 ## Conclusion
