@@ -454,12 +454,12 @@ BlocksMap performs multiple refactoring optimizations.  The original version use
     <td class="tg-0lax">8 + 24 + 8 * replicas (3) = 56</td>
   </tr>
   <tr>
-    <td class="tg-0lax">BlockUnderConstructionFeature Ref</td>
+    <td class="tg-0lax">BlockUnderConstructionFeature</td>
     <td class="tg-0lax">uc</td>
     <td class="tg-0lax">not counted (dynamic)</td>
   </tr>
   <tr>
-    <td class="tg-0lax" rowspan="7">LightWeightGSet&lt;Block, BlockInfo&gt;</td>
+    <td class="tg-0lax" rowspan="7">LightWeightGSet</td>
     <td class="tg-0lax">#</td>
     <td class="tg-0lax">Object header</td>
     <td class="tg-0lax">16</td>
@@ -508,7 +508,7 @@ BlocksMap performs multiple refactoring optimizations.  The original version use
     <td class="tg-0lax">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax">LightWeightGSet&lt;Block, BlockInfo&gt; Ref</td>
+    <td class="tg-0lax">LightWeightGSet</td>
     <td class="tg-0lax">blocks</td>
     <td class="tg-0lax">8 + 68 + 2% * size(total memory)</td>
   </tr>
