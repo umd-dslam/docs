@@ -834,6 +834,24 @@ Each Datanode (`DatanodeDescriptor.storageMap` in the table below) is treated as
 
 > Due to many dynamically changing information is not counted, results may have some errors. For example, replicateBlocks, recoverBlocks, and invalidateBlocks in DatanodeDescriptor relate to state transitions of data blocks. pendingCached, cached, and pendingUncached relate to cache.
 
+
+Based on the previous analysis, let's estimate the total amount of memory that Namenode needs to maintain for this part of the information:
+
+```bash
+Total = (406 + 556 + 544) * num(datanodes) / 2^30 (GB)
+```
+
+| # datanodes | Total Size |
+|-------------|------------|
+| 1000        | 1.43MB     |
+| 10000       | 14.36MB    |
+| 100000      | 143.62MB   |
+| 1000000     | 1.40GB     |
+| 10000000    | 14.03GB    |
+
+**When the number of Datanodes reaches tens of millions or even hundreds of millions, the metadata of Datanodes in Namenode is not the bottleneck of HDFS. We don't need to put DatanodeDescriptor and DatanodeStorageInfo into the database system!**
+
+
 ## Conclusion
 
 ## References
