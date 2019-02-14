@@ -199,13 +199,10 @@ Object type: class java.lang.String, size: 32 bytes
 Let's manually analyse and calculate their memory usage:
 
 - **Person p**: 16 bytes (object header) + 8 bytes (string reference) + 4 bytes (int) + 8 bytes (long) + 1 byte (boolean) + 8 bytes (byte reference) + 3 bytes (padding) = 48 bytes. Total size: 48 + (24 + 4 * 8) = 104 bytes (`password`: 24 + size + pad, size = 0, pad = 0).
-
-To calculate arrays using `24 + size + pad`:
-
 - **int[] a0 = {}**: output: 24 bytes (size = 0, pad = 0).
 - **int[] a1 = {1}**: output: 32 bytes (size = 4, pad = 4).
 - **int[] a2 = {1, 2}**: output: 32 bytes (size = 4 * 2, pad = 0).
-- **int[] a3 = new int[100]**: output: 424 bytes (size = 4 * 100, pad = 0).
+- **int[] a3 = new int[100]**: output: 424 bytes (size = 4 * 100, pad = 0). 
 - **String[] b0 = {}**: output: 24 bytes (size = 0, pad = 0).
 - **String[] b1 = {"1"}**: output: 32 bytes (size = 8, pad = 0).
 - **String[] b2 = {"1", "2"}**: output: 40 bytes (size = 8 * 2, pad = 0).
@@ -218,10 +215,8 @@ We assume that all Person references are different in `List<Person>` (40 bytes +
 - **List<Person> al2**: output: 40 bytes, real size: 40 + 8 * 2 = 56 bytes. Total size: 56 + 104 * 2 = 264 bytes.
 - **List<Person> al3**: output: 40 bytes, real size: 40 + 8 * 100 = 840 bytes. Total size: 840 + 104 * 100 = 11240 bytes.
 
-To calculate strings using `32 fixed bytes + 16 bytes/entry`:
-
 - **String s0 = ""**: output: 32 bytes, total size = 32 bytes.
-- **String s1 = "hello"**: output: 32 bytes, total size = 32 + 16 * 5 = 112 bytes.
+- **String s1 = "hello"**: output: 32 bytes, total size = 32 + 2 * 5 + 6 (pad) = 48 bytes.
 
 After studying the size of the Java object, let's estimate the various Java objects in the Namenode.
 
