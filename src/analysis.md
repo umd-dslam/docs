@@ -455,7 +455,7 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
   <tr>
     <td class="tg-0lax">DatanodeStorageInfo[]</td>
     <td class="tg-0lax">storages</td>
-    <td class="tg-0lax">8 + 24 + 8 * replicas (3) = 56</td>
+    <td class="tg-0lax">8+24+8*r(3)=56</td>
   </tr>
   <tr>
     <td class="tg-0lax">BlockUnderConstructionFeature</td>
@@ -467,12 +467,12 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
     <td class="tg-0lax">#</td>
     <td class="tg-0lax">Object header</td>
     <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="7">68 + 2% * size(total memory)</td>
+    <td class="tg-0lax" rowspan="7">68 + 8*num(blocks) + 2%*size(total memory)</td>
   </tr>
   <tr>
     <td class="tg-0lax">LinkedElement[]</td>
     <td class="tg-0lax">entries</td>
-    <td class="tg-0lax">8 + 24</td>
+    <td class="tg-0lax">8+24+8*num(blocks)</td>
   </tr>
   <tr>
     <td class="tg-0lax">int</td>
@@ -497,14 +497,14 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
   <tr>
     <td class="tg-0lax"></td>
     <td class="tg-0lax">Index Space</td>
-    <td class="tg-0lax">2% * size(total memory)</td>
+    <td class="tg-0lax">2%*total memory</td>
   </tr>
   <tr>
     <td class="tg-0lax" rowspan="5">BlocksMap</td>
     <td class="tg-0lax">#</td>
     <td class="tg-0lax">Object header</td>
     <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="5">116 + 2% * size(total memory)</td>
+    <td class="tg-0lax" rowspan="5">116+8*num(blocks)+2%*total memory</td>
   </tr>
   <tr>
     <td class="tg-0lax">int</td>
@@ -514,7 +514,7 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
   <tr>
     <td class="tg-0lax">LightWeightGSet</td>
     <td class="tg-0lax">blocks</td>
-    <td class="tg-0lax">8 + 68 + 2% * size(total memory)</td>
+    <td class="tg-0lax">8+68+8*num(blocks)+2%*total memory</td>
   </tr>
   <tr>
     <td class="tg-0lax">LongAdder</td>
@@ -532,11 +532,14 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
 HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occupies a large amount of memory space. Assuming that there are 10 million or 100 million data blocks across the cluster and the total memory of the NameNode is 256GB, the BlocksMap, Block and BlockInfo will take up a lot of memory:
 
 > Total = (Block + BlockInfo) * num(blocks) + BlocksMap
+>       = (40 + 90) * num(blocks) + 116 + 8 * num(blocks) + 2% * 256 * 2^30 (bytes)
+>       = (138 * num(blocks) + 5497558138.88)/2^30 (GB)
 
-- Total = (40 + 90) * 10 million (bytes) + 116 (bytes) + 2% * 256 (GB) = 17.23GB
+- Total = (138 * 10M + 5497558138.88)/2^30 = 17.97GB
 
-- Total = (40 + 90) * 100 million (bytes) + 116 (bytes) + 2% * 256 (GB) = 126.19GB
+- Total = (138 * 100M + 5497558138.88)/2^30 = 133.64GB
 
+In addition to INode, **Block and BlockInfo are also the scalability bottleneck of HDFS.**
 
 ## Datanode Storage
 
