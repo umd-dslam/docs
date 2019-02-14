@@ -851,7 +851,6 @@ Total = (406 + 556 + 544) * num(datanodes) / 2^30 (GB)
 
 **When the number of Datanodes reaches tens of millions or even hundreds of millions, the metadata of Datanodes in Namenode is not the bottleneck of HDFS. We don't need to put DatanodeDescriptor and DatanodeStorageInfo into the database system!**
 
-
 ## Conclusion
 
 ## References
