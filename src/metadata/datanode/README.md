@@ -112,6 +112,8 @@ public class DatanodeDescriptor extends DatanodeInfo {
 }
 ```
 
+We will analyse the memory consumption of `DatanodeDescriptor` in [Section 3.4 - Quantitative Analysis - Datanode Storage](https://dsl-umd.github.io/docs/analysis.html#datanode-storage).
+
 
 ## References
 
