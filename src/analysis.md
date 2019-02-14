@@ -33,7 +33,7 @@ OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
 | long       | 8            | 8                      |
 | float      | 4            | 8                      |
 | double     | 8            | 8                      |
-| char       | 16           | 16                     |
+| char       | 2            | 8                      |
 
 
 ### Object References
@@ -117,7 +117,7 @@ The cost of ArrayList is **40 bytes fixed** + 8 bytes/entry.
 
 To understand how much heap a String object uses, we must look at [String's source code](https://github.com/ZenOfAutumn/jdk8/blob/de6c37469e54d46841838423400144f7b9dc4cf1/java/lang/String.java#L111-L120). The following table shows the properties and their sizes:
 
-The cost of String is **32 bytes fixed** + 16 bytes/entry.
+The cost of String is **32 bytes fixed** + 2 bytes/entry.
 
 |  Field  |    Type    | Size (bytes) |
 |:-------:|:----------:|:------------:|
@@ -547,6 +547,286 @@ In addition to INode, **Block, BlockInfo and BlocksMap are also the scalability 
 
 ## Datanode Storage
 
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Class</th>
+    <th class="tg-0lax">Type</th>
+    <th class="tg-0lax">Members</th>
+    <th class="tg-0lax">Size (bytes)</th>
+    <th class="tg-0lax">Total</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+    <td class="tg-0pky" rowspan="13">DatanodeStorageInfo</td>
+    <td class="tg-0pky">#</td>
+    <td class="tg-0pky">Object header</td>
+    <td class="tg-0pky">16</td>
+    <td class="tg-0pky" rowspan="13">177</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">DatanodeDescriptor</td>
+    <td class="tg-0pky">dn</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String</td>
+    <td class="tg-0pky">storageID</td>
+    <td class="tg-0pky">8+32+2*32=104</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Enum(bool)</td>
+    <td class="tg-0pky">storageType</td>
+    <td class="tg-0pky">1</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Enum(short)</td>
+    <td class="tg-0pky">state</td>
+    <td class="tg-0pky">2</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">capacity</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">dfsUsed</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">remaining</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">blockPoolUsed</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">FoldedTreeSet ref</td>
+    <td class="tg-0pky">blocks</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int</td>
+    <td class="tg-0pky">blockReportCount</td>
+    <td class="tg-0pky">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">boolean</td>
+    <td class="tg-0pky">heartbeatedSinceFailover</td>
+    <td class="tg-0pky">1</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">boolean</td>
+    <td class="tg-0pky">blockContentsStale</td>
+    <td class="tg-0pky">1</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky" rowspan="14">DatanodeDescriptor</td>
+    <td class="tg-0pky">#</td>
+    <td class="tg-0pky">Object header</td>
+    <td class="tg-0pky">16</td>
+    <td class="tg-0pky" rowspan="14">406</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">LeavingServiceStatus ref</td>
+    <td class="tg-0pky">leavingServiceStatus</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">HashMap&lt;StorageID, DatanodeStorageInfo&gt;</td>
+    <td class="tg-0pky">storageMap</td>
+    <td class="tg-0pky">8+40+(storageID+8+DatanodeStorageInfo)*3=48+(104+8+177)=337</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">lastCachingDirectiveSentTimeMs</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">boolean</td>
+    <td class="tg-0pky">isAlive</td>
+    <td class="tg-0pky">1</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">boolean</td>
+    <td class="tg-0pky">needKeyUpdate</td>
+    <td class="tg-0pky">1</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">boolean</td>
+    <td class="tg-0pky">forceRegistration</td>
+    <td class="tg-0pky">1</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">bandwidth</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">lastBlocksScheduledRollTime</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int</td>
+    <td class="tg-0pky">volumeFailures</td>
+    <td class="tg-0pky">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">VolumeFailureSummary</td>
+    <td class="tg-0pky">volumeFailureSummary</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">boolean</td>
+    <td class="tg-0pky">disallowed</td>
+    <td class="tg-0pky">1</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int</td>
+    <td class="tg-0pky">pendingReplicationWithoutTargets</td>
+    <td class="tg-0pky">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">boolean</td>
+    <td class="tg-0pky">heartbeatedSinceRegistration</td>
+    <td class="tg-0pky">1</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky" rowspan="16">DatanodeInfo</td>
+    <td class="tg-0pky">#</td>
+    <td class="tg-0pky">Object header</td>
+    <td class="tg-0pky">16</td>
+    <td class="tg-0pky" rowspan="16">556</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">capacity</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">dfsUsed</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">nonDfsUsed</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">remaining</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">blockPoolUsed</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">cacheCapacity</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">cacheUsed</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">lastUpdate</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">long</td>
+    <td class="tg-0pky">lastUpdateMonotonic</td>
+    <td class="tg-0pky">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int</td>
+    <td class="tg-0pky">xceiverCount</td>
+    <td class="tg-0pky">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String</td>
+    <td class="tg-0pky">location (network topology)</td>
+    <td class="tg-0pky">8+32+2*50=140</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String</td>
+    <td class="tg-0pky">softwareVersion</td>
+    <td class="tg-0pky">8+32+2*8=56</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">List&lt;String&gt;</td>
+    <td class="tg-0pky">dependentHostNames</td>
+    <td class="tg-0pky">8+40+(8+32+2*16)*2=192</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String</td>
+    <td class="tg-0pky">upgradeDomain</td>
+    <td class="tg-0pky">8+32+2*16=72</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int</td>
+    <td class="tg-0pky">numBlocks</td>
+    <td class="tg-0pky">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky" rowspan="9">DatanodeID</td>
+    <td class="tg-0pky">#</td>
+    <td class="tg-0pky">Object header</td>
+    <td class="tg-0pky">16</td>
+    <td class="tg-0pky" rowspan="9">544</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String</td>
+    <td class="tg-0pky">ipAddr</td>
+    <td class="tg-0pky">8+32+2*16=72</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String</td>
+    <td class="tg-0pky">peerHostName</td>
+    <td class="tg-0pky">8+32+2*16=72</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int</td>
+    <td class="tg-0pky">xferPort</td>
+    <td class="tg-0pky">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int</td>
+    <td class="tg-0pky">infoPort</td>
+    <td class="tg-0pky">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int</td>
+    <td class="tg-0pky">infoSecurePort</td>
+    <td class="tg-0pky">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int</td>
+    <td class="tg-0pky">ipcPort</td>
+    <td class="tg-0pky">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String</td>
+    <td class="tg-0pky">xferAddr</td>
+    <td class="tg-0pky">8+32+2*16=72</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String</td>
+    <td class="tg-0pky">datanodeUuid</td>
+    <td class="tg-0pky">8+32+2*128=296</td>
+  </tr>
+  </tbody>
+</table>
 
 
 ## Conclusion
