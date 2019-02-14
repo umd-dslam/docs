@@ -548,7 +548,8 @@ In addition to INode, **Block, BlockInfo and BlocksMap are also the scalability 
 ## Datanode Storage
 
 
-Since DataNode generally mounts multiple different types of storage volumes, such as HDD, SSD, etc., `DatanodeDescriptor.storageMap` in the table below is a collection of storage volumes (`DatanodeStorageInfo`). More details can be found in [Section 3.3 - Datanode Storage](https://dsl-umd.github.io/docs/metadata/datanode/index.html).
+Since Datanode generally mounts multiple different types of storages such as HDD, SSD, RAM, etc.
+Each Datanode (`DatanodeDescriptor.storageMap` in the table below) is treated as a collection of storages. A storage in Datanode is represented by `DatanodeStorageInfo`.  More details can be found in [Section 3.3 - Datanode Storage](https://dsl-umd.github.io/docs/metadata/datanode/index.html).
 
 <table class="tg">
 <thead>
