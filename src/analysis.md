@@ -529,6 +529,9 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
   </tbody>
 </table>
 
+HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occupies a large amount of memory space. Assuming that there are 100 million data blocks across the cluster and the total memory of the NameNode is 256GB, the BlocksMap, Block and BlockInfo will take up a lot of memory:
+
+Total = (40 + 90) * 100 million (bytes) + 68 (bytes) + 2% * 256 (GB) = 126.19 GB
 
 
 ## Datanode Storage
