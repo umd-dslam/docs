@@ -913,6 +913,20 @@ Total = (406 + 556 + 544) * num(datanodes) / 2^30 (GB)
 
 ## Conclusion
 
+In this section, we quantify the memory usage of various objects. The memory consumption comes mainly from the size of the objects themselves (`INodeFile`, `INodeDirectory`, `Block` and `BlockInfo`) and their references in two hash tables, that is, `INodesMap` and `BlocksMap`.
+
+The metadata of Datanode (`DatanodeStorageInfo` and `DatanodeDescriptor`) is not a bottleneck because the number of horizontal expansion of the Datanode grows very slowly compared to the exponential growth of the data (files and blocks).
+
+We can solve this problem in two directions:
+
+- Objects: We can remove all attributes of `INodeFile`, `INodeDirectory`, `Block` and `BlockInfo` and put them into the deterministic database system.
+
+- Object References: We might also put serialized key-value into the deterministic database system.
+Or, implement a DHT (distributed hash table) to replace `INodesMap` and `BlocksMap`.
+
+
+
+
 ## References
 
 1. How to Get the Size of an Object in Java, https://www.baeldung.com/java-size-of-object
