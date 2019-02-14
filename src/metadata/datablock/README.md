@@ -85,7 +85,7 @@ as NAS) etc. A storage in the Datanode is represented by this class. More inform
 class BlocksMap {
   private final int capacity;
   private GSet<Block, BlockInfo> blocks;
-  private final LongAdder totalReplicatedBlocks = new LongAdder();
+  private final LongDataAdder totalReplicatedBlocks = new LongAdder();
   private final LongAdder totalECBlockGroups = new LongAdder();
 }
 ```
