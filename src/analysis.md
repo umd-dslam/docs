@@ -943,7 +943,7 @@ CREATE TABLE datanodeDescriptor(
 
 We can solve the HDFS bottleneck from two directions without sacrificing performance:
 
-- Objects: We can remove all attributes of `INodeFile`, `INodeDirectory`, `Block` and `BlockInfo` and put them into the deterministic database system. Their data models are as follows:
+1. **Objects**: We can remove all attributes of `INodeFile`, `INodeDirectory`, `Block` and `BlockInfo` and put them into the deterministic database system. Their data models are as follows:
 
 ```sql
 CREATE TABLE inodes(
@@ -964,7 +964,7 @@ CREATE TABLE datablocks(
 
 <table><tr><th>  blockId </th><th> numBytes   </th><th>  generationStamp    </th><th> eplication  </th><th> bcId </th></tr></table>
 
-- Object References: We might also put serialized key-value into the deterministic database system.
+2. **Object References**: We might also put serialized key-value into the deterministic database system.
 Or, implement a DHT (distributed hash table) to replace `INodesMap` and `BlocksMap`.
 
 
