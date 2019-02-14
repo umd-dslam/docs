@@ -391,7 +391,7 @@ The namespace is resident in the JVM heap memory. To ensure the reliability of t
 
 HDFS splits a file into multiple data blocks. To ensure data reliability, each block has multiple replicas and are stored on different Datanodes in the cluster. In addition to maintaining the information of the `Block` itself, the Namenode also needs to maintain the correspondence from the data block to Datanodes, which is used to describe the physical location of each replica. The `BlocksMap` structure in the BlockManager is used for the mapping relation between `Block` and `BlockInfo`. You can find more details in [Section 3.2](https://dsl-umd.github.io/docs/metadata/datablock/index.html) we introduced before.
 
-BlocksMap performs multiple refactoring optimizations.  The original version uses `HashMap` to save the mapping from `Block` to `BlockInfo`.  HDFS then adopts `LightWeightGSet` instead of HashMap. It uses an array for storing the elements and linked lists for collision resolution, which performs better in terms of ease of use, memory footprint and performance. For details on LightWeightGSet, please refer to [HDFS-1114](https://issues.apache.org/jira/browse/HDFS-1114).
+BlocksMap performed multiple refactoring optimizations.  NameNode used a `java.util.HashMap` to store `BlockInfo` objects. When there are many blocks in HDFS, this map uses a lot of memory in the NameNode. They optimized the memory usage by a light weight hash table implementation which is `LightWeightGSet` instead of HashMap. It uses an array for storing the elements and linked lists for collision resolution, which performs better in terms of ease of use, memory footprint and performance. For details on LightWeightGSet, please refer to [HDFS-1114](https://issues.apache.org/jira/browse/HDFS-1114).
 
 
 > In order to avoid collision conflicts, BlocksMap allocates **2%** of total memory as the index space of `LightWeightGSet` ([BlockManager.java#L464-L466](https://github.com/DSL-UMD/hadoop-calvin/blob/838a740157e153c338056f9ffdbf1c606e3dcd8a/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockManager.java#L464-L466)).
@@ -528,6 +528,8 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
   </tr>
   </tbody>
 </table>
+
+> Note: The hash table elements are required to implement a new interface, called `LinkedElement`, which provides `setNext` and `getNex` to perations. Then, the hash table entries store references to `LinkedElement` objects. These objects are the heads of linked lists. For linked lists, the memory overhead is 8 bytes per element in 64-bitJVMs.
 
 HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occupies a large amount of memory space. Assuming that there are 10 million or 100 million data blocks across the cluster and the total memory of the NameNode is 256GB, the BlocksMap, Block and BlockInfo will take up a lot of memory:
 
