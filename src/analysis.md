@@ -601,6 +601,7 @@ Total = Total(Block) + Total(BlockInfo) + Total(BlocksMap)
 | 10 Million | 1.28 GB    |
 | 100 Million| 12.85 GB   |
 | 1 Billion  | 128.52 GB  |
+| 10 Billion | 1285.23 GB |
 
 In addition to INode, **Block, BlockInfo and BlocksMap are also the scalability bottleneck of HDFS.**
 
