@@ -396,6 +396,8 @@ BlocksMap performs multiple refactoring optimizations.  The original version use
 
 > In order to avoid collision conflicts, BlocksMap allocates **2%** of total memory as the index space of `LightWeightGSet` ([BlockManager.java#L464-L466](https://github.com/DSL-UMD/hadoop-calvin/blob/838a740157e153c338056f9ffdbf1c606e3dcd8a/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockManager.java#L464-L466)).
 
+The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in the following table.
+
 <table class="tg">
 <thead>
   <tr>
