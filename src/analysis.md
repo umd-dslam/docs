@@ -832,6 +832,7 @@ Each Datanode (`DatanodeDescriptor.storageMap` in the table below) is treated as
   </tbody>
 </table>
 
+> Due to many dynamically changing information is not counted, results may have some errors. For example, replicateBlocks, recoverBlocks, and invalidateBlocks in DatanodeDescriptor relate to state transitions of data blocks. pendingCached, cached, and pendingUncached relate to cache.
 
 ## Conclusion
 
