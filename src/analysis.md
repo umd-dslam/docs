@@ -529,7 +529,7 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
   </tbody>
 </table>
 
-> Note: The hash table elements are required to implement a new interface, called `LinkedElement`, which provides `setNext` and `getNex` to perations. Then, the hash table entries store references to `LinkedElement` objects. These objects are the heads of linked lists. For linked lists, the memory overhead is 8 bytes per element in 64-bitJVMs.
+> Note: The hash table elements are required to implement a new interface, called `LinkedElement`, which provides `setNext` and `getNex` to perations. Then, the hash table entries store references to `LinkedElement` objects. These objects are the heads of linked lists. For linked lists, the memory overhead is 8 bytes per element in 64-bit JVMs.
 
 HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occupies a large amount of memory space. Assuming that there are 10 million or 100 million data blocks across the cluster and the total memory of the NameNode is 256GB, the BlocksMap, Block and BlockInfo will take up a lot of memory:
 
