@@ -87,6 +87,27 @@ public class INodeFile extends INodeWithAdditionalFields
 
  In [Section 3.4 - Quantitative Analysis - File and Directory](https://dsl-umd.github.io/docs/analysis.html#file-and-directory), we will analyse the memory consumption of `INode`, `INodeFile` and `INodeDirectory`.
 
+## INodeMap
+
+INodeMao are storing all the INodes and maintaining the mapping between INode ID and INode.
+
+```java
+public class INodeMap {
+  static INodeMap newInstance(INodeDirectory rootDir) {
+    // Compute the map capacity by allocating 1% of total memory
+    int capacity = LightWeightGSet.computeCapacity(1, "INodeMap");
+    GSet<INode, INodeWithAdditionalFields> map =
+        new LightWeightGSet<>(capacity);
+    map.put(rootDir);
+    return new INodeMap(map);
+  }
+
+  /** Synchronized by external lock. */
+  private final GSet<INode, INodeWithAdditionalFields> map;
+}
+```
+
+`GSet` in here is a light weight hash table and use bucketlists for collision resolution. All operations except the iterate operation are almost constant time operations. Of course, the iterate operation depends on the size of the set.
 
 
 ## File Operation
