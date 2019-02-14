@@ -917,7 +917,7 @@ In this section, we quantify the memory usage of various objects. The memory con
 
 The metadata of Datanode (`DatanodeStorageInfo` and `DatanodeDescriptor`) is not a bottleneck because the number of horizontal expansion of the Datanode grows very slowly compared to the exponential growth of the data (files and blocks). The relation for Datanode metadata can be discarded.
 
-<pre><S><code class="language-sql">
+<pre><code class="language-sql"><S>
 CREATE TABLE datanodeStorageInfo(
     storageID text primary key, storageType int, State int,
     capacity bigint, dfsUsed bigint, nonDfsUsed bigint, remaining bigint,
@@ -938,7 +938,7 @@ CREATE TABLE datanodeDescriptor(
     forceRegistration boolean, bandwidth bigint, lastBlocksScheduledRollTime bigint,
     disallowed boolean, pendingReplicationWithoutTargets int, heartbeatedSinceRegistration boolean 
 );
-</code></S></pre>
+</S></code></pre>
     
 
 We can solve the HDFS bottleneck from two directions without sacrificing performance:
