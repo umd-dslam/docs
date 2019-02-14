@@ -959,8 +959,7 @@ CREATE TABLE inodes(
 );
 ```
 
-|  ID      | parent   |  name    | accesstime  | modificationtime |  header  | permission  | blockId |
-|----------|----------|----------|-------------|------------------|----------|-------------|---------|
+<table><tr><th>  ID      </th><th> parent   </th><th>  name    </th><th> accesstime  </th><th> modificationtime </th><th>  header  </th><th> permission  </th><th> blockId </th></tr></table>
 
 ```sql
 CREATE TABLE datablocks(
@@ -969,9 +968,7 @@ CREATE TABLE datablocks(
 );
 ```
 
-|  blockId | numBytes   |  generationStamp    | eplication  | bcId |
-|----------|------------|---------------------|-------------|------|
-
+<table><tr><th>  blockId </th><th> numBytes   </th><th>  generationStamp    </th><th> eplication  </th><th> bcId </th></tr></table>
 
 - Object References: We might also put serialized key-value into the deterministic database system.
 Or, implement a DHT (distributed hash table) to replace `INodesMap` and `BlocksMap`.
