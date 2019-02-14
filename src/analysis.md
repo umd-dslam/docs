@@ -2,7 +2,7 @@
 
 The purpose of this session is to find the memory bottleneck by quantifying the memory footprint of various data structures in HDFS. Data structures that are not bottlenecks will remain in the Namenode's memory, but the bottleneck part needs to be transferred to the distributed deterministic database to improve the overall scalability of HDFS.
 
-> Here we only make a rough estimate of the size of different objects. Optimizatins like reordering object properties and memory layout of super/subclasses in JVM heap allocation were not considered. But this does not affect the final result.
+> Here we only make a rough estimate of the size of different objects. Optimization like reordering object properties and memory layout of super/subclasses in JVM heap allocation were not considered. But this does not affect the final result.
 
 ## Java Object Size
 
@@ -14,7 +14,7 @@ One way to get an estimate of an object's size in Java is to use `getObjectSize(
 
 We know the size of each primitive from the Java specification. What isn't stated in the specification is how much heap space they use. It seems to be JVM implementation dependent.
 Below is a table that shows each primitive's size and how much heap it may use on my JVM.
-Be aware because of `8 byte alignment` and `padding` that a primitive such as a byte or boolean, can be packed together to take up less memory, and this table only shows the maximum space it can use.
+Be aware because of `8-byte alignment` and `padding` that a primitive such as a byte or boolean, can be packed together to take up less memory, and this table only shows the maximum space it can use.
 
 ```bash
 $ java -version
@@ -222,7 +222,7 @@ After studying the size of the Java object, let's estimate the various Java obje
 
 ## File and Directory
 
-Namenode maintains a directory tree for HDFS and a mapping of file blocks to datanodes where the data is stored. Similar to the traditional stand-alone file system, the directory structure of HDFS is also a tree structure. HDFS Namespace stores all the attributes of each directory/file node in the directory tree, including: name, number (id), user, group, permission, modification time, access time, subdirectory/file (children) and other information which exist in the Namenode's memory at runtime. You can find more details in [Section 3.1](https://dsl-umd.github.io/docs/metadata/namespace/index.html).
+Namenode maintains a directory tree for HDFS and a mapping of file blocks to Datanodes where the data is stored. Similar to the traditional stand-alone file system, the directory structure of HDFS is also a tree structure. HDFS Namespace stores all the attributes of each directory/file node in the directory tree, including: name, number (id), user, group, permission, modification time, access time, subdirectory/file (children) and other information which exist in the Namenode's memory at runtime. You can find more details in [Section 3.1](https://dsl-umd.github.io/docs/metadata/namespace/index.html).
 
 The memory usage of each attribute in inode is shown in the table.
 
@@ -447,7 +447,7 @@ The namespace is resident in the JVM heap memory. To ensure the reliability of t
 
 HDFS splits a file into multiple data blocks. To ensure data reliability, each block has multiple replicas and are stored on different Datanodes in the cluster. In addition to maintaining the information of the `Block` itself, the Namenode also needs to maintain the correspondence from the data block to Datanodes, which is used to describe the physical location of each replica. The `BlocksMap` structure in the BlockManager is used for the mapping relation between `Block` and `BlockInfo`. You can find more details in [Section 3.2](https://dsl-umd.github.io/docs/metadata/datablock/index.html) we introduced before.
 
-BlocksMap performed multiple refactoring optimizations.  NameNode used a `java.util.HashMap` to store `BlockInfo` objects. When there are many blocks in HDFS, this map uses a lot of memory in the NameNode. They optimized the memory usage by a light weight hash table implementation which is `LightWeightGSet` instead of HashMap. It uses an array for storing the elements and linked lists for collision resolution, which performs better in terms of ease of use, memory footprint and performance. For details on LightWeightGSet, please refer to [HDFS-1114](https://issues.apache.org/jira/browse/HDFS-1114).
+BlocksMap performed multiple refactoring optimizations.  NameNode used a `java.util.HashMap` to store `BlockInfo` objects. When there are many blocks in HDFS, this map uses a lot of memory in the NameNode. They optimized the memory usage by a lightweight hash table implementation which is `LightWeightGSet` instead of HashMap. It uses an array for storing the elements and linked lists for collision resolution, which performs better in terms of ease of use, memory footprint and performance. For details on LightWeightGSet, please refer to [HDFS-1114](https://issues.apache.org/jira/browse/HDFS-1114).
 
 
 > In order to avoid collision conflicts, BlocksMap allocates **2%** of total memory as the index space of `LightWeightGSet` ([BlockManager.java#L464-L466](https://github.com/DSL-UMD/hadoop-calvin/blob/838a740157e153c338056f9ffdbf1c606e3dcd8a/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/blockmanagement/BlockManager.java#L464-L466)).
@@ -585,7 +585,7 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
   </tbody>
 </table>
 
-> Note: The hash table elements are required to implement a new interface, called `LinkedElement`, which provides `setNext` and `getNex` to perations. Then, the hash table entries store references to `LinkedElement` objects. These objects are the heads of linked lists. For linked lists, the memory overhead is 8 bytes per element in 64-bit JVMs.
+> Note: The hash table elements are required to implement a new interface, called `LinkedElement`, which provides `setNext` and `getNext` to operations. Then, the hash table entries store references to `LinkedElement` objects. These objects are the heads of linked lists. For linked lists, the memory overhead is 8 bytes per element in 64-bit JVMs.
 
 HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occupies a large amount of memory space. Assuming that there are 10 million or 100 million data blocks across the cluster and the total memory of the NameNode is 256GB, the BlocksMap, Block and BlockInfo will take up a lot of memory:
 
