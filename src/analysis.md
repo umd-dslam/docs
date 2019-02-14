@@ -349,8 +349,67 @@ The memory usage of each attribute in inode is shown in the table.
   </tbody>
 </table>
 
+In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. If the cluster has features such as ACL/Snapshot, you need to increase this memory overhead. In most cases, `INodeFile`, `INodeDirectory` and `withQuotaFeature` will suffice. 
 
-In addition to the attributes mentioned in the table, some non-generic attributes like access control lists are not counted. If the cluster has features such as ACL/Snapshotd, you need to increase this memory overhead. In most cases, `INodeFile`, `INodeDirectory` and `withQuotaFeature` will suffice. 
+`INodeMap` also stores lots of INode references which need to be counted.
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Class</th>
+    <th class="tg-0lax">Type</th>
+    <th class="tg-0lax">Members</th>
+    <th class="tg-0lax">Size (bytes)</th>
+    <th class="tg-0lax">Total</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+    <td class="tg-0lax" rowspan="6">LightWeightGSet</td>
+    <td class="tg-0lax">#</td>
+    <td class="tg-0lax">Object header</td>
+    <td class="tg-0lax">16</td>
+    <td class="tg-0lax" rowspan="6">68 + 8 * num(files)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">LinkedElement[]</td>
+    <td class="tg-0lax">entries</td>
+    <td class="tg-0lax">8+24+8*num(files)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">int</td>
+    <td class="tg-0lax">hash_mask</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">int</td>
+    <td class="tg-0lax">size</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">int</td>
+    <td class="tg-0lax">modification</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">interface Collection</td>
+    <td class="tg-0lax">values</td>
+    <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky" rowspan="2">INodeMap</td>
+    <td class="tg-0pky">#</td>
+    <td class="tg-0pky">Object header</td>
+    <td class="tg-0pky">16</td>
+    <td class="tg-0pky" rowspan="2">92 + 8 * num(files)</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">LightWeightGSet&lt;INode, INodeWithAdditionalFields&gt;</td>
+    <td class="tg-0pky">map</td>
+    <td class="tg-0pky">8 + 68 + 8 * num(files)</td>
+  </tr>
+    </tbody>
+</table>
+
 
 An estimating formula for the total size:
 
