@@ -945,18 +945,18 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
 
 1. **Objects**: We can remove all attributes of `INodeFile`, `INodeDirectory`, `Block` and `BlockInfo` and put them into the deterministic database system. Their data models are as follows:
 
-```sql
-CREATE TABLE inodes(
-    id int primary key, parent int, name text,
-    accessTime bigint, modificationTime bigint,
-    header bigint, permission bigint, blockIds bigint[]
-);
+    ```sql
+    CREATE TABLE inodes(
+        id int primary key, parent int, name text,
+        accessTime bigint, modificationTime bigint,
+        header bigint, permission bigint, blockIds bigint[]
+    );
 
-CREATE TABLE datablocks(
-    blockId bigint primary key, numBytes bigint, generationStamp bigint,
-    eplication int, bcId bigint
-);
-```
+    CREATE TABLE datablocks(
+        blockId bigint primary key, numBytes bigint, generationStamp bigint,
+        eplication int, bcId bigint
+    );
+    ```
 
 
 
