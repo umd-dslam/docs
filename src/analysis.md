@@ -917,7 +917,7 @@ In this section, we quantify the memory usage of various objects. The memory con
 
 The metadata of Datanode (`DatanodeStorageInfo` and `DatanodeDescriptor`) is not a bottleneck because the number of horizontal expansion of the Datanode grows very slowly compared to the exponential growth of the data (files and blocks).
 
-The former tables for them is useless.
+    The relation for Datanode metadata can be discarded.
 
     <S>
 
