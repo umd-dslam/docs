@@ -391,6 +391,9 @@ The namespace is resident in the JVM heap memory. To ensure the reliability of t
 
 HDFS splits a file into multiple data blocks. To ensure data reliability, each block has multiple replicas and are stored on different Datanodes in the cluster. In addition to maintaining the information of the `Block` itself, the Namenode also needs to maintain the correspondence from the data block to Datanodes, which is used to describe the physical location of each replica. The `BlocksMap` structure in the BlockManager is used for the mapping relation between `Block` and `BlockInfo`. You can find more details in [Section 3.2](https://dsl-umd.github.io/docs/metadata/datablock/index.html) we introduced before.
 
+BlocksMap performs multiple refactoring optimizations.  The original version uses `HashMap` to save the mapping from `Block` to `BlockInfo`.  HDFS then adopts `LightWeightGSet` instead of HashMap. It uses an array for storing the elements and linked lists for collision resolution, which performs better in terms of ease of use, memory footprint and performance.
+
+
 <table class="tg">
 <thead>
   <tr>
@@ -521,6 +524,8 @@ HDFS splits a file into multiple data blocks. To ensure data reliability, each b
   </tr>
   </tbody>
 </table>
+
+
 
 ## Datanode Storage
 
