@@ -590,14 +590,17 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
 HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occupies a large amount of memory space. Assuming that there are 10 million or 100 million data blocks across the cluster and the total memory of the NameNode is 256GB, the BlocksMap, Block and BlockInfo will take up a lot of memory:
 
 ```bash
-Total = (Block + BlockInfo) * num(blocks) + BlocksMap
-      = (40 + 90) * num(blocks) + 116 + 8 * num(blocks) + 2% * 256 * 2^30 (bytes)
-      = (138 * num(blocks) + 5497558138.88)/2^30 (GB)
+Total = Total(Block) + Total(BlockInfo) + Total(BlocksMap)
+      = (Block + BlockInfo) * num(blocks) + Total(BlocksMap)
+      = (40 + 90) * num(blocks) + 116 + 8 * num(blocks)
+      = (138 * num(blocks) + 116) / 2^30 (GB)
 ```
 
-- Total = (138 * 10M + 5497558138.88)/2^30 = 17.97GB
-
-- Total = (138 * 100M + 5497558138.88)/2^30 = 133.64GB
+| # blocks   | Total Size |
+|------------|------------|
+| 10 Million | 1.28 GB    |
+| 100 Million| 12.85 GB   |
+| 1 Billion  | 128.52 GB  |
 
 In addition to INode, **Block, BlockInfo and BlocksMap are also the scalability bottleneck of HDFS.**
 
