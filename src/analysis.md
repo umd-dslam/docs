@@ -1061,6 +1061,8 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
     );
     ```
 
+> Even if you move all attributes of these objects to the database, each object header will still occupy 16 bytes. If none of attributes in objects are available, we might change their classes to static nested classes and put all functions into the inner classes which can be accessed without instantiating the outer classes.
+
 2. **Object References**: We might also put serialized key-value into the deterministic database system.
 Or, implement a DHT (distributed hash table) to replace `INodesMap` and `BlocksMap`.
 
