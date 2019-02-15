@@ -511,28 +511,27 @@ An estimating formula for the total size:
 ```bash
 num(children) = num(directories) + num(files)
 
-Total(files) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
+Total(INode) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
              = 336 * num(files) + 8 * num(blocks)
 
-Total(directories) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
-                   = 392 * num(diretories) + 8 * num(children)
-                   = 400 * num(diretories) + 8 * num(files)
+Total(INodeDirectory) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
+                      = 392 * num(diretories) + 8 * num(children)
+                      = 400 * num(diretories) + 8 * num(files)
 
-Total(INodeMap) = 92 + 8 * num(children) + 1%*total memory
-                = 92 + 8 * num(diretories) + 8 * num(files) + 1%*total memory
+Total(INodeMap) = 92 + 8 * num(children) + 1% * total memory
+                = 92 + 8 * num(diretories) + 8 * num(files) + 1% * total memory
 
-Total = Total(files) + Total(directories) + Total(INodeMap)
-      = 408 * num(diretories) + 352 * num(files) + 8 * num(blocks) + 92 + 1%*total memory
+Total(INode) + Total(INodeDirectory) + Total(INodeMap) = 408 * num(diretories) + 352 * num(files) + 8 * num(blocks) + 92 + 1% * total memory
 ```
 
 
 By assuming the number of directories, files, and data blocks, we estimate how much memory these data structures consume (Note: **ignore** 1% total memory from INodeMap).
 
-| # directories | # files     | # blocks    | Total      |
-|---------------|-------------|-------------|------------|
-| 10 Million    | 10 Million  | 100 Million | 7.82 GB    |
-| 100 Million   | 100 Million | 1 Billion   | 78.23 GB   |
-| 1 Billion     | 1 Billion   | 10 Billion  | 782.31 GB  |
+| # directories | # files     | # blocks    | Total(INode + INodeDirectory + INodeMap)|
+|---------------|-------------|-------------|-----------------------------------------|
+| 10 Million    | 10 Million  | 100 Million | 7.82 GB                                 |
+| 100 Million   | 100 Million | 1 Billion   | 78.23 GB                                |
+| 1 Billion     | 1 Billion   | 10 Billion  | 782.31 GB                               |
 
 
 The namespace is resident in the JVM heap memory. To ensure the reliability of the data, the Namenode periodically make a checkpoint and materializes the namespace to the external storage device. When data continues to grow exponentially, the number of files/directories will also increase, and eventually, memory will grow linearly proportional to the number of files/directories. 
@@ -688,23 +687,24 @@ HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occu
 
 ```bash
 Total(Block) = 40 * num(blocks)
+
 Total(BlockInfo) = 90 * num(blocks)
+
 Total(BlocksMap) = 116 + 8 * num(blocks) + 2% * total memory
 
-Total = Total(Block) + Total(BlockInfo) + Total(BlocksMap)
-      = (Block + BlockInfo) * num(blocks) + Total(BlocksMap)
+Total(Block) + Total(BlockInfo) + Total(BlocksMap)
       = (40 + 90) * num(blocks) + 116 + 8 * num(blocks) + 2% * total memory
-      = (138 * num(blocks) + 116 + 2% * total memory) / 2^30 (GB)
+      = 138 * num(blocks) + 116 + 2% * total memory
 ```
 
 The table **ignored** 2% * total memory from BlocksMap.
 
-| # blocks   | Total Size |
-|------------|------------|
-| 10 Million | 1.28 GB    |
-| 100 Million| 12.85 GB   |
-| 1 Billion  | 128.52 GB  |
-| 10 Billion | 1285.23 GB |
+| # blocks   | Total(Block + BlockInfo + BlocksMap) |
+|------------|--------------------------------------|
+| 10 Million | 1.28 GB                              |
+| 100 Million| 12.85 GB                             |
+| 1 Billion  | 128.52 GB                            |
+| 10 Billion | 1285.23 GB                           |
 
 In addition to INode, **Block, BlockInfo and BlocksMap are also the scalability bottleneck of HDFS.**
 
@@ -1066,21 +1066,19 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
     ```
 
     <pre><code class="language-bash"><S>
-    Total(files) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
-             = 336 * num(files) + 8 * num(blocks)
+    Total(INode) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
+                 = 336 * num(files) + 8 * num(blocks)
 
-    Total(directories) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
-                       = 392 * num(diretories) + 8 * num(children)
-                       = 400 * num(diretories) + 8 * num(files)
+    Total(INodeDirectory) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
+                          = 392 * num(diretories) + 8 * num(children)
+                          = 400 * num(diretories) + 8 * num(files)
 
     Total(Block) = 40 * num(blocks)
 
     Total(BlockInfo) = 90 * num(blocks)
     </S></code></pre>
 
-    Looks all cost is ultimately thrown away! But, ...
-
-    > Even if you move all attributes of these objects to the database, each object header will still occupy 16 bytes. If none of attributes in objects are available, we might change their classes to static nested classes and put all functions into the inner classes which can be accessed without instantiating the outer classes. Or we can selectively ignore it because even the memory required by 1 billion INodes and 10 billion data blocks is only about 100GB ().
+    > Looks all cost is ultimately thrown away! But, even if you move all attributes of these objects to the database, each object header will still occupy 16 bytes. If none of attributes in objects are available, we might change their classes to static nested classes and put all functions into the inner classes which can be accessed without instantiating the outer classes. Or we can selectively ignore it because even the memory required by 1 billion INodes and 10 billion data blocks is only about 163.91GB ((1000000000+10000000000)*16/2^30).
 
 
 2. **Object References**: We might also put serialized key-value into the deterministic database system.
