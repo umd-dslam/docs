@@ -201,14 +201,21 @@ Let's manually analyse and calculate their memory usage:
 <table class="tg">
 <thead>
   <tr>
+    <th class="tg-0pky">Type</th>
+    <th class="tg-0pky">Object</th>
+    <th class="tg-0lax">Value</th>
+    <th class="tg-c3ow">Output (Bytes)</th>
+    <th class="tg-dvpl">Total Size (Bytes)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
     <td class="tg-0lax">Person</td>
     <td class="tg-0lax">p</td>
     <td class="tg-0lax">new Person()</td>
     <td class="tg-0lax">16 (object header) + 8 (string ref) + 4 (int) + 8 (long) + 1 (bool) + 8 (byte ref) + 3 (pad) = 48</td>
     <td class="tg-lqy6">48 + (24 + 4 * 8) = 104</td>
   </tr>
-</thead>
-<tbody>
   <tr>
     <td class="tg-0pky">List&lt;Person&gt;</td>
     <td class="tg-0pky">al0</td>
