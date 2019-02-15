@@ -396,19 +396,26 @@ In addition to the attributes mentioned in the table, some non-generic attribute
     <td class="tg-0lax">8</td>
   </tr>
   <tr>
-    <td class="tg-0pky" rowspan="2">INodeMap</td>
+    <td class="tg-0pky" rowspan="3">INodeMap</td>
     <td class="tg-0pky">#</td>
     <td class="tg-0pky">Object header</td>
     <td class="tg-0pky">16</td>
-    <td class="tg-0pky" rowspan="2">92 + 8 * num(files)</td>
+    <td class="tg-0pky" rowspan="3">92 + 8*num(files) + 1%*total memory</td>
   </tr>
   <tr>
     <td class="tg-0pky">LightWeightGSet&lt;INode, INodeWithAdditionalFields&gt;</td>
     <td class="tg-0pky">map</td>
     <td class="tg-0pky">8 + 68 + 8 * num(files)</td>
   </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">Index Space</td>
+    <td class="tg-0pky">1%*total memory</td>
+  </tr>
     </tbody>
 </table>
+
+> In order to avoid collision conflicts, INodeMap allocates **1%** of total memory as the index space of `LightWeightGSet` ([INodeMap.java#L37-L44](https://github.com/DSL-UMD/hadoop-calvin/blob/6c852f2a3757129491c21a9ba3b315a7a00c0c28/hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/namenode/INodeMap.java#L37-L44)).
 
 
 An estimating formula for the total size:
@@ -421,25 +428,26 @@ Total(directories) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
                    = 392 * num(diretories) + 8 * num(children)
                    = 400 * num(diretories) + 8 * num(files)
 
-Total(INodeMap) = 92 + 8 * num(files)
+Total(INodeMap) = 92 + 8 * num(files) + 1%*total memory
 
 Total = Total(files) + Total(directories) + Total(INodeMap)
-      = 400 * num(diretories) + 352 * num(files) + 8 * num(blocks) + 92
-```
+      = 400 * num(diretories) + 352 * num(files) + 8 * num(blocks) + 92 + 1%*total memory
 
-> Note: From the parent-child relationship of the directory tree, **num(children) = num(directories) + num(files)**.
+Note: num(children) = num(directories) + num(files)
+```
 
 
 By assuming the number of directories, files, and data blocks, we estimate how much memory these data structures consume.
 
-| # directories | # files     | # blocks    | Total Size |
+| # directories | # files     | # blocks    | Total      |
 |---------------|-------------|-------------|------------|
 | 10 Million    | 10 Million  | 100 Million | 7.74 GB    |
 | 100 Million   | 100 Million | 1 Billion   | 77.48 GB   |
 | 1 Billion     | 1 Billion   | 10 Billion  | 774.86 GB  |
 
 
-The namespace is resident in the JVM heap memory. To ensure the reliability of the data, the Namenode periodically make a checkpoint and materializes the namespace to the external storage device. When data continues to grow exponentially, the number of files/directories will also increase, and eventually, memory will grow linearly proportional to the number of files/directories. The 3nd tuple from the above table shows that the total memory consumed (774.86 GB) has far exceeded the capacity of a typical server.
+The namespace is resident in the JVM heap memory. To ensure the reliability of the data, the Namenode periodically make a checkpoint and materializes the namespace to the external storage device. When data continues to grow exponentially, the number of files/directories will also increase, and eventually, memory will grow linearly proportional to the number of files/directories. 
+Assume that a server has 256GB of RAM, 1% of that (2.56GB) will be used as `INodeMap` capacity, then the total memory consumed (774.86 GB) from the 3rd tuple has far exceeded its unused memory.
 
 **From this we can conclude that the bottleneck of HDFS is here!**
 
