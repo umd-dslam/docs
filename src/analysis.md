@@ -1048,7 +1048,11 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
     CREATE TABLE inodes(
         id int primary key, parent int, name text,
         accessTime bigint, modificationTime bigint,
-        header bigint, permission bigint, blockIds bigint[]
+        header bigint, permission bigint
+    );
+
+    CREATE TABLE inode2block(
+        id int primary key, blockId bigint
     );
 
     CREATE TABLE datablocks(
@@ -1056,8 +1060,6 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
         eplication int, bcId bigint
     );
     ```
-
-
 
 2. **Object References**: We might also put serialized key-value into the deterministic database system.
 Or, implement a DHT (distributed hash table) to replace `INodesMap` and `BlocksMap`.
