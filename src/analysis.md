@@ -694,14 +694,16 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
 
 > Note: The hash table elements are required to implement a new interface, called `LinkedElement`, which provides `setNext` and `getNext` to operations. Then, the hash table entries store references to `LinkedElement` objects. These objects are the heads of linked lists. For linked lists, the memory overhead is 8 bytes per element in 64-bit JVMs.
 
-HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occupies a large amount of memory space. Assuming that there are 10 million or 100 million data blocks across the cluster and the total memory of the NameNode is 256GB, the BlocksMap, Block and BlockInfo will take up a lot of memory:
+HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occupies a large amount of memory space. Assuming that there are 10 million or 100 million data blocks, the BlocksMap, Block and BlockInfo will take up a lot of memory:
 
 ```bash
 Total = Total(Block) + Total(BlockInfo) + Total(BlocksMap)
       = (Block + BlockInfo) * num(blocks) + Total(BlocksMap)
-      = (40 + 90) * num(blocks) + 116 + 8 * num(blocks)
-      = (138 * num(blocks) + 116) / 2^30 (GB)
+      = (40 + 90) * num(blocks) + 116 + 8 * num(blocks) + 2% * total memory
+      = (138 * num(blocks) + 116 + 2% * total memory) / 2^30 (GB)
 ```
+
+The table ignored 2% * total memory from BlocksMap.
 
 | # blocks   | Total Size |
 |------------|------------|
