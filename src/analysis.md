@@ -1081,7 +1081,7 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
 >   Looks all cost is ultimately thrown away! But, even if you move all attributes of these objects to the database, each object header will still occupy 16 bytes. If none of attributes in objects are available, we might change their classes to static nested classes and put all functions into the inner classes which can be accessed without instantiating the outer classes. Or we just ignore it because even the memory required by 1 billion INodes and 10 billion data blocks is only about 163.91GB ((1000000000+10000000000)*16/2^30).
 
 
-2. **Object References**: This problem is automatically resolved if we use static nested classes. Or, we put serialized key-value pairs such as (InodeID, INode) and (blockID, Block) into the deterministic database system .
+2. **Object References**: This problem is automatically resolved if we use static nested classes. Or, we put serialized key-value pairs such as (InodeID, INode) and (blockID, Block) into the deterministic database system.
 
     ```bash
     Total(INodeMap) = 92 + 8 * num(children) + 1% * total memory
