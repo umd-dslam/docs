@@ -687,6 +687,10 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
 HDFS uses `LightWeightGSet` to optimize memory usage, but `BlocksMap` still occupies a large amount of memory space. Assuming that there are 10 million or 100 million data blocks, the BlocksMap, Block and BlockInfo will take up a lot of memory:
 
 ```bash
+Total(Block) = 40 * num(blocks)
+Total(BlockInfo) = 90 * num(blocks)
+Total(BlocksMap) = 116 + 8 * num(blocks) + 2% * total memory
+
 Total = Total(Block) + Total(BlockInfo) + Total(BlocksMap)
       = (Block + BlockInfo) * num(blocks) + Total(BlocksMap)
       = (40 + 90) * num(blocks) + 116 + 8 * num(blocks) + 2% * total memory
@@ -1061,11 +1065,33 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
     );
     ```
 
-    > Even if you move all attributes of these objects to the database, each object header will still occupy 16 bytes. If none of attributes in objects are available, we might change their classes to static nested classes and put all functions into the inner classes which can be accessed without instantiating the outer classes.
+    <pre><code class="language-bash"><S>
+    Total(files) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
+             = 336 * num(files) + 8 * num(blocks)
+
+    Total(directories) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
+                       = 392 * num(diretories) + 8 * num(children)
+                       = 400 * num(diretories) + 8 * num(files)
+
+    Total(Block) = 40 * num(blocks)
+
+    Total(BlockInfo) = 90 * num(blocks)
+    </S></code></pre>
+
+    Looks all cost is ultimately thrown away! But, ...
+
+    > Even if you move all attributes of these objects to the database, each object header will still occupy 16 bytes. If none of attributes in objects are available, we might change their classes to static nested classes and put all functions into the inner classes which can be accessed without instantiating the outer classes. Or we can selectively ignore it because even the memory required by 1 billion INodes and 10 billion data blocks is only about 100GB ().
+
 
 2. **Object References**: We might also put serialized key-value into the deterministic database system.
 Or, implement a DHT (distributed hash table) to replace `INodesMap` and `BlocksMap`.
 
+    ```bash
+    Total(INodeMap) = 92 + 8 * num(children) + 1% * total memory
+                    = 92 + 8 * num(diretories) + 8 * num(files) + 1% * total memory
+
+    Total(BlocksMap) = 116 + 8 * num(blocks) + 2% * total memory
+    ```
 
 
 ## References
