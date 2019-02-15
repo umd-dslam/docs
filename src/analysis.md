@@ -198,27 +198,117 @@ Object type: class java.lang.String, size: 32 bytes
 
 Let's manually analyse and calculate their memory usage:
 
-- **Person p**: 16 bytes (object header) + 8 bytes (string reference) + 4 bytes (int) + 8 bytes (long) + 1 byte (boolean) + 8 bytes (byte reference) + 3 bytes (padding) = 48 bytes. Total size: 48 + (24 + 4 * 8) = 104 bytes (`password`: 24 + size + pad, size = 0, pad = 0).
-- **int[] a0 = {}**: output: 24 bytes (size = 0, pad = 0).
-- **int[] a1 = {1}**: output: 32 bytes (size = 4, pad = 4).
-- **int[] a2 = {1, 2}**: output: 32 bytes (size = 4 * 2, pad = 0).
-- **int[] a3 = new int[100]**: output: 424 bytes (size = 4 * 100, pad = 0). 
-- **String[] b0 = {}**: output: 24 bytes (size = 0, pad = 0).
-- **String[] b1 = {"1"}**: output: 32 bytes (size = 8, pad = 0).
-- **String[] b2 = {"1", "2"}**: output: 40 bytes (size = 8 * 2, pad = 0).
-- **String[] b3 = new String[100]**: output: 824 bytes (size = 8 * 100, pad = 0).
-
-
-We assume that all Person references are different in `List<Person>` (40 bytes + 8 bytes/entry):
-
-- **List<Person> al0**: output: 40 bytes, real size = total size = 40 bytes.
-- **List<Person> al1**: output: 40 bytes, real size: 40 + 8 = 48 bytes. Total size: 48 + 104 = 152 bytes.
-- **List<Person> al2**: output: 40 bytes, real size: 40 + 8 * 2 = 56 bytes. Total size: 56 + 104 * 2 = 264 bytes.
-- **List<Person> al3**: output: 40 bytes, real size: 40 + 8 * 100 = 840 bytes. Total size: 840 + 104 * 100 = 11240 bytes.
-
-
-- **String s0 = ""**: output: 32 bytes, total size = 32 bytes.
-- **String s1 = "hello"**: output: 32 bytes, total size = 32 + 2 * 5 + 6 (pad) = 48 bytes.
+<table class="tg">
+<thead>
+  <tr>
+    <td class="tg-0lax">Person</td>
+    <td class="tg-0lax">p</td>
+    <td class="tg-0lax">new Person()</td>
+    <td class="tg-0lax">16 (object header) + 8 (string ref) + 4 (int) + 8 (long) + 1 (bool) + 8 (byte ref) + 3 (pad) = 48</td>
+    <td class="tg-lqy6">48 + (24 + 4 * 8) = 104</td>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">List&lt;Person&gt;</td>
+    <td class="tg-0pky">al0</td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0pky">40</td>
+    <td class="tg-dvpl">40</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">al1</td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0pky">40</td>
+    <td class="tg-dvpl">40+ 8 + 104 = 152</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">al2</td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0pky">40</td>
+    <td class="tg-dvpl">40 + 8*2 + 104 * 2 = 264</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">al3</td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0pky">40</td>
+    <td class="tg-dvpl">40 + 8 * 100 + 104 * 100 = 11240</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String</td>
+    <td class="tg-0pky">s0</td>
+    <td class="tg-0lax">""</td>
+    <td class="tg-0pky">32</td>
+    <td class="tg-dvpl">32</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">s1</td>
+    <td class="tg-0lax">"hello"</td>
+    <td class="tg-0pky">32</td>
+    <td class="tg-dvpl">32 + 2 * 5 = 42</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">int[]</td>
+    <td class="tg-0pky">a0</td>
+    <td class="tg-0lax">{}</td>
+    <td class="tg-0pky">24</td>
+    <td class="tg-dvpl">24</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">a1</td>
+    <td class="tg-0lax">{1}</td>
+    <td class="tg-0pky">24 + 4 + 4 (pad) = 32</td>
+    <td class="tg-dvpl">32</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">a2</td>
+    <td class="tg-0lax">{1, 2}</td>
+    <td class="tg-0pky">24 + 4 * 2 = 32</td>
+    <td class="tg-dvpl">32</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">a3</td>
+    <td class="tg-0lax">new int[100]</td>
+    <td class="tg-0pky">24 + 4 * 100 = 424</td>
+    <td class="tg-dvpl">424</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">String[]</td>
+    <td class="tg-0pky">b0</td>
+    <td class="tg-0lax">{}</td>
+    <td class="tg-0pky">24</td>
+    <td class="tg-dvpl">24</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">b1</td>
+    <td class="tg-0lax">{"1"}</td>
+    <td class="tg-0pky">24 + 8 = 32</td>
+    <td class="tg-dvpl">32 + (32 + 2*1) * 1 = 66</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">b2</td>
+    <td class="tg-0lax">{"1", "2"}</td>
+    <td class="tg-0pky">40 (size = 8 * 2, pad = 0)</td>
+    <td class="tg-dvpl">40 + (32 + 2*1) * 2 = 108</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"></td>
+    <td class="tg-0pky">b3</td>
+    <td class="tg-0lax">new String[100]</td>
+    <td class="tg-0pky">824 (size = 8 * 100, pad = 0)</td>
+    <td class="tg-dvpl">824+(32+2*0)*100 = 4024</td>
+  </tr>
+  </tbody>
+</table>
 
 After studying the size of the Java object, let's estimate the various Java objects in the Namenode.
 
