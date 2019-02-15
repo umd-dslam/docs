@@ -619,11 +619,11 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
     <td class="tg-0lax">not counted (dynamic)</td>
   </tr>
   <tr>
-    <td class="tg-0lax" rowspan="7">LightWeightGSet</td>
+    <td class="tg-0lax" rowspan="6">LightWeightGSet</td>
     <td class="tg-0lax">#</td>
     <td class="tg-0lax">Object header</td>
     <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="7">68 + 8*num(blocks) + 2%*size(total memory)</td>
+    <td class="tg-0lax" rowspan="6">68 + 8*num(blocks) + 2%*size(total memory)</td>
   </tr>
   <tr>
     <td class="tg-0lax">LinkedElement[]</td>
@@ -651,16 +651,11 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
     <td class="tg-0lax">8</td>
   </tr>
   <tr>
-    <td class="tg-0lax"></td>
-    <td class="tg-0lax">Index Space</td>
-    <td class="tg-0lax">2%*total memory</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax" rowspan="5">BlocksMap</td>
+    <td class="tg-0lax" rowspan="6">BlocksMap</td>
     <td class="tg-0lax">#</td>
     <td class="tg-0lax">Object header</td>
     <td class="tg-0lax">16</td>
-    <td class="tg-0lax" rowspan="5">116+8*num(blocks)+2%*total memory</td>
+    <td class="tg-0lax" rowspan="6">116+8*num(blocks)+2%*total memory</td>
   </tr>
   <tr>
     <td class="tg-0lax">int</td>
@@ -670,7 +665,7 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
   <tr>
     <td class="tg-0lax">LightWeightGSet</td>
     <td class="tg-0lax">blocks</td>
-    <td class="tg-0lax">8+68+8*num(blocks)+2%*total memory</td>
+    <td class="tg-0lax">8+68+8*num(blocks)</td>
   </tr>
   <tr>
     <td class="tg-0lax">LongAdder</td>
@@ -681,6 +676,11 @@ The memory usage of each attribute in BlocksMap, Block and BlockInfo is shown in
     <td class="tg-0lax">LongAdder</td>
     <td class="tg-0lax">totalECBlockGroups</td>
     <td class="tg-0lax">8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax">Index Space</td>
+    <td class="tg-0lax">2%*total memory</td>
   </tr>
   </tbody>
 </table>
