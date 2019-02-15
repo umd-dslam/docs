@@ -693,7 +693,7 @@ Total = Total(Block) + Total(BlockInfo) + Total(BlocksMap)
       = (138 * num(blocks) + 116 + 2% * total memory) / 2^30 (GB)
 ```
 
-The table ignored 2% * total memory from BlocksMap.
+The table **ignored** 2% * total memory from BlocksMap.
 
 | # blocks   | Total Size |
 |------------|------------|
