@@ -488,12 +488,12 @@ In addition to the attributes mentioned in the table, some non-generic attribute
     <td class="tg-0pky">#</td>
     <td class="tg-0pky">Object header</td>
     <td class="tg-0pky">16</td>
-    <td class="tg-0pky" rowspan="3">92 + 8*num(files) + 1%*total memory</td>
+    <td class="tg-0pky" rowspan="3">92 + 8*num(children) + 1%*total memory</td>
   </tr>
   <tr>
     <td class="tg-0pky">LightWeightGSet&lt;INode, INodeWithAdditionalFields&gt;</td>
     <td class="tg-0pky">map</td>
-    <td class="tg-0pky">8 + 68 + 8 * num(files)</td>
+    <td class="tg-0pky">8 + 68 + 8 * num(children)</td>
   </tr>
   <tr>
     <td class="tg-0pky"></td>
@@ -509,6 +509,8 @@ In addition to the attributes mentioned in the table, some non-generic attribute
 An estimating formula for the total size:
 
 ```bash
+num(children) = num(directories) + num(files)
+
 Total(files) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
              = 336 * num(files) + 8 * num(blocks)
 
@@ -516,12 +518,11 @@ Total(directories) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
                    = 392 * num(diretories) + 8 * num(children)
                    = 400 * num(diretories) + 8 * num(files)
 
-Total(INodeMap) = 92 + 8 * num(files) + 1%*total memory
+Total(INodeMap) = 92 + 8 * num(children) + 1%*total memory
+                = 92 + 8 * num(diretories) + 8 * num(files) + 1%*total memory
 
 Total = Total(files) + Total(directories) + Total(INodeMap)
-      = 400 * num(diretories) + 352 * num(files) + 8 * num(blocks) + 92 + 1%*total memory
-
-Note: num(children) = num(directories) + num(files)
+      = 408 * num(diretories) + 352 * num(files) + 8 * num(blocks) + 92 + 1%*total memory
 ```
 
 
@@ -529,13 +530,13 @@ By assuming the number of directories, files, and data blocks, we estimate how m
 
 | # directories | # files     | # blocks    | Total      |
 |---------------|-------------|-------------|------------|
-| 10 Million    | 10 Million  | 100 Million | 7.74 GB    |
-| 100 Million   | 100 Million | 1 Billion   | 77.48 GB   |
-| 1 Billion     | 1 Billion   | 10 Billion  | 774.86 GB  |
+| 10 Million    | 10 Million  | 100 Million | 7.82 GB    |
+| 100 Million   | 100 Million | 1 Billion   | 78.23 GB   |
+| 1 Billion     | 1 Billion   | 10 Billion  | 782.31 GB  |
 
 
 The namespace is resident in the JVM heap memory. To ensure the reliability of the data, the Namenode periodically make a checkpoint and materializes the namespace to the external storage device. When data continues to grow exponentially, the number of files/directories will also increase, and eventually, memory will grow linearly proportional to the number of files/directories. 
-Assume that a server has 256GB of RAM, 1% of that (2.56GB) will be used as `INodeMap` capacity, then the total memory consumed (774.86 GB) from the 3rd tuple has far exceeded its unused memory.
+Assume that a server has 256GB of RAM, 1% of that (2.56GB) will be used as `INodeMap` capacity, then the total memory consumed (782.31 GB) from the 3rd tuple has far exceeded its unused memory.
 
 **From this we can conclude that the bottleneck of HDFS is here!**
 
