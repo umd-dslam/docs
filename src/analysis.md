@@ -1083,12 +1083,12 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
 
 2. **Object References**: This problem is automatically resolved if we use static nested classes. Or, we put serialized key-value pairs such as (InodeID, INode) and (blockID, Block) into the deterministic database system.
 
-    ```bash
+    <pre><code class="language-bash"><S>
     Total(INodeMap) = 92 + 8 * num(children) + 1% * total memory
                     = 92 + 8 * num(diretories) + 8 * num(files) + 1% * total memory
 
     Total(BlocksMap) = 116 + 8 * num(blocks) + 2% * total memory
-    ```
+    </S></code></pre>
 
 
 ## References
