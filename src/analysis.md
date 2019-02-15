@@ -204,114 +204,103 @@ Let's manually analyse and calculate their memory usage:
     <th class="tg-0pky">Type</th>
     <th class="tg-0pky">Object</th>
     <th class="tg-0lax">Value</th>
-    <th class="tg-c3ow">Output (Bytes)</th>
+    <th class="tg-dvpl">Output (Bytes)</th>
     <th class="tg-dvpl">Total Size (Bytes)</th>
   </tr>
-</thead>
-<tbody>
+  <tbody>
   <tr>
     <td class="tg-0lax">Person</td>
     <td class="tg-0lax">p</td>
     <td class="tg-0lax">new Person()</td>
-    <td class="tg-0lax">16 (object header) + 8 (string ref) + 4 (int) + 8 (long) + 1 (bool) + 8 (byte ref) + 3 (pad) = 48</td>
+    <td class="tg-lqy6">16 (object header) + 8 (string ref) + 4 (int) + 8 (long) + 1 (bool) + 8 (byte ref) + 3 (pad) = 48</td>
     <td class="tg-lqy6">48 + (24 + 4 * 8) = 104</td>
   </tr>
   <tr>
-    <td class="tg-0pky">List&lt;Person&gt;</td>
+    <td class="tg-0pky" rowspan="4">List&lt;Person&gt;</td>
     <td class="tg-0pky">al0</td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0pky">40</td>
+    <td class="tg-0lax">new ArrayList(0)</td>
+    <td class="tg-dvpl">40</td>
     <td class="tg-dvpl">40</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">al1</td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0pky">40</td>
+    <td class="tg-0lax">new ArrayList(1)</td>
+    <td class="tg-dvpl">40</td>
     <td class="tg-dvpl">40+ 8 + 104 = 152</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">al2</td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0pky">40</td>
+    <td class="tg-0lax">new ArrayList(2)</td>
+    <td class="tg-dvpl">40</td>
     <td class="tg-dvpl">40 + 8*2 + 104 * 2 = 264</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">al3</td>
-    <td class="tg-0lax"></td>
-    <td class="tg-0pky">40</td>
+    <td class="tg-0lax">new ArrayList(100)</td>
+    <td class="tg-dvpl">40</td>
     <td class="tg-dvpl">40 + 8 * 100 + 104 * 100 = 11240</td>
   </tr>
   <tr>
-    <td class="tg-0pky">String</td>
+    <td class="tg-0pky" rowspan="2">String</td>
     <td class="tg-0pky">s0</td>
     <td class="tg-0lax">""</td>
-    <td class="tg-0pky">32</td>
+    <td class="tg-dvpl">32</td>
     <td class="tg-dvpl">32</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">s1</td>
     <td class="tg-0lax">"hello"</td>
-    <td class="tg-0pky">32</td>
+    <td class="tg-dvpl">32</td>
     <td class="tg-dvpl">32 + 2 * 5 = 42</td>
   </tr>
   <tr>
-    <td class="tg-0pky">int[]</td>
+    <td class="tg-0pky" rowspan="4">int[]</td>
     <td class="tg-0pky">a0</td>
     <td class="tg-0lax">{}</td>
-    <td class="tg-0pky">24</td>
+    <td class="tg-dvpl">24</td>
     <td class="tg-dvpl">24</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">a1</td>
     <td class="tg-0lax">{1}</td>
-    <td class="tg-0pky">24 + 4 + 4 (pad) = 32</td>
+    <td class="tg-dvpl">24 + 4 + 4 (pad) = 32</td>
     <td class="tg-dvpl">32</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">a2</td>
     <td class="tg-0lax">{1, 2}</td>
-    <td class="tg-0pky">24 + 4 * 2 = 32</td>
+    <td class="tg-dvpl">24 + 4 * 2 = 32</td>
     <td class="tg-dvpl">32</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">a3</td>
     <td class="tg-0lax">new int[100]</td>
-    <td class="tg-0pky">24 + 4 * 100 = 424</td>
+    <td class="tg-dvpl">24 + 4 * 100 = 424</td>
     <td class="tg-dvpl">424</td>
   </tr>
   <tr>
-    <td class="tg-0pky">String[]</td>
+    <td class="tg-0pky" rowspan="4">String[]</td>
     <td class="tg-0pky">b0</td>
     <td class="tg-0lax">{}</td>
-    <td class="tg-0pky">24</td>
+    <td class="tg-dvpl">24</td>
     <td class="tg-dvpl">24</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">b1</td>
     <td class="tg-0lax">{"1"}</td>
-    <td class="tg-0pky">24 + 8 = 32</td>
+    <td class="tg-dvpl">24 + 8 = 32</td>
     <td class="tg-dvpl">32 + (32 + 2*1) * 1 = 66</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">b2</td>
     <td class="tg-0lax">{"1", "2"}</td>
-    <td class="tg-0pky">40 (size = 8 * 2, pad = 0)</td>
+    <td class="tg-dvpl">24 + 8 * 2 = 40</td>
     <td class="tg-dvpl">40 + (32 + 2*1) * 2 = 108</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
     <td class="tg-0pky">b3</td>
     <td class="tg-0lax">new String[100]</td>
-    <td class="tg-0pky">824 (size = 8 * 100, pad = 0)</td>
+    <td class="tg-dvpl">24 + 8 * 100 = 824</td>
     <td class="tg-dvpl">824+(32+2*0)*100 = 4024</td>
   </tr>
   </tbody>
