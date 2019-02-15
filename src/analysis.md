@@ -208,12 +208,14 @@ Let's manually analyse and calculate their memory usage:
 - **String[] b2 = {"1", "2"}**: output: 40 bytes (size = 8 * 2, pad = 0).
 - **String[] b3 = new String[100]**: output: 824 bytes (size = 8 * 100, pad = 0).
 
+
 We assume that all Person references are different in `List<Person>` (40 bytes + 8 bytes/entry):
 
 - **List<Person> al0**: output: 40 bytes, real size = total size = 40 bytes.
 - **List<Person> al1**: output: 40 bytes, real size: 40 + 8 = 48 bytes. Total size: 48 + 104 = 152 bytes.
 - **List<Person> al2**: output: 40 bytes, real size: 40 + 8 * 2 = 56 bytes. Total size: 56 + 104 * 2 = 264 bytes.
 - **List<Person> al3**: output: 40 bytes, real size: 40 + 8 * 100 = 840 bytes. Total size: 840 + 104 * 100 = 11240 bytes.
+
 
 - **String s0 = ""**: output: 32 bytes, total size = 32 bytes.
 - **String s1 = "hello"**: output: 32 bytes, total size = 32 + 2 * 5 + 6 (pad) = 48 bytes.
