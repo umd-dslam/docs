@@ -529,7 +529,7 @@ Note: num(children) = num(directories) + num(files)
 ```
 
 
-By assuming the number of directories, files, and data blocks, we estimate how much memory these data structures consume.
+By assuming the number of directories, files, and data blocks, we estimate how much memory these data structures consume (Note: **ignore** 1% total memory from INodeMap).
 
 | # directories | # files     | # blocks    | Total      |
 |---------------|-------------|-------------|------------|
