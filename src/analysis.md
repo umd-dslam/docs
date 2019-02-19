@@ -1067,7 +1067,7 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
 
     <pre><code class="language-bash"><S>
 Total(INode) = (24 + 256 + 56) * num(files) + 8 * num(blocks)
-              = 336 * num(files) + 8 * num(blocks)
+             = 336 * num(files) + 8 * num(blocks)
 
 Total(INodeDirectory) = (24 + 256 + 64 + 48) * num(diretories) + 8 * num(children)
                       = 392 * num(diretories) + 8 * num(children)
