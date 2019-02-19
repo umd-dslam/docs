@@ -1056,12 +1056,12 @@ We can solve the HDFS bottleneck from two directions without sacrificing perform
     );
 
     CREATE TABLE inode2block(
-        id int primary key, blockId bigint
+        id int primary key, blockId bigint, index int
     );
 
     CREATE TABLE datablocks(
         blockId bigint primary key, numBytes bigint, generationStamp bigint,
-        eplication int, bcId bigint
+        eplication int
     );
     ```
 
