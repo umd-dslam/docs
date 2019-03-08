@@ -7,8 +7,8 @@
 
 - [Introduction](./intro/README.md)
     - [HDFS Architecture](./intro/hdfs.md)
-    - [Deterministic Database](./intro/calvin.md)
-    - [Horizontally Scale Namespace](./intro/new.md)
+    - [Distributed Database](./intro/calvin.md)
+    - [Scale-out Metadata](./intro/new.md)
 
 - [HDFS Metadata Management](./metadata/README.md)
     - [File and Directory](./metadata/namespace/README.md)
@@ -19,7 +19,7 @@
 
 - [Advanced Optimization](./opt/README.md)
 
-- [Deterministic Database](./db/README.md)
+- [Distributed Database](./db/README.md)
 
 ---------------
 
