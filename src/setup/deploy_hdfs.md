@@ -104,10 +104,12 @@ The deployment process is more complicated because it involves multiple componen
 
     ```bash
     xxx@linuxkit-025000000001:~$ mkdir -p ~/.ssh
-    xxx@linuxkit-025000000001:~$ sudo ssh-keygen -t rsa -f ~/.ssh/id_dsa  
-    xxx@linuxkit-025000000001:~$ sudo cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys  
-    xxx@linuxkit-025000000001:~$ sudo chmod 0600 ~/.ssh/authorized_keys
-    xxx@linuxkit-025000000001:~$ sudo service ssh restart
+    xxx@linuxkit-025000000001:~$ ssh-keygen -t rsa -f ~/.ssh/id_dsa  
+    xxx@linuxkit-025000000001:~$ cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys  
+    xxx@linuxkit-025000000001:~$ chmod 0600 ~/.ssh/authorized_keys
+    xxx@linuxkit-025000000001:~$ service ssh restart
+    xxx@linuxkit-025000000001:~$ ssh localhost
+    # exit
     ```
 
 5. set environment variables
