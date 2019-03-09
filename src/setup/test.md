@@ -4,7 +4,7 @@ You can query IP in current container by:
 
 ```bash
 xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ IP=$(/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
-xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ cat $IP
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ echo $IP
 ```
 
 Then, running NNThroughputBenchmark for Namenode. As its name indicates, is a name-node throughput benchmark, which runs a series of client threads on a single node against a name-node. If no name-node is configured, it will firstly start a name-node in the same process (standalone mode), in which case each client repetitively performs the same operation by directly calling the respective name-node methods. Otherwise, the benchmark will perform the operations against a remote name-node via client protocol RPCs (remote mode). Either way, all clients are running locally in a single process rather than remotely across different nodes. The reason is to avoid communication overhead caused by RPC connections and serialization, and thus reveal the upper bound of pure name-node performance.
