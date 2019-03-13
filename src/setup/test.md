@@ -29,5 +29,8 @@ xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.h
 
 # mkdirs *
 xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://${IP}:9000 -op mkdirs -threads 1 -dirs 10 -keepResults -logLevel INFO
+
+# blockreport *
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$  ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.Ndfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op blockReport -datanodes 1 -reports 1 -blksPerFile 3 -keepResuocksPerReport 1 -blocksPerFile 3 -keepResults -logLevel INFO
 ```
 
