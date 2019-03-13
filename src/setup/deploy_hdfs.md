@@ -54,7 +54,7 @@ The deployment process is more complicated because it involves multiple componen
         <configuration>
             <property>
                 <name>fs.defaultFS</name>
-                <value>hdfs://192.168.65.3:9000</value>
+                <value>hdfs://localhost:9000</value>
             </property>
 
             <property>
