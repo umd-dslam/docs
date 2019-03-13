@@ -8,22 +8,23 @@ More details can be found [here](https://hadoop.apache.org/docs/r3.2.0/hadoop-pr
 Please adjust the command line parameters by yourself:
 
 ```bash
+cd /home/gangl/hadoop/hadoop-dist/target/hadoop-3.3.0-SNAPSHOT
 # open *
-xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op open -threads 1 -files 100000 -keepResults -logLevel INFO
+$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op open -threads 1 -files 100000 -keepResults -logLevel INFO
 
 # open  *
-xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op open -threads 100 -files 100 -keepResults -logLevel INFO
+$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op open -threads 100 -files 100 -keepResults -logLevel INFO
 
 # create *
-xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op create -threads 1 -files 2 -keepResults -logLevel INFO
+$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op create -threads 1 -files 2 -keepResults -logLevel INFO
 
 # delete *
-xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op delete -threads 1 -files 10 -keepResults -logLevel INFO
+$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op delete -threads 1 -files 10 -keepResults -logLevel INFO
 
 # mkdirs *
-xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op mkdirs -threads 1 -dirs 10 -keepResults -logLevel INFO
+$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op mkdirs -threads 1 -dirs 10 -keepResults -logLevel INFO
 
 # blockreport *
-xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$  ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op blockReport -datanodes 3 -reports 3 -blocksPerReport 3 -blocksPerFile 3 -keepResults -logLevel INFO
+$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op blockReport -datanodes 3 -reports 3 -blocksPerReport 3 -blocksPerFile 3 -keepResults -logLevel INFO
 ```
 
