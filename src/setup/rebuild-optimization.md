@@ -21,12 +21,19 @@ After you have cleared your last deployment environment, you are ready to start 
 ```bash
 $ cd $HADOOP_HOME
 
-$ rm -rf ~/hadoop/data/*
-$ rm -rf ~/hadoop/name/*
-$ rm -rf ~/hadoop/tmp/*
-$ rm -rf logs/*
+$ cat << EOF > test.sh
+rm -rf ~/hadoop/data/*
+rm -rf ~/hadoop/name/*
+rm -rf ~/hadoop/tmp/*
+rm -rf logs/*
 
-$ kill $(jps | grep '[NameNode,DataNode]' | awk '{print $1}')
-$ ./bin/hdfs namenode -format
-$ ./sbin/start-dfs.sh
+PGPASSWORD=docker psql -h localhost -p 5432 -d docker -U docker --command "drop table inodes, inode2block, datablocks, blockstripes, block2storage, storage;"
+kill $(jps | grep '[NameNode,DataNode]' | awk '{print $1}')
+./bin/hdfs namenode -format
+./sbin/start-dfs.sh
+EOF
+
+$ bash test.sh
 ```
+
+
