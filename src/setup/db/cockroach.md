@@ -141,6 +141,8 @@ $ docker exec -it roach2 ./cockroach sql --insecure
 
 $ CREATE USER IF NOT EXISTS docker;
 $ GRANT ALL ON DATABASE bank TO docker;
+$ GRANT ALL ON TABLE bank.* TO docker;
+$ SHOW GRANTS ON TABLE bank.*;
 ```
 
 ## Stop Cockroach DB
