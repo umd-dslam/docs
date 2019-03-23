@@ -133,6 +133,24 @@ When you started the cockroach docker, you mapped the node's default HTTP port 8
 
 <img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/cockroach2.jpeg" class="center" style="width: 100%;" />
 
+
+## Create User `docker`
+
+```bash
+$ docker exec -it roach2 ./cockroach sql --insecure
+
+$ CREATE USER IF NOT EXISTS docker;
+$ GRANT ALL ON DATABASE bank TO docker;
+```
+
+## Stop Cockroach DB
+
+```bash
+$ docker stop roach1 roach2 roach3
+$ docker rm roach1 roach2 roach3
+$ rm -rf cockroach-data
+```
+
 # References
 
 1. https://www.cockroachlabs.com/docs/stable/install-cockroachdb-mac.html#use-docker-1
