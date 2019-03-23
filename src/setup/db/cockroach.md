@@ -128,10 +128,10 @@ root@:26257/defaultdb> \q
 
 When you started the cockroach docker, you mapped the node's default HTTP port 8080 to port 8080 on the host. Please check out `http://localhost:8080` in your browser!
 
-<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/cockroach1.jpeg" class="center" style="width: 80%;" />
+<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/cockroach1.jpeg" class="center" style="width: 100%;" />
 
 
-<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/cockroach2.jpeg" class="center" style="width: 80%;" />
+<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/cockroach2.jpeg" class="center" style="width: 100%;" />
 
 # References
 
