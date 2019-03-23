@@ -132,7 +132,12 @@ The deployment process is more complicated because it involves multiple componen
 
         # add the following line into /etc/environment 
         JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64"
+
+        # set database
+        DATABASE="COCKROACH"
         ```
+
+> env `DATABASE`: connect to selected database system at runtime!
 
 6. deploy HDFS
 
