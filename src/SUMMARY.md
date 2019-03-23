@@ -25,7 +25,9 @@
 
 - [Setting up Environment](./setup/README.md)
     - [Install Docker](./setup/install_docker.md)
-    - [Build Postgres Image](./setup/postgres_image.md)
+    - [Deploy Database Systems](./setup/db/README.md)
+        - [Option: Postgres](./setup/db/postgres.md)
+        - [Option: Cockroach Cluster](./setup/db/cockroach.md)
     - [Build Hadoop Dev Image](./setup/hadoop_image.md)
     - [Build Source Code](./setup/build_code.md)
     - [Deploy Hadoop HDFS](./setup/deploy_hdfs.md)
