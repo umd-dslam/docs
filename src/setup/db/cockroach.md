@@ -72,23 +72,23 @@ $ docker exec -it roach1 ./cockroach sql --insecure
 #
 # Enter \? for a brief introduction.
 #
-root@:26257/defaultdb> CREATE DATABASE bank;
+root@:26257/defaultdb> CREATE DATABASE docker;
 
 CREATE DATABASE
 
 Time: 45.2141ms
 
-root@:26257/defaultdb> CREATE TABLE bank.accounts (id INT PRIMARY KEY, balance D 
+root@:26257/defaultdb> CREATE TABLE docker.accounts (id INT PRIMARY KEY, balance D 
 CREATE TABLE
 
 Time: 49.3003ms
 
-root@:26257/defaultdb> INSERT INTO bank.accounts VALUES (1, 1000.50);
+root@:26257/defaultdb> INSERT INTO docker.accounts VALUES (1, 1000.50);
 INSERT 1
 
 Time: 80.0553ms
 
-root@:26257/defaultdb> SELECT * FROM bank.accounts;
+root@:26257/defaultdb> SELECT * FROM docker.accounts;
   id | balance  
 +----+---------+
    1 | 1000.50  
@@ -113,7 +113,7 @@ docker exec -it roach2 ./cockroach sql --insecure
 #
 # Enter \? for a brief introduction.
 #
-root@:26257/defaultdb> SELECT * FROM bank.accounts;
+root@:26257/defaultdb> SELECT * FROM docker.accounts;
   id | balance  
 +----+---------+
    1 | 1000.50  
@@ -140,9 +140,10 @@ When you started the cockroach docker, you mapped the node's default HTTP port 8
 $ docker exec -it roach2 ./cockroach sql --insecure
 
 $ CREATE USER IF NOT EXISTS docker;
-$ GRANT ALL ON DATABASE bank TO docker;
-$ GRANT ALL ON TABLE bank.* TO docker;
-$ SHOW GRANTS ON TABLE bank.*;
+$ GRANT ALL ON DATABASE docker TO docker;
+$ GRANT ALL ON TABLE docker.* TO docker;
+$ SHOW GRANTS ON TABLE docker.*;
+$ docker exec -it roach2 ./cockroach sql --insecure -u docker -d docker
 ```
 
 ## Stop Cockroach DB
