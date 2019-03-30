@@ -119,6 +119,8 @@ a3a4a96b2222        gangliao/voltdb:8.4.2   "/root/voltdb-ent/de…"   3 seconds
 015db7c2dccb        gangliao/voltdb:8.4.2   "/root/voltdb-ent/de…"   3 minutes ago       Up 3 minutes        0.0.0.0:8080->8080/tcp   volt1
 ```
 
+> Note that the ports for the next two node's management consoles are mapped to 8081 and 8082.
+
 # References
 
 1. https://github.com/VoltDB/voltdb/wiki/Docker-&-VoltDB-Clustering-Intro
