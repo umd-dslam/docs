@@ -28,6 +28,7 @@
     - [Deploy Database Systems](./setup/db/README.md)
         - [Option: Postgres](./setup/db/postgres.md)
         - [Option: Cockroach Cluster](./setup/db/cockroach.md)
+        - [Option: VoltDB Cluster](./setup/db/voltdb.md)
     - [Build Hadoop Dev Image](./setup/hadoop_image.md)
     - [Build Source Code](./setup/build_code.md)
     - [Deploy Hadoop HDFS](./setup/deploy_hdfs.md)
