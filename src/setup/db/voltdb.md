@@ -103,7 +103,7 @@ voltdb-docker>$ mv voltdb-ent-8.4.2 voltdb-ent
 5. Now we can start a 1 node (k=0) VoltDB cluster in this way:
 
     ```bash
-    $ docker run --name=volt1 --hostname=volt1 -d -p 8080:8080 \
+    $ docker run --name=volt1 --hostname=volt1 -d -p 8080:8080 -p 21212:21212 \
     gangliao/voltdb:8.4.2 /root/voltdb-ent/deploy.py 3 1 volt1
     ```
 
