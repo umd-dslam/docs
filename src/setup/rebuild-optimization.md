@@ -21,7 +21,10 @@ After you have cleared your last deployment environment, you are ready to start 
 ```bash
 $ cd $HADOOP_HOME
 
-$ cat << EOF > test.sh
+$ vim test.sh
+
+# copy the following command lines into test.sh
+cd $HADOOP_HOME
 rm -rf ~/hadoop/data/*
 rm -rf ~/hadoop/name/*
 rm -rf ~/hadoop/tmp/*
@@ -29,9 +32,15 @@ rm -rf logs/*
 
 PGPASSWORD=docker psql -h localhost -p 5432 -d docker -U docker --command "drop table inodes, inode2block, datablocks, blockstripes, block2storage, storage;"
 kill $(jps | grep '[NameNode,DataNode]' | awk '{print $1}')
+
+cd  ~/hadoop
+javac HdfsMetaInfoSchema.java
+java  HdfsMetaInfoSchema
+cd $HADOOP_HOME
+
 ./bin/hdfs namenode -format
 ./sbin/start-dfs.sh
-EOF
+
 
 $ bash test.sh
 ```
