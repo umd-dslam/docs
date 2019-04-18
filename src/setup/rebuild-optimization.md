@@ -6,21 +6,28 @@ Compiling Hadoop's entire project is very slow, and a common laptop like Macbook
 If you change its source code, in order to speed up the recompiling, we can hack its compilation process as follows:
 
 ```bash
-$ cd ~/hadoop/hadoop-hdfs-project/hadoop-hdfs-db/
-$ mvn package -Pdist -DskipTests
-$ cp hadoop-hdfs-db-1.0.0.jar $HADOOP_HOME/share/hadoop/hdfs/lib/
-$ cd ~/hadoop/hadoop-hdfs-project/hadoop-hdfs/
-$ mvn package -Pdist -DskipTests
-$ cp target/hadoop-hdfs-3.3.0-SNAPSHOT.jar $HADOOP_HOME/share/hadoop/hdfs/
-$ cp target/hadoop-hdfs-3.3.0-SNAPSHOT-tests.jar $HADOOP_HOME/share/hadoop/hdfs/
+$ cd $HADOOP_HOME
+$ vim build.sh
+
+# copy the following command lines into build.sh
+cd ~/hadoop/hadoop-hdfs-project/hadoop-hdfs-db/
+mvn install -Pdist -DskipTests
+# cp target/hadoop-hdfs-db-1.0.0.jar $HADOOP_HOME/share/hadoop/hdfs/lib/
+cd ~/hadoop/hadoop-hdfs-project/hadoop-hdfs/
+mvn package -Pdist -DskipTests
+cp target/hadoop-hdfs-3.3.0-SNAPSHOT.jar $HADOOP_HOME/share/hadoop/hdfs/
+cp target/hadoop-hdfs-3.3.0-SNAPSHOT-tests.jar $HADOOP_HOME/share/hadoop/hdfs/
+cd $HADOOP_HOME
 ```
 
+```bash
+bash build.sh
+```
 
 After you have cleared your last deployment environment, you are ready to start a new deployment.
 
 ```bash
 $ cd $HADOOP_HOME
-
 $ vim test.sh
 
 # copy the following command lines into test.sh
@@ -39,8 +46,9 @@ cd $HADOOP_HOME
 
 ./bin/hdfs namenode -format
 ./sbin/start-dfs.sh
+```
 
-
+```bash
 $ bash test.sh
 ```
 
