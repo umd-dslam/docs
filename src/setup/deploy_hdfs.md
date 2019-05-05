@@ -120,7 +120,7 @@ The deployment process is more complicated because it involves multiple componen
         # 1. change env variables' value in hadoop-env.sh
         # note: `/home/gangl` should be your `HOME` directory.
         export HADOOP_ROOT_LOGGER=INFO,console
-        export HADOOP_CLASSPATH="/home/gangl/java/postgresql-42.2.5.jar:"
+        export HADOOP_CLASSPATH="export HADOOP_CLASSPATH="/home/gangl/commons-pool2-2.6.2/commons-pool2-2.6.2.jar:/home/gangl/java/postgresql-42.2.5.jar:/home/gangl/voltadb/voltdb-ent-8.4.2/voltdb/voltdb-8.4.2.jar:/home/gangl/voltadb/voltdb-ent-8.4.2/voltdb/voltdbclient-8.4.2.jar:"
         export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
         ```
 
