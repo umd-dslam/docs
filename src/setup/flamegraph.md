@@ -15,3 +15,7 @@ jps
 ../FlameGraph/flamegraph.pl  -colors=java /tmp/collapsed.txt > flamegraph_yarn-bigdata40_hdfs_namenode.svg
 ```
 
+After you execute the above commands in HDFS container, a new `svg` file will be generated!
+
+<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/flamegraph_hdfs_namenode.svg" class="center" style="width: 80%;" />
+
