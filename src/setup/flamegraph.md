@@ -18,4 +18,6 @@ jps
 After you execute the above commands in HDFS container, a new `svg` file will be generated!
 
 
-<img src="https://dsl-umd.github.io/docs/img/flamegraph_hdfs_namenode.svg" class="center" style="width: 100%;"/>
+<a href="https://dsl-umd.github.io/docs/img/flamegraph_hdfs_namenode.svg">
+<img src="https://i.imgur.com/gPnUxl2.png" class="center" style="width: 100%;"/>
+</a>
