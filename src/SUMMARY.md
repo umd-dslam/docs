@@ -34,6 +34,7 @@
     - [Deploy Hadoop HDFS](./setup/deploy_hdfs.md)
     - [HDFS Namenode Test](./setup/test.md)
     - [Rebuild Source Code](./setup/rebuild-optimization.md)
+    - [HDFS Flame Graph](./setup/flamegraph.md)
 
 
 - [Benchmark](./benchmark.md)
