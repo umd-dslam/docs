@@ -20,3 +20,7 @@ After you execute the above commands in HDFS container, a new `svg` file will be
 <a href="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/flamegraph_hdfs_namenode.svg">
 <img src="https://i.imgur.com/gPnUxl2.png" class="center" style="width: 100%;"/>
 </a>
+
+
+![Alt text](https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/flamegraph_hdfs_namenode.svg?sanitize=true)
+<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/flamegraph_hdfs_namenode.svg?sanitize=true">
