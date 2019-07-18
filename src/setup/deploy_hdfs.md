@@ -107,6 +107,7 @@ The deployment process is more complicated because it involves multiple componen
     xxx@linuxkit-025000000001:~$ ssh-keygen -t rsa -f ~/.ssh/id_dsa  
     xxx@linuxkit-025000000001:~$ cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys  
     xxx@linuxkit-025000000001:~$ chmod 0600 ~/.ssh/authorized_keys
+    xxx@linuxkit-025000000001:~$ ssh-copy-id -i  localhost
     xxx@linuxkit-025000000001:~$ sudo service ssh restart
     xxx@linuxkit-025000000001:~$ ssh localhost
     # exit
