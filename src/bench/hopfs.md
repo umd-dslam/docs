@@ -28,7 +28,7 @@ docker run -d --net=cluster --name=ndb2 --ip=192.168.0.4 mysql/mysql-cluster ndb
 4. And finally the MySQL server node
 
 ```bash
-docker run -d --net=cluster --name=mysql1 --ip=192.168.0.10 -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e MYSQL_DATABASE=metadb mysql/mysql-cluster mysqld
+docker run -d --net=cluster --name=mysql1 --ip=192.168.0.10 -p 3307:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true -e MYSQL_DATABASE=metadb mysql/mysql-cluster mysqld
 ```
 
 The server will be initialized with a randomized password that will need to be changed, so fetch it from the log, then log in and change the password. 
