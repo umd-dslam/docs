@@ -38,6 +38,8 @@
 
 
 - [Benchmark](./benchmark.md)
+    - [HDFS Baseline](./bench/hdfs.md)
+    - [HopFS](./bench/hopfs.md)
 
 ---------------
 
