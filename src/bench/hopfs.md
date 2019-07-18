@@ -40,6 +40,13 @@ docker exec -it mysql1 mysql -uroot -p
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
 ```
 
+5. Access MySQL cluster from Host
+
+```bash
+brew install mysql-client # mac osx
+mysql -u root -h localhost -P 3307 --protocol=tcp
+```
+
 ## References:
 
 1. Salman Niazi, Mahmoud Ismail, Seif Haridi, Jim Dowling, Steffen Grohsschmiedt, and Mikael Ronström. 2017. HopsFS: scaling hierarchical file system metadata using newSQL databases. In Proceedings of the 15th Usenix Conference on File and Storage Technologies (FAST'17). USENIX Association, Berkeley, CA, USA, 89-103.
