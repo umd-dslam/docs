@@ -85,3 +85,5 @@ export CLASSPATH="$CLASSPATH:/home/gangliao/voltadb/voltdb-ent-8.4.2/voltdb/volt
     </property>
 </configuration>
 ```
+
+https://trinhhieu668.wordpress.com/2017/10/06/build-hadoop-2-7-from-source-on-centos-step-by-step/
