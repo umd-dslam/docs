@@ -18,7 +18,7 @@ export PATH
 ```
 
 ```bash
-mvn clean install -Pdist  -DskipTests
+mvn clean install -Pdist  -Pnative -DskipTests
 
 mkdir -p $HOME/hadoop/data
 mkdir -p $HOME/hadoop/name
