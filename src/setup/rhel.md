@@ -2,6 +2,13 @@
 sudo yum -y install protobuf protobuf-devel cmake
 wget http://apache.cs.utah.edu/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz
 sudo tar xvf apache-maven-3.6.2-bin.tar.gz -C /usr/lib/
+
+wget https://cmake.org/files/v3.12/cmake-3.12.3.tar.gz
+tar zxvf cmake-3.*
+cd cmake-3.*
+./bootstrap --prefix=/usr/local
+make -j$(nproc)
+make install
 ```
 
 ```bash
