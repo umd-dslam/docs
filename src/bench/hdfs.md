@@ -6,9 +6,11 @@ docker pull gangliao/hdfs_baseline:3.3.0
 docker run --rm -it -d  --name hadoop-baseline gangliao/hdfs_baseline:3.3.0
 docker exec -it hadoop-baseline bash
 
+
 cd ..
 tar xvf hadoop-3.3.0-SNAPSHOT.tar.gz
 cd ~/hadoop-3.3.0-SNAPSHOT
+sudo chmod -R 777 /home/gangl/hadoop/
 ```
 
 ```bash
