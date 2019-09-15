@@ -27,4 +27,5 @@ sudo bash ./simplesetup.sh --install-deps
 
 sudo vagrant plugin install vagrant-disksize
 sudo vagrant up
+sudo vagrant ssh
 ```
