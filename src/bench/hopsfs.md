@@ -26,6 +26,19 @@ wget https://hopsworks.readthedocs.io/en/latest/_downloads/e150a261128e5d4a0c804
 sudo bash ./simplesetup.sh --install-deps
 
 sudo vagrant plugin install vagrant-disksize
+
+
+config.vm.provider :virtualbox do |v|
+  v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  v.customize ["modifyvm", :id, "--memory", 15548]
+  v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  v.customize ["modifyvm", :id, "--nictype1", "virtio"]
+  v.customize ["modifyvm", :id, "--name", "hopsworks0"]
+  v.customize ["modifyvm", :id, "--cpus", "8"]
+  v.customize ["modifyvm", :id, "--ioapic", "on"]
+end
+
+
 sudo vagrant up
 sudo vagrant ssh
 ```
