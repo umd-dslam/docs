@@ -61,5 +61,6 @@ kill 20088 24633 22202 26797
 
 ```bash
 ./sbin/start-nn.sh
+./bin/hdfs namenode -format
 hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark  -op create -threads 1 -files 10000 -filesPerDir 10000 -keepResults -logLevel INFO
 ```
