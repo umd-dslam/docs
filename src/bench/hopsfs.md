@@ -64,3 +64,35 @@ kill 20088 24633 22202 26797
 ./bin/hdfs namenode -format
 hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark  -op create -threads 1 -files 10000 -filesPerDir 10000 -keepResults -logLevel INFO
 ```
+
+
+# clean database: hops
+
+```bash
+#!/bin/bash
+MUSER="$1"
+MPASS="$2"
+MDB="$3" # Detect paths
+MYSQL=$(which mysql)
+AWK=$(which awk)
+GREP=$(which grep)
+
+if [ $# -ne 3 ]
+then
+        echo "Usage: $0 {MySQL-User-Name} {MySQL-User-Password} {MySQL-Database-Name}"
+        echo "Drops all tables from a MySQL"
+        exit 1
+fi
+
+TABLES=$($MYSQL -h 10.0.2.15 -P 3306 -u $MUSER -p$MPASS $MDB -e 'show tables' | $AWK '{ print $1}' | $GREP -v '^Tables' )
+
+for t in $TABLES
+do
+        echo "Deleting $t table from $MDB database..."
+        $MYSQL -u $MUSER -p$MPASS $MDB -e "drop table $t"
+done
+```
+
+```bash
+bash empty.sh kthfs kthfs hops
+````
