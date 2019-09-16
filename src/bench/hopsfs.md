@@ -42,3 +42,24 @@ end
 sudo vagrant up
 sudo vagrant ssh
 ```
+
+```bash
+cd /srv/hops/hadoop-2.8.2.8
+vim etc/hadoop/hadoop-env.sh
+export HADOOP_ROOT_LOGGER=INFO,console
+
+
+jps
+27249 Jps
+20088 NameNode
+24633 ResourceManager
+22202 DataNode
+26797 NodeManager
+
+kill 20088 24633 22202 26797
+```
+
+```bash
+./sbin/start-nn.sh
+hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark  -op create -threads 1 -files 10000 -filesPerDir 10000 -keepResults -logLevel INFO
+```
