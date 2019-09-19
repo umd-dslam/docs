@@ -10,7 +10,7 @@ docker exec -it hadoop-baseline bash
 cd ..
 tar xvf hadoop-3.3.0-SNAPSHOT.tar.gz
 cd ~/hadoop-3.3.0-SNAPSHOT
-sudo chmod -R 777 /home/gangl/hadoop/
+sudo chmod -R 777 ~/hadoop-3.3.0-SNAPSHOT
 ```
 
 ```bash
