@@ -28,3 +28,9 @@ cat mounts | ./bin/hadoop jar  /home/gangliao/hadoop/hadoop-hdfs-project/hadoop-
 ```bash
 ./bin/hadoop jar  /home/gangliao/hadoop/hadoop-hdfs-project/hadoop-hdfs-nnproxy/target/hadoop-hdfs-nnproxy-1.0.0.jar org.apache.hadoop.hdfs.nnproxy.server.ProxyMain $NNPROXY_OPTS
 ```
+
+## Run test
+
+```bash
+./bin/hadoop  org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:65212 -op create -threads 1 -files 10      -filesPerDir 100000 -keepResults -logLevel INFO
+```
