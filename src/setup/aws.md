@@ -3,6 +3,9 @@
 ```bash
 echo 'hdfs://ip-172-30-0-250.ec2.internal:9000 /nnThroughputBenchmark/create/ThroughputBenchDir0' > mounts
 echo 'hdfs://ip-172-30-0-250.ec2.internal:9000 /' >> mounts
+
+echo 'hdfs://localhost:9000 /nnThroughputBenchmark/create/ThroughputBenchDir0' > mounts
+echo 'hdfs://localhost:9000 /' >> mounts
 cat mounts | ./bin/hadoop jar /home/ec2-user/voltfs/hadoop-hdfs-nnproxy-1.0.0.jar org.apache.hadoop.hdfs.nnproxy.tools.LoadMount $NNPROXY_OPTS
 ./bin/hadoop jar  /home/ec2-user/voltfs/hadoop-hdfs-nnproxy-1.0.0.jar org.apache.hadoop.hdfs.nnproxy.tools.DumpMount $NNPROXY_OPTS
 ./bin/hadoop jar  /home/ec2-user/voltfs/hadoop-hdfs-nnproxy-1.0.0.jar org.apache.hadoop.hdfs.nnproxy.server.ProxyMain $NNPROXY_OPTS &
