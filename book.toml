@@ -2,7 +2,7 @@
 authors = ["Gang Liao"]
 multilingual = false
 src = "src"
-title = "CalvinDFS"
+title = "FileScale"
 
 [output.html]
 mathjax-support = true

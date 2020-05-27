@@ -2,6 +2,10 @@
 
 ---------------
 
+- [FileScale](./filescale.md)
+
+---------------
+
 - [Setting up Environment](./setup/README.md)
     - [Install Docker](./setup/install_docker.md)
     - [Deploy Database Systems](./setup/db/README.md)
