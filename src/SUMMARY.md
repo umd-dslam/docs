@@ -1,26 +1,5 @@
 # Summary
 
-
-- [Proposal](./proposal.md)
-
----------------
-
-- [Introduction](./intro/README.md)
-    - [HDFS Architecture](./intro/hdfs.md)
-    - [Distributed Database](./intro/calvin.md)
-    - [Scale-out Metadata](./intro/new.md)
-
-- [HDFS Metadata Management](./metadata/README.md)
-    - [File and Directory](./metadata/namespace/README.md)
-    - [Data Blocks](./metadata/datablock/README.md)
-    - [Datanode Storage](./metadata/datanode/README.md)
-    - [Quantitative Analysis](./analysis.md)
-    - [Data Model](./datamodel.md)
-
-- [Advanced Optimization](./opt/README.md)
-
-- [Distributed Database](./db/README.md)
-
 ---------------
 
 - [Setting up Environment](./setup/README.md)
@@ -35,12 +14,3 @@
     - [HDFS Namenode Test](./setup/test.md)
     - [Rebuild Source Code](./setup/rebuild-optimization.md)
     - [HDFS Flame Graph](./setup/flamegraph.md)
-
-
-- [Benchmark](./benchmark.md)
-    - [HDFS Baseline](./bench/hdfs.md)
-    - [HopFS](./bench/hopfs.md)
-
----------------
-
-- [Contributors](./misc/contributors.md)
