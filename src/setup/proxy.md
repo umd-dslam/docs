@@ -20,7 +20,7 @@ cat mounts | ./bin/hadoop org.apache.hadoop.hdfs.nnproxy.tools.LoadMount $NNPROX
 ## Dump Mount table
 
 ```shell
-./bin/hadoop jar org.apache.hadoop.hdfs.nnproxy.tools.DumpMount $NNPROXY_OPTS
+./bin/hadoop org.apache.hadoop.hdfs.nnproxy.tools.DumpMount $NNPROXY_OPTS
 ```
 
 
