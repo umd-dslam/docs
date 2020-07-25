@@ -1,5 +1,5 @@
 # Setting up Environment
 
-In this section, you will learn how to setup the development environment. This project provides a flexible metadata storage layer to integrate different database systems into HDFS. For the sake of simplicity, **only Postgres** integration is currently available. 
+In this section, you will learn how to setup the development environment. FileScale provides a flexible database layer to conveniently integrate different database systems into HDFS. We developed an isolation environment for continuous development. To make FileScale reproducible in anytime and anywhere, all experiments are evaluated in the docker containers or AWS EC2 instances. Our containerized database system exposes an external IP and Port for users, so that HDFS can connect to it through the JDBC-compliant driver.
 
-We have developed an isolation environment for development and experiment. All experiments are done in a docker container which is reproducible in any machines. Our containerized PostgreSQL exposes an external IP and Port for users, so that HDFS container can connect to PostgreSQL through JDBC Driver.
+Currently, FileScale supports PostgreSQL, CockroachDB and VoltDB. For the sake of simplicity and completeness, we recommend you choose VoltDB as FileScale's underlying database system. 
