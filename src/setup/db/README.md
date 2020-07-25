@@ -1,3 +1,3 @@
 # Deploy Database Systems
 
-Currently, our system provides technical support to some open source database systems such as [PostgreSQL](https://www.postgresql.org/), [Cockroach](https://github.com/cockroachdb/cockroach), [VoltDB](https://github.com/VoltDB/voltdb) and [YugaByte](https://github.com/YugaByte/yugabyte-db). It's also designed to be easily integrate distributed databases within the enterprise as long as they are compatible with PostgreSQL or MySQL. For example,Google's [Spanner](https://cloud.google.com/spanner/), Amazon's [Aurora](https://aws.amazon.com/rds/aurora/?nc1=h_ls) and Microsoft Azure's [Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/).
+Currently, our system only provides technical support to three open source database systems, i.e., [PostgreSQL](https://www.postgresql.org/), [Cockroach](https://github.com/cockroachdb/cockroach), [VoltDB](https://github.com/VoltDB/voltdb). 
