@@ -1,7 +1,6 @@
-# Deploy Hadoop HDFS in Container
+# Deploy FileScale
 
-After the compilation is complete, the next step is to consider how to deploy HDFS.
-The deployment process is more complicated because it involves multiple components, such as multiple Datanodes, Namenode, and second Namenode. Here we start them through different processes on the same machine. How to deploy HDFS clusters will be introduced later.
+After the build process is complete, the next step is to consider how to deploy FileScale. The deployment process is much more complicated since it involves multiple sub-components, e.g., Datanodes and Namenodes. Here we only show how to start them on the same machine. 
 
 1. add **linuxkit-025000000001** as an alias of localhost in `/etc/hosts`.
 
