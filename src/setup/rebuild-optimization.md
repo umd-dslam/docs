@@ -1,11 +1,8 @@
-# Rebuild Source Code Optimization 
+# Rebuild Source Code 
 
-Compiling Hadoop's entire project is very slow, and a common laptop like Macbook Pro might takes about an hour. For some reason, Maven's incremental compilation has no obvious acceleration. In addition to HDFS, the Hadoop ecosystem includes many subsystems such as [MapReduce](https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html), [Yarn](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html), etc.
+Compiling Hadoop is time-consuming, and we found Maven's incremental compilation has no obvious acceleration. In order to accelerate this process, we can only build the code we changed:
 
-
-If you change its source code, in order to speed up the recompiling, we can hack its compilation process as follows:
-
-```bash
+```shell
 $ cd $HADOOP_HOME
 $ vim build.sh
 
@@ -20,13 +17,13 @@ cp target/hadoop-hdfs-3.3.0-SNAPSHOT-tests.jar $HADOOP_HOME/share/hadoop/hdfs/
 cd $HADOOP_HOME
 ```
 
-```bash
+```shell
 bash build.sh
 ```
 
-After you have cleared your last deployment environment, you are ready to start a new deployment.
+After you cleaned the previous build workspace, you are ready to start a new one.
 
-```bash
+```shell
 $ cd $HADOOP_HOME
 $ vim test.sh
 
@@ -48,7 +45,7 @@ cd $HADOOP_HOME
 ./sbin/start-dfs.sh
 ```
 
-```bash
+```shell
 $ bash test.sh
 ```
 
