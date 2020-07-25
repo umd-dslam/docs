@@ -1,25 +1,12 @@
 
-# Build a Hadoop Development Environment Docker Image
+# Build a FileScale Development Environment
 
-## Hadoop Dev Docker Image
-
-Fortunately, official Hadoop team already used Docker as their daily testbed.
-We added a few software (**postgresql-client** and **jdbc**) in offical script to access **postgressql-9.3** in the former container (remote server): **pg_test**.
+## FileScale Dev Docker Image
 
 
-<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/arch01-01.png" class="center" style="width: 70%;" />
+The following commands are used to build and start Hadoop dev environment.
 
-<span class="caption">Figure 3-3-1: The client server architecture diagram of HDFS and Postgres.</span>
-
-These incremental commands are added in [start-build-env.sh#L67-L75](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L67-L75).
-
-Also, `docker run --net=host` was added [start-build-env.sh#L87](https://github.com/DSL-UMD/hadoop-calvin/blob/c337680e23ded375df17c09a878f719102a47773/start-build-env.sh#L87) in order to reach the comparable performance for container, which will perform identically to the bare metal.
-
-
-Now, the following commands could be used to build and start Hadoop dev environment! The default container
-name is **hadoop-dev**.
-
-```bash
+```shell
 $ cd $project_directory  # where Dockerfile is located
 
 # Build Hadoop Development Environment Docker Image and start it.
@@ -29,12 +16,11 @@ $ docker ps
 
 CONTAINER ID    IMAGE               COMMAND                  CREATED        STATUS       PORTS                    NAMES
 a07214073fc3    hadoop-build-501    "/bin/bash"              9 hours ago    Up 9 hours                            hadoop-dev
-55eb5cf75643    eg_postgresql       "/usr/lib/postgresql…"   3 weeks ago    Up 9 hours   0.0.0.0:5432->5432/tcp   pg_test
 ```
 
-## Interact with Postgres
+## Interact with FileScale
 
-```bash
+```shell
 # Jump into hadoop-dev container
 $ docker exec -it hadoop-dev bash
 
@@ -56,11 +42,10 @@ Hadoop from source.
 xxx@linuxkit-025000000001:~/hadoop$
 ```
 
-Since we installed **postgresql-client** and **jdbc driver** in hadoop-dev image, 
-you can use them to access Postgres's service from remote server (**pg_test** container),
-for example, connect to database server, create table and insert/select tuples:
+Because we installed database drivers in the hadoop-dev image, you allow to directly access FileScale's database layer.
+For example, connecting to database server, creating table and inserting tuples:
 
-```bash
+```shell
 xxx@linuxkit-025000000001:~/hadoop$ psql -h localhost -p 5432 -d docker -U docker
 
 Password for user docker: # password is docker
