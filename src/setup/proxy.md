@@ -1,4 +1,8 @@
-## setup VoltDB's ZK IP and Port
+# Proxy Layer
+
+FileScale uses a proxy layer to divide the namespace among multiple sub-namespaces (NameNodes). VoltDB has a built-in Zookeeper cluster that can be re-used to store mount table.
+
+## Set Environment Variables 
 
 ```shell
 # Setup zk environment, for simplicity, not necessary

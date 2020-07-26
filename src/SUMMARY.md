@@ -17,4 +17,5 @@
     - [Deploy FileScale](./setup/deploy_hdfs.md)
     - [FileScale Benchmark](./setup/test.md)
     - [Rebuild Code](./setup/rebuild-optimization.md)
+    - [Deploy Proxy Layer](./setup/proxy.md)
     - [Flame Graph](./setup/flamegraph.md)
