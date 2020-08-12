@@ -122,6 +122,12 @@ After the build process is complete, the next step is to consider how to deploy 
         export HADOOP_ROOT_LOGGER=INFO,console
         export HADOOP_CLASSPATH="/home/gangl/commons-pool2-2.6.2/commons-pool2-2.6.2.jar:/home/gangl/java/postgresql-42.2.5.jar:/home/gangl/voltadb/voltdb-ent-8.4.2/voltdb/voltdb-8.4.2.jar:/home/gangl/voltadb/voltdb-ent-8.4.2/voltdb/voltdbclient-8.4.2.jar:"
         export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+        export DATABASE="VOLT"
+        export VOLTDB_SERVER="localhost"
+        export ENABLE_NN_PROXY="false"
+        export FILESCALE_FILES_PER_DIRECTORY="100000"
+        export UPDATE_DB_TIME_DELAY="1000"
+        export OBJECT_CACHE_SIZE="1000000000"
         ```
 
     - set env variables in `/etc/environment`:
