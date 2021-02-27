@@ -94,6 +94,10 @@ After the build process is complete, the next step is to consider how to deploy 
                 <value>true</value>
                 <description>web permission to acccess HDFS</description>
             </property>
+            <property>
+                <name>ipc.maximum.data.length</name>
+                <value>268435456</value>
+            </property>
         </configuration>
         ```
 
