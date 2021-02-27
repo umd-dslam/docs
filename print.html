@@ -1,0 +1,880 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>FileScale</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="theme/docs.css">
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="spacer"></li><li class="chapter-item expanded "><a href="filescale.html"><strong aria-hidden="true">1.</strong> FileScale</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="setup/index.html"><strong aria-hidden="true">2.</strong> Setting up Environment</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="setup/install_docker.html"><strong aria-hidden="true">2.1.</strong> Install Docker</a></li><li class="chapter-item expanded "><a href="setup/db/index.html"><strong aria-hidden="true">2.2.</strong> Deploy Database Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="setup/db/voltdb.html"><strong aria-hidden="true">2.2.1.</strong> Recommend: VoltDB Cluster</a></li><li class="chapter-item expanded "><a href="setup/db/postgres.html"><strong aria-hidden="true">2.2.2.</strong> Option: Postgres</a></li><li class="chapter-item expanded "><a href="setup/db/cockroach.html"><strong aria-hidden="true">2.2.3.</strong> Option: Cockroach Cluster</a></li></ol></li><li class="chapter-item expanded "><a href="setup/hadoop_image.html"><strong aria-hidden="true">2.3.</strong> Create Dev Image</a></li><li class="chapter-item expanded "><a href="setup/build_code.html"><strong aria-hidden="true">2.4.</strong> Build Source Code</a></li><li class="chapter-item expanded "><a href="setup/deploy_hdfs.html"><strong aria-hidden="true">2.5.</strong> Deploy FileScale</a></li><li class="chapter-item expanded "><a href="setup/test.html"><strong aria-hidden="true">2.6.</strong> FileScale Benchmark</a></li><li class="chapter-item expanded "><a href="setup/rebuild-optimization.html"><strong aria-hidden="true">2.7.</strong> Rebuild Code</a></li><li class="chapter-item expanded "><a href="setup/proxy.html"><strong aria-hidden="true">2.8.</strong> Deploy Proxy Layer</a></li><li class="chapter-item expanded "><a href="setup/flamegraph.html"><strong aria-hidden="true">2.9.</strong> Flame Graph</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">FileScale</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="filescale"><a class="header" href="#filescale">FileScale</a></h2>
+<blockquote>
+<p>Fast and Elastic Metadata Management for Distributed File Systems</p>
+</blockquote>
+<p>Recent work has shown that distributed database systems are a promising solution for scaling metadata management in scalable file systems. This work has shown that systems that store metadata on a single machine, or over a shared-disk abstraction, struggle to scale performance to deployments including billions of files. In contrast, leveraging a scalable, shared-nothing, distributed system for metadata storage can achieve much higher levels of scalability, without giving up high availability guarantees. However, for low-scale deployments -- where metadata can fit in memory on a single machine -- these systems that store metadata in a distributed database typically perform an order of magnitude worse than systems that store metadata in memory on a single machine. This has limited the impact of these distributed database approaches, since they are only currently applicable to file systems of extreme scale.</p>
+<p><strong>FileScale</strong> is a disaggregated architecture that incorporates a distributed database system as part of a comprehensive approach to metadata management in distributed file systems. In contrast to previous approaches, the architecture described in the paper performs comparably to the single-machine architecture at small scale, while enabling linear scalability as the file system metadata increases.</p>
+<p>FileScale's architectural design enables file system scalability with far less efficiency costs, so that it can be used from the early stages of an application up through the later stages as the application scales over time.  We packages up code and all its dependencies in the image file (i.e. AWS EC2 AMI and Docker) for users can quickly and reliably reproduce our storage system from one computing environment to another. FileScale includes around 38K LoC changed on HDFS 3.2.0. The code is freely available:</p>
+<pre><code class="language-shell">git clone https://github.com/DSLAM-UMD/FileScale
+</code></pre>
+<h1 id="setting-up-environment"><a class="header" href="#setting-up-environment">Setting up Environment</a></h1>
+<p>In this section, you will learn how to setup the development environment. FileScale provides a flexible database layer to conveniently integrate different database systems into HDFS. We developed an isolation environment for continuous development. To make FileScale reproducible in anytime and anywhere, all experiments are evaluated in the docker containers or AWS EC2 instances. Our containerized database system exposes an external IP and Port for users, so that HDFS can connect to it through the JDBC-compliant driver.</p>
+<p>Currently, FileScale supports PostgreSQL, CockroachDB and VoltDB. For the sake of simplicity and completeness, we recommend you choose VoltDB as FileScale's underlying database system. </p>
+<h1 id="install-docker"><a class="header" href="#install-docker">Install Docker</a></h1>
+<p>Due to the complexity of this project, Hadoop compilation involves a lot of dependencies. It is very hard to reproduce the experimental results on bare metal. The best way to solve this problem for anyone is to use the Docker.</p>
+<p><a href="https://en.wikipedia.org/wiki/Docker_(software)">Docker</a> is a computer program that performs operating-system-level virtualization. Docker is used to run software packages called &quot;containers&quot;. Containers are isolated from each other and bundle their own application, tools, libraries and configuration files; they can communicate with each other through well-defined channels. All containers are run by a single operating-system kernel and are thus more lightweight than virtual machines. Containers are created from &quot;images&quot; that specify their precise contents. Images are often created by combining and modifying standard images downloaded from public repositories.</p>
+<p>You can download and install Docker from this webpage: <a href="https://docs.docker.com/install/">https://docs.docker.com/install/</a>. Docker
+is available on multiple platforms. For example, Desktop (Mac and Windows), Server (CentOS, Debian, Fedora and Ubuntu).</p>
+<p>After installation, you can issue the command to verify its version:</p>
+<pre><code class="language-bash">$ docker --version
+
+Docker version 18.05.0-ce, build f150324
+</code></pre>
+<h1 id="deploy-database-systems"><a class="header" href="#deploy-database-systems">Deploy Database Systems</a></h1>
+<p>Currently, our system only provides technical support to three open source database systems, i.e., <a href="https://www.postgresql.org/">PostgreSQL</a>, <a href="https://github.com/cockroachdb/cockroach">Cockroach</a>, <a href="https://github.com/VoltDB/voltdb">VoltDB</a>. </p>
+<h1 id="start-a-cluster-in-docker"><a class="header" href="#start-a-cluster-in-docker">Start a Cluster in Docker</a></h1>
+<h2 id="create-a-directory-voltdb-docter"><a class="header" href="#create-a-directory-voltdb-docter">Create a directory voltdb-docter:</a></h2>
+<pre><code class="language-bash">$ mkdir voltdb-docker;cd voltdb-docker
+</code></pre>
+<h2 id="download-voltdb"><a class="header" href="#download-voltdb">Download VoltDB</a></h2>
+<p>Download VoltDB from http://learn.voltdb.com/DLSoftwareDownload.html</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ ls
+
+voltdb-ent-8.4.2.tar.gz
+</code></pre>
+<p>Next, unpack your downloaded VoltDB <code>tar.gz</code> file into this directory in a folder named &quot;voltdb-ent&quot;.</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ mkdir voltdb-ent
+voltdb-docker&gt;$ tar -xzf voltdb-ent-8.4.2.tar.gz
+voltdb-docker&gt;$ mv voltdb-ent-8.4.2 voltdb-ent
+</code></pre>
+<h2 id="multi-node-cluster"><a class="header" href="#multi-node-cluster">Multi-Node Cluster</a></h2>
+<ol>
+<li>
+<p>If we want to use 3 nodes, we're going to add a script that generates a deployment file and starts VoltDB with it. Back in the directory that contains our dockerfile, add this script as a new file named <code>deploy.py</code>.</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ cat &lt;&lt; EOF &gt; deploy.py
+#!/usr/bin/env python
+
+import sys, os
+
+deploymentText = &quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;deployment&gt;
+    &lt;cluster hostcount=&quot;##HOSTCOUNT##&quot; kfactor=&quot;##K##&quot; /&gt;
+    &lt;httpd enabled=&quot;true&quot;&gt;&lt;jsonapi enabled=&quot;true&quot; /&gt;&lt;/httpd&gt;
+&lt;/deployment&gt;
+&quot;&quot;&quot;
+
+deploymentText = deploymentText.replace(&quot;##HOSTCOUNT##&quot;, sys.argv[1])
+deploymentText = deploymentText.replace(&quot;##K##&quot;, sys.argv[2])
+
+with open('/root/voltdb-ent/deployment.xml', 'w') as f:
+    f.write(deploymentText)
+
+os.execv(&quot;/root/voltdb-ent/bin/voltdb&quot;,
+        [&quot;voltdb&quot;,
+        &quot;create&quot;,
+        &quot;--deployment=/root/voltdb-ent/deployment.xml&quot;,
+        &quot;--host=&quot; + sys.argv[3]])
+EOF
+</code></pre>
+<p>Make <code>deploy.py</code> is executable.</p>
+<pre><code class="language-bash">chmod a+x deploy.py
+</code></pre>
+</li>
+<li>
+<p>Create a file named <code>Dockerfile</code> in the directory with the following contents:</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ cat &lt;&lt; EOF &gt; Dockerfile
+# VoltDB on top of Docker base JDK8 images
+FROM java:8
+WORKDIR /root
+COPY voltdb-ent/ voltdb-ent/
+COPY deploy.py voltdb-ent/
+WORKDIR /root/voltdb-ent
+# Ports
+# 21212 : Client Port
+# 21211 : Admin Port
+#  8080 : Web Interface Port
+#  3021 : Internal Server Port
+#  4560 : Log Port
+#  9090 : JMX Port
+#  5555 : Replication Port
+#  7181 : Zookeeper Port
+EXPOSE 21212 21211 8080 3021 4560 9090 5555 7181
+CMD /bin/bash
+EOF
+</code></pre>
+</li>
+<li>
+<p>Now build the Docker image:</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ docker build -t gangliao/voltdb:8.4.2 .
+</code></pre>
+</li>
+<li>
+<p>You can find your VoltDB image:</p>
+<pre><code class="language-bash">$ docker image
+
+REPOSITORY            TAG         IMAGE ID            CREATED             SIZE
+gangliao/voltdb       8.4.2       d08f1b9a1569        6 minutes ago       773MB
+</code></pre>
+</li>
+<li>
+<p>Now we can start a 1 node (k=0) VoltDB cluster in this way:</p>
+<pre><code class="language-bash">$ docker run --name=volt1 --hostname=volt1 -d -p 8080:8080 -p 21212:21212 \
+gangliao/voltdb:8.4.2 /root/voltdb-ent/deploy.py 3 1 volt1
+</code></pre>
+<p>Find the IP of the first container using:</p>
+<pre><code class="language-bash">$ docker inspect --format '{{ .NetworkSettings.IPAddress }}' volt1
+
+172.17.0.3
+</code></pre>
+</li>
+<li>
+<p>we can use that IP as the leader for the second and third nodes:</p>
+<pre><code class="language-bash">$ export LEADERIP=172.17.0.3
+$ docker run --name=volt2 --hostname=volt2 -d -p 8081:8080 \
+    gangliao/voltdb:8.4.2 /root/voltdb-ent/deploy.py 3 1 $LEADERIP
+$ docker run --name=volt3 --hostname=volt3 -d -p 8082:8080 \
+    gangliao/voltdb:8.4.2 /root/voltdb-ent/deploy.py 3 1 $LEADERIP
+
+$ docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                    NAMES
+a3a4a96b2222        gangliao/voltdb:8.4.2   &quot;/root/voltdb-ent/de…&quot;   3 seconds ago       Up 3 seconds        0.0.0.0:8082-&gt;8080/tcp   volt3
+75e9b9190ce5        gangliao/voltdb:8.4.2   &quot;/root/voltdb-ent/de…&quot;   12 seconds ago      Up 11 seconds       0.0.0.0:8081-&gt;8080/tcp   volt2
+015db7c2dccb        gangliao/voltdb:8.4.2   &quot;/root/voltdb-ent/de…&quot;   3 minutes ago       Up 3 minutes        0.0.0.0:8080-&gt;8080/tcp   volt1
+</code></pre>
+<blockquote>
+<p>Note that the ports for the next two node's management consoles are mapped to 8081 and 8082.</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="references"><a class="header" href="#references">References</a></h1>
+<ol>
+<li>https://github.com/VoltDB/voltdb/wiki/Docker-&amp;-VoltDB-Clustering-Intro</li>
+</ol>
+<h1 id="build-a-postgres-docker-image"><a class="header" href="#build-a-postgres-docker-image">Build a Postgres Docker Image</a></h1>
+<p>Postgres image is built by a <a href="https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/Dockerfile">Dockerfile</a>:</p>
+<pre><code class="language-bash">$ cd $project_directory  # where Dockerfile is located
+$ docker build -t eg_postgresql . # build a Docker image
+</code></pre>
+<p>Note: <code>postgresql-9.3</code> was packaged into Docker image, to change its version, please check out <a href="https://github.com/DSL-UMD/hadoop-calvin/blob/calvin/Dockerfile#L20">Dockerfile#L20</a>!</p>
+<p><code>docker images</code> can list all images built locally or downloaded from registry:</p>
+<pre><code class="language-bash">$ docker images
+
+REPOSITORY             TAG          IMAGE ID            CREATED             SIZE
+eg_postgresql          latest       efb054f3e4d1        8 weeks ago         421MB
+</code></pre>
+<p>Now, you can start a Postgres container (in the background):</p>
+<pre><code class="language-bash">$ docker run -d -p 5432:5432 --name pg_test eg_postgresql
+</code></pre>
+<p>Note: docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</p>
+<ul>
+<li>-d: Run container in background and print container ID</li>
+<li>--name: Assign a name to the container</li>
+<li>-p: Publish a container's port(s) to the host</li>
+</ul>
+<p><strong>-p 5432:5432</strong> means pg_test's port 5432 is mapped to the host network port 5432.
+pg_test's network port 5432 (Postgres service) is not isolated from the Docker host.</p>
+<p><code>docker ps</code> can list all alive containers.</p>
+<pre><code class="language-bash">$ docker ps
+
+CONTAINER ID    IMAGE            COMMAND                  CREATED        STATUS       PORTS                    NAMES
+55eb5cf75643    eg_postgresql    &quot;/usr/lib/postgresql…&quot;   3 weeks ago    Up 9 hours   0.0.0.0:5432-&gt;5432/tcp   pg_test
+</code></pre>
+<h1 id="start-a-cluster-in-docker-1"><a class="header" href="#start-a-cluster-in-docker-1">Start a Cluster in Docker</a></h1>
+<h2 id="download-cockroachdb-image"><a class="header" href="#download-cockroachdb-image">Download CockroachDB Image</a></h2>
+<p>If you have not already installed the official CockroachDB Docker image, then you need to pull the image for the <code>v2.1.6</code> release of CockroachDB from Docker Hub:</p>
+<pre><code class="language-bash">$ docker pull cockroachdb/cockroach:v2.1.6
+</code></pre>
+<h2 id="create-a-bridge-network"><a class="header" href="#create-a-bridge-network">Create a Bridge Network</a></h2>
+<p>Since you'll be running multiple Docker containers on a single host, with one CockroachDB node per container, you need to create what Docker refers to as a bridge network. The bridge network will enable the containers to communicate as a single cluster while keeping them isolated from external networks.</p>
+<pre><code class="language-bash">$ docker network create -d bridge roachnet
+</code></pre>
+<h2 id="start-the-first-node"><a class="header" href="#start-the-first-node">Start the first node</a></h2>
+<pre><code class="language-bash">$ docker run -d \
+--name=roach1 \
+--hostname=roach1 \
+--net=roachnet \
+-p 26257:26257 -p 8080:8080  \
+-v &quot;${PWD}/cockroach-data/roach1:/cockroach/cockroach-data&quot;  \
+cockroachdb/cockroach:v2.1.6 start --insecure
+</code></pre>
+<blockquote>
+<p><code>--hostname</code>: The hostname for the container. You will use this to join other containers/nodes to the cluster.</p>
+</blockquote>
+<h2 id="add-nodes-to-the-cluster"><a class="header" href="#add-nodes-to-the-cluster">Add nodes to the cluster</a></h2>
+<p>With just one node, you can already connect a SQL client and start building out your database. In real deployments, however, you'll always want 3 or more nodes to take advantage of CockroachDB's automatic replication, rebalancing, and fault tolerance capabilities.</p>
+<p>To simulate a real deployment, scale your cluster by adding two more nodes:</p>
+<pre><code class="language-bash">$ docker run -d \
+--name=roach2 \
+--hostname=roach2 \
+--net=roachnet \
+-v &quot;${PWD}/cockroach-data/roach2:/cockroach/cockroach-data&quot; \
+cockroachdb/cockroach:v2.1.6 start --insecure --join=roach1
+</code></pre>
+<pre><code class="language-bash">$ docker run -d \
+--name=roach3 \
+--hostname=roach3 \
+--net=roachnet \
+-v &quot;${PWD}/cockroach-data/roach3:/cockroach/cockroach-data&quot; \
+cockroachdb/cockroach:v2.1.6 start --insecure --join=roach1
+</code></pre>
+<blockquote>
+<p><code>--join</code>: This flag joins the new nodes to the cluster, using the first container's hostname. Otherwise, all cockroach start defaults are accepted. Note that since each node is in a unique container, using identical default ports won’t cause conflicts.</p>
+</blockquote>
+<h2 id="test-the-cluster"><a class="header" href="#test-the-cluster">Test the cluster</a></h2>
+<p>You can use the <code>docker exec</code> command to start the built-in SQL shell in the first container:</p>
+<pre><code class="language-bash">$ docker exec -it roach1 ./cockroach sql --insecure
+
+# Welcome to the cockroach SQL interface.
+# All statements must be terminated by a semicolon.
+# To exit: CTRL + D.
+#
+# Server version: CockroachDB CCL v2.1.6 (x86_64-unknown-linux-gnu, built 2019/03/04 23:21:07, go1.10.7) (same version as client)
+# Cluster ID: 8a175a56-be36-4136-b3ff-c55cfd177905
+#
+# Enter \? for a brief introduction.
+#
+root@:26257/defaultdb&gt; CREATE DATABASE docker;
+
+CREATE DATABASE
+
+Time: 45.2141ms
+
+root@:26257/defaultdb&gt; CREATE TABLE docker.accounts (id INT PRIMARY KEY, balance D 
+CREATE TABLE
+
+Time: 49.3003ms
+
+root@:26257/defaultdb&gt; INSERT INTO docker.accounts VALUES (1, 1000.50);
+INSERT 1
+
+Time: 80.0553ms
+
+root@:26257/defaultdb&gt; SELECT * FROM docker.accounts;
+  id | balance  
++----+---------+
+   1 | 1000.50  
+(1 row)
+
+Time: 67.3204ms
+
+root@:26257/defaultdb&gt; \q
+</code></pre>
+<p>Then start the SQL shell in the second container:</p>
+<pre><code class="language-bash">docker exec -it roach2 ./cockroach sql --insecure
+
+# Welcome to the cockroach SQL interface.
+# All statements must be terminated by a semicolon.
+# To exit: CTRL + D.
+#
+# Server version: CockroachDB CCL v2.1.6 (x86_64-unknown-linux-gnu, built 2019/03/04 23:21:07, go1.10.7) (same version as client)
+# Cluster ID: 8a175a56-be36-4136-b3ff-c55cfd177905
+#
+# Enter \? for a brief introduction.
+#
+root@:26257/defaultdb&gt; SELECT * FROM docker.accounts;
+  id | balance  
++----+---------+
+   1 | 1000.50  
+(1 row)
+
+Time: 33.7007ms
+
+root@:26257/defaultdb&gt; \q
+</code></pre>
+<h2 id="monitor-the-cluster"><a class="header" href="#monitor-the-cluster">Monitor the cluster</a></h2>
+<p>When you started the cockroach docker, you mapped the node's default HTTP port 8080 to port 8080 on the host. Please check out <code>http://localhost:8080</code> in your browser!</p>
+<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/cockroach1.jpeg" class="center" style="width: 100%;" />
+<img src="https://raw.githubusercontent.com/DSL-UMD/docs/master/src/img/cockroach2.jpeg" class="center" style="width: 100%;" />
+<h2 id="create-user-docker"><a class="header" href="#create-user-docker">Create User <code>docker</code></a></h2>
+<pre><code class="language-bash">$ docker exec -it roach2 ./cockroach sql --insecure
+
+$ CREATE USER IF NOT EXISTS docker;
+$ GRANT ALL ON DATABASE docker TO docker;
+$ GRANT ALL ON TABLE docker.* TO docker;
+$ SHOW GRANTS ON TABLE docker.*;
+$ docker exec -it roach2 ./cockroach sql --insecure -u docker -d docker
+</code></pre>
+<h2 id="stop-cockroach-db"><a class="header" href="#stop-cockroach-db">Stop Cockroach DB</a></h2>
+<pre><code class="language-bash">$ docker stop roach1 roach2 roach3
+$ docker rm roach1 roach2 roach3
+$ rm -rf cockroach-data
+</code></pre>
+<h1 id="references-1"><a class="header" href="#references-1">References</a></h1>
+<ol>
+<li>https://www.cockroachlabs.com/docs/stable/install-cockroachdb-mac.html#use-docker-1</li>
+<li>https://www.cockroachlabs.com/docs/stable/start-a-local-cluster-in-docker.html</li>
+</ol>
+<h1 id="build-a-filescale-development-environment"><a class="header" href="#build-a-filescale-development-environment">Build a FileScale Development Environment</a></h1>
+<h2 id="filescale-dev-docker-image"><a class="header" href="#filescale-dev-docker-image">FileScale Dev Docker Image</a></h2>
+<p>The following commands are used to build and start Hadoop dev environment.</p>
+<pre><code class="language-shell">$ cd $project_directory  # where Dockerfile is located
+
+# Build Hadoop Development Environment Docker Image and start it.
+$ ./start-build-env.sh
+
+$ docker ps
+
+CONTAINER ID    IMAGE               COMMAND                  CREATED        STATUS       PORTS                    NAMES
+a07214073fc3    hadoop-build-501    &quot;/bin/bash&quot;              9 hours ago    Up 9 hours                            hadoop-dev
+</code></pre>
+<h2 id="interact-with-filescale"><a class="header" href="#interact-with-filescale">Interact with FileScale</a></h2>
+<pre><code class="language-shell"># Jump into hadoop-dev container
+$ docker exec -it hadoop-dev bash
+
+ _   _           _                    ______
+| | | |         | |                   |  _  \
+| |_| | __ _  __| | ___   ___  _ __   | | | |_____   __
+|  _  |/ _` |/ _` |/ _ \ / _ \| '_ \  | | | / _ \ \ / /
+| | | | (_| | (_| | (_) | (_) | |_) | | |/ /  __/\ V /
+\_| |_/\__,_|\__,_|\___/ \___/| .__/  |___/ \___| \_(_)
+                              | |
+                              |_|
+
+This is the standard Hadoop Developer build environment.
+This has all the right tools installed required to build
+Hadoop from source.
+
+# Now, you are in hadoop-dev container!
+# see prompt is changed from $ to xxx@linuxkit-025000000001 
+xxx@linuxkit-025000000001:~/hadoop$
+</code></pre>
+<p>Because we installed database drivers in the hadoop-dev image, you allow to directly access FileScale's database layer.
+For example, connecting to database server, creating table and inserting tuples:</p>
+<pre><code class="language-shell">xxx@linuxkit-025000000001:~/hadoop$ psql -h localhost -p 5432 -d docker -U docker
+
+Password for user docker: # password is docker
+SSL connection (protocol: TLSv1.2, cipher: DHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
+
+docker=# CREATE TABLE cities (name varchar(80), location point);
+
+CREATE TABLE
+
+docker=# INSERT INTO cities VALUES ('San Francisco', '(-194.0, 53.0)');
+
+INSERT 0 1
+
+docker=# SELECT * FROM cities;
+
+     name      | location
+---------------+-----------
+ San Francisco | (-194,53)
+(1 row)
+</code></pre>
+<h1 id="build-filescale"><a class="header" href="#build-filescale">Build FileScale</a></h1>
+<p>Since the local directory is mounted into the container by default, you can build FileScale using the container.</p>
+<pre><code class="language-shell"># Build Hadoop in hadoop-dev container
+xxx@linuxkit-025000000001:~$ USER=$(ls /home/)
+xxx@linuxkit-025000000001:~$ chown -R $USER /home/$USER/.m2
+
+# Compile HDFS
+xxx@linuxkit-025000000001$ mvn clean package -Pdist -Pnative -Dtar -DskipTests
+</code></pre>
+<h1 id="deploy-filescale"><a class="header" href="#deploy-filescale">Deploy FileScale</a></h1>
+<p>After the build process is complete, the next step is to consider how to deploy FileScale. The deployment process is much more complicated since it involves multiple sub-components, e.g., Datanodes and Namenodes. Here we only show how to start them on the same machine. </p>
+<ol>
+<li>
+<p>add <strong>linuxkit-025000000001</strong> as an alias of localhost in <code>/etc/hosts</code>.</p>
+<pre><code class="language-bash"># set password
+xxx@linuxkit-025000000001:~$ sudo passwd xxx  # user: xxx@linuxkit-025000000001
+xxx@linuxkit-025000000001:~$ sudo passwd root # user: root
+xxx@linuxkit-025000000001:~$ cat /etc/hostname
+
+linuxkit-025000000001
+
+xxx@linuxkit-025000000001:~$ cat /etc/hosts
+
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+xxx@linuxkit-025000000001:~$ sudo vim /etc/hosts
+# add linuxkit-025000000001 into 127.0.0.1       localhost
+# 127.0.0.1       localhost linuxkit-025000000001
+
+xxx@linuxkit-025000000001:~$ cat /etc/hosts
+
+127.0.0.1       localhost linuxkit-025000000001
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+</code></pre>
+</li>
+<li>
+<p>create directories for various data generated by FileScale</p>
+<pre><code class="language-bash">xxx@linuxkit-025000000001:~$ mkdir -p $HOME/hadoop/tmp
+xxx@linuxkit-025000000001:~$ mkdir -p $HOME/hadoop/name
+xxx@linuxkit-025000000001:~$ mkdir -p $HOME/hadoop/data
+</code></pre>
+</li>
+<li>
+<p>change both <strong>core_site.xml</strong> and <strong>hdfs-site.xml</strong> under <code>hadoop-dist/target/hadoop-3.3.0-SNAPSHOT/etc/hadoop/</code></p>
+<ul>
+<li>
+<p><strong>core_site.xml</strong>:</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.defaultFS&lt;/name&gt;
+        &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;/home/gangl/hadoop/tmp&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Note: <code>/home/gangl</code> should be your <code>HOME</code> directory. <code>192.168.65.3</code> is retrieved by <code>/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'</code>.</p>
+</li>
+<li>
+<p><strong>hdfs-site.xml</strong>:</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+        &lt;value&gt;/home/gangl/hadoop/name&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+        &lt;value&gt;/home/gangl/hadoop/data&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+      &lt;name&gt;dfs.namenode.fs-limits.min-block-size&lt;/name&gt;
+      &lt;value&gt;10&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.webhdfs.enabled&lt;/name&gt;
+        &lt;value&gt;true&lt;/value&gt;
+        &lt;description&gt;web permission to acccess HDFS&lt;/description&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;ipc.maximum.data.length&lt;/name&gt;
+        &lt;value&gt;268435456&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Note: <code>/home/gangl</code> should be your <code>HOME</code> directory.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>generate a new SSH key</p>
+<pre><code class="language-bash">xxx@linuxkit-025000000001:~$ mkdir -p ~/.ssh
+xxx@linuxkit-025000000001:~$ ssh-keygen -t rsa -f ~/.ssh/id_dsa  
+xxx@linuxkit-025000000001:~$ cat ~/.ssh/id_dsa.pub &gt;&gt; ~/.ssh/authorized_keys  
+xxx@linuxkit-025000000001:~$ chmod 0600 ~/.ssh/authorized_keys
+xxx@linuxkit-025000000001:~$ ssh-copy-id -i  localhost
+xxx@linuxkit-025000000001:~$ sudo service ssh restart
+xxx@linuxkit-025000000001:~$ ssh localhost
+# exit
+</code></pre>
+</li>
+<li>
+<p>set environment variables</p>
+<ul>
+<li>
+<p>set env variables in <code>hadoop-dist/target/hadoop-3.3.0-SNAPSHOT/etc/hadoop/hadoop-env.sh</code>:</p>
+<pre><code class="language-bash"># 1. change env variables' value in hadoop-env.sh
+# note: `/home/gangl` should be your `HOME` directory.
+export HADOOP_ROOT_LOGGER=INFO,console
+export HADOOP_CLASSPATH=&quot;/home/gangl/commons-pool2-2.6.2/commons-pool2-2.6.2.jar:/home/gangl/java/postgresql-42.2.5.jar:/home/gangl/voltadb/voltdb-ent-8.4.2/voltdb/voltdb-8.4.2.jar:/home/gangl/voltadb/voltdb-ent-8.4.2/voltdb/voltdbclient-8.4.2.jar:&quot;
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+export DATABASE=&quot;VOLT&quot;
+export VOLTDB_SERVER=&quot;localhost&quot;
+export ENABLE_NN_PROXY=&quot;false&quot;
+export FILESCALE_FILES_PER_DIRECTORY=&quot;100000&quot;
+export UPDATE_DB_TIME_DELAY=&quot;1000&quot;
+export OBJECT_CACHE_SIZE=&quot;1000000000&quot;
+</code></pre>
+</li>
+<li>
+<p>set env variables in <code>/etc/environment</code>:</p>
+<pre><code class="language-bash"># add JAVA_HOME to sudo vim /etc/environment
+xxx@linuxkit-025000000001:~$ sudo vim /etc/environment
+
+# add the following line into /etc/environment 
+JAVA_HOME=&quot;/usr/lib/jvm/java-1.8.0-openjdk-amd64&quot;
+
+# set database
+DATABASE=&quot;COCKROACH&quot;
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>env <code>DATABASE</code>: connect to selected database system at runtime!</p>
+</blockquote>
+<ol start="6">
+<li>
+<p>deploy FileScale</p>
+<pre><code class="language-bash">cd $HADOOP_HOME
+
+# reformat namenode
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hdfs namenode -format
+
+# kill former namenode and datanode processes
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ kill $(jps | grep '[NameNode,DataNode]' | awk '{print $1}')
+
+# deploy HDFS
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./sbin/start-dfs.sh
+
+# check alive HDFS processes
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ jps
+</code></pre>
+<p>Note: using <code>jps</code> to make sure all three processes are running!</p>
+</li>
+</ol>
+<h1 id="filescale-benchmark"><a class="header" href="#filescale-benchmark">FileScale Benchmark</a></h1>
+<p>HDFS NNThroughputBenchmark is a name-node throughput benchmark, which runs a series of client threads on a single node against a name-node. If no name-node is configured, it will firstly start a name-node in the same process (standalone mode), in which case each client repetitively performs the same operation by directly calling the respective name-node methods. Otherwise, the benchmark will perform the operations against a remote name-node via client protocol RPCs (remote mode). Either way, all clients are running locally in a single process rather than remotely across different nodes. The reason is to avoid communication overhead caused by RPC connections and serialization, and thus reveal the upper bound of pure name-node performance.  we extended the client workload generation in the benchmark codebase to run inthe large-scale environments required for our analysis.</p>
+<p>More details can be found <a href="https://hadoop.apache.org/docs/r3.2.0/hadoop-project-dist/hadoop-common/Benchmarking.html">here</a>.</p>
+<p>Please adjust the command line parameters by yourself:</p>
+<h3 id="create"><a class="header" href="#create">Create</a></h3>
+<pre><code class="language-shell">$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op create -threads 1 -files 2 -filesPerDir 1000 -keepResults -logLevel INFO
+</code></pre>
+<h3 id="open"><a class="header" href="#open">Open</a></h3>
+<pre><code class="language-shell">$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op Open -threads 1 -files 2 -filesPerDir 1000 -keepResults -logLevel INFO
+</code></pre>
+<h3 id="delete"><a class="header" href="#delete">Delete</a></h3>
+<pre><code class="language-shell">$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op delete -threads 1 -files 2 -filesPerDir 1000 -keepResults -logLevel INFO
+</code></pre>
+<h3 id="mkdirs"><a class="header" href="#mkdirs">Mkdirs</a></h3>
+<pre><code class="language-shell">$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op mkdirs -threads 1 -dirs 2 -dirsPerDir 1000 -keepResults -logLevel INFO
+</code></pre>
+<h3 id="rename"><a class="header" href="#rename">Rename</a></h3>
+<pre><code class="language-shell">$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op rename -threads 1 -files 2 -filesPerDir 1000 -keepResults -logLevel INFO
+</code></pre>
+<h3 id="clean"><a class="header" href="#clean">Clean</a></h3>
+<pre><code class="language-shell">$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op clean -keepResults -logLevel INFO
+</code></pre>
+<h3 id="recursive-delete-a-directory"><a class="header" href="#recursive-delete-a-directory">Recursive Delete a Directory</a></h3>
+<pre><code class="language-shell">$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op create -threads 1 -files 2 -filesPerDir 1000 -keepResults -logLevel INFO
+$ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op renameDir -keepResults -logLevel INFO
+</code></pre>
+<h1 id="rebuild-source-code"><a class="header" href="#rebuild-source-code">Rebuild Source Code</a></h1>
+<p>Compiling Hadoop is time-consuming, and we found Maven's incremental compilation has no obvious acceleration. In order to accelerate this process, we can only build the code we changed:</p>
+<pre><code class="language-shell">$ cd $HADOOP_HOME
+$ vim build.sh
+
+# copy the following command lines into build.sh
+cd ~/hadoop/hadoop-hdfs-project/hadoop-hdfs-db/
+mvn install -Pdist -DskipTests
+# cp target/hadoop-hdfs-db-1.0.0.jar $HADOOP_HOME/share/hadoop/hdfs/lib/
+cd ~/hadoop/hadoop-hdfs-project/hadoop-hdfs/
+mvn package -Pdist -DskipTests
+cp target/hadoop-hdfs-3.3.0-SNAPSHOT.jar $HADOOP_HOME/share/hadoop/hdfs/
+cp target/hadoop-hdfs-3.3.0-SNAPSHOT-tests.jar $HADOOP_HOME/share/hadoop/hdfs/
+cd $HADOOP_HOME
+</code></pre>
+<pre><code class="language-shell">bash build.sh
+</code></pre>
+<p>After you cleaned the previous build workspace, you are ready to start a new one.</p>
+<pre><code class="language-shell">$ cd $HADOOP_HOME
+$ vim test.sh
+
+# copy the following command lines into test.sh
+cd $HADOOP_HOME
+rm -rf ~/hadoop/data/*
+rm -rf ~/hadoop/name/*
+rm -rf ~/hadoop/tmp/*
+rm -rf logs/*
+
+kill $(jps | grep '[NameNode,DataNode]' | awk '{print $1}')
+
+cd  ~/hadoop
+javac HdfsMetaInfoSchema.java
+java  HdfsMetaInfoSchema
+cd $HADOOP_HOME
+
+./bin/hdfs namenode -format
+./sbin/start-dfs.sh
+</code></pre>
+<pre><code class="language-shell">$ bash test.sh
+</code></pre>
+<h1 id="proxy-layer"><a class="header" href="#proxy-layer">Proxy Layer</a></h1>
+<p>FileScale uses a proxy layer to divide the namespace among multiple sub-namespaces (NameNodes). VoltDB has a built-in Zookeeper cluster that can be re-used to store mount table.</p>
+<h2 id="set-environment-variables"><a class="header" href="#set-environment-variables">Set Environment Variables</a></h2>
+<pre><code class="language-shell"># Setup zk environment, for simplicity, not necessary
+export NNPROXY_ZK_QUORUM=&quot;localhost:7181&quot;
+export NNPROXY_MOUNT_TABLE_ZKPATH=&quot;/hadoop/hdfs/mounts&quot;
+
+export NNPROXY_OPTS=&quot;-Ddfs.nnproxy.mount-table.zk.quorum=$NNPROXY_ZK_QUORUM -Ddfs.nnproxy.mount-table.zk.path=$NNPROXY_MOUNT_TABLE_ZKPATH&quot;
+
+</code></pre>
+<h2 id="load-mount-table"><a class="header" href="#load-mount-table">Load Mount table</a></h2>
+<pre><code class="language-shell">echo 'hdfs://localhost:9000 /nnThroughputBenchmark/create/ThroughputBenchDir0' &gt; mounts
+echo 'hdfs://localhost:9000 /' &gt;&gt; mounts
+cat mounts | ./bin/hadoop org.apache.hadoop.hdfs.nnproxy.tools.LoadMount $NNPROXY_OPTS
+</code></pre>
+<h2 id="dump-mount-table"><a class="header" href="#dump-mount-table">Dump Mount table</a></h2>
+<pre><code class="language-shell">./bin/hadoop org.apache.hadoop.hdfs.nnproxy.tools.DumpMount $NNPROXY_OPTS
+</code></pre>
+<h2 id="start-nnproxy"><a class="header" href="#start-nnproxy">Start NNProxy</a></h2>
+<pre><code class="language-shell">./bin/hadoop org.apache.hadoop.hdfs.nnproxy.server.ProxyMain $NNPROXY_OPTS
+</code></pre>
+<h2 id="run-test"><a class="header" href="#run-test">Run test</a></h2>
+<pre><code class="language-shell">./bin/hadoop  org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:65212 -op create -threads 1 -files 10      -filesPerDir 100000 -keepResults -logLevel INFO
+</code></pre>
+<h2 id="faq"><a class="header" href="#faq">FAQ</a></h2>
+<pre><code class="language-python">os.execv(&quot;/root/voltdb/voltdb-ent/bin/voltdb&quot;,
+         [&quot;voltdb&quot;,
+          &quot;create&quot;,
+          &quot;--deployment=/root/voltdb/deployment.xml&quot;,
+                    &quot;--host=&quot; + sys.argv[3],
+          &quot;--zookeeper=0.0.0.0:7181&quot;])
+</code></pre>
+<h2 id="hdfs-flame-graph"><a class="header" href="#hdfs-flame-graph">HDFS Flame Graph</a></h2>
+<p>It is possible to profile Java processes running in a Docker or LXC container both from within a container.</p>
+<pre><code class="language-bash">cd $HADOOP_HOME
+git clone https://github.com/jvm-profiling-tools/async-profiler
+git clone https://github.com/BrendanGregg/FlameGraph
+cd async-profiler &amp;&amp; make
+cd ../
+mkdir async-profiler-output &amp;&amp; cd async-profiler-output
+# (get hdfs namenode process)
+jps
+../async-profiler/profiler.sh -t -d 120 -e itimer -o collapsed -f /tmp/collapsed.txt 231591
+../FlameGraph/flamegraph.pl  -colors=java /tmp/collapsed.txt &gt; flamegraph_yarn-bigdata40_hdfs_namenode.svg
+</code></pre>
+<p>After you execute the above commands in HDFS container, a new <code>svg</code> file will be generated!</p>
+<a href="https://dsl-umd.github.io/docs/img/flamegraph_hdfs_namenode.svg">
+<img src="https://i.imgur.com/gPnUxl2.png" class="center" style="width: 100%;"/>
+</a>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

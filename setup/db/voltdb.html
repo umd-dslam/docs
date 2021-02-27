@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Recommend: VoltDB Cluster - FileScale</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../../theme/docs.css">
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="spacer"></li><li class="chapter-item expanded "><a href="../../filescale.html"><strong aria-hidden="true">1.</strong> FileScale</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../../setup/index.html"><strong aria-hidden="true">2.</strong> Setting up Environment</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../setup/install_docker.html"><strong aria-hidden="true">2.1.</strong> Install Docker</a></li><li class="chapter-item expanded "><a href="../../setup/db/index.html"><strong aria-hidden="true">2.2.</strong> Deploy Database Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../setup/db/voltdb.html" class="active"><strong aria-hidden="true">2.2.1.</strong> Recommend: VoltDB Cluster</a></li><li class="chapter-item expanded "><a href="../../setup/db/postgres.html"><strong aria-hidden="true">2.2.2.</strong> Option: Postgres</a></li><li class="chapter-item expanded "><a href="../../setup/db/cockroach.html"><strong aria-hidden="true">2.2.3.</strong> Option: Cockroach Cluster</a></li></ol></li><li class="chapter-item expanded "><a href="../../setup/hadoop_image.html"><strong aria-hidden="true">2.3.</strong> Create Dev Image</a></li><li class="chapter-item expanded "><a href="../../setup/build_code.html"><strong aria-hidden="true">2.4.</strong> Build Source Code</a></li><li class="chapter-item expanded "><a href="../../setup/deploy_hdfs.html"><strong aria-hidden="true">2.5.</strong> Deploy FileScale</a></li><li class="chapter-item expanded "><a href="../../setup/test.html"><strong aria-hidden="true">2.6.</strong> FileScale Benchmark</a></li><li class="chapter-item expanded "><a href="../../setup/rebuild-optimization.html"><strong aria-hidden="true">2.7.</strong> Rebuild Code</a></li><li class="chapter-item expanded "><a href="../../setup/proxy.html"><strong aria-hidden="true">2.8.</strong> Deploy Proxy Layer</a></li><li class="chapter-item expanded "><a href="../../setup/flamegraph.html"><strong aria-hidden="true">2.9.</strong> Flame Graph</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">FileScale</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="start-a-cluster-in-docker"><a class="header" href="#start-a-cluster-in-docker">Start a Cluster in Docker</a></h1>
+<h2 id="create-a-directory-voltdb-docter"><a class="header" href="#create-a-directory-voltdb-docter">Create a directory voltdb-docter:</a></h2>
+<pre><code class="language-bash">$ mkdir voltdb-docker;cd voltdb-docker
+</code></pre>
+<h2 id="download-voltdb"><a class="header" href="#download-voltdb">Download VoltDB</a></h2>
+<p>Download VoltDB from http://learn.voltdb.com/DLSoftwareDownload.html</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ ls
+
+voltdb-ent-8.4.2.tar.gz
+</code></pre>
+<p>Next, unpack your downloaded VoltDB <code>tar.gz</code> file into this directory in a folder named &quot;voltdb-ent&quot;.</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ mkdir voltdb-ent
+voltdb-docker&gt;$ tar -xzf voltdb-ent-8.4.2.tar.gz
+voltdb-docker&gt;$ mv voltdb-ent-8.4.2 voltdb-ent
+</code></pre>
+<h2 id="multi-node-cluster"><a class="header" href="#multi-node-cluster">Multi-Node Cluster</a></h2>
+<ol>
+<li>
+<p>If we want to use 3 nodes, we're going to add a script that generates a deployment file and starts VoltDB with it. Back in the directory that contains our dockerfile, add this script as a new file named <code>deploy.py</code>.</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ cat &lt;&lt; EOF &gt; deploy.py
+#!/usr/bin/env python
+
+import sys, os
+
+deploymentText = &quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;deployment&gt;
+    &lt;cluster hostcount=&quot;##HOSTCOUNT##&quot; kfactor=&quot;##K##&quot; /&gt;
+    &lt;httpd enabled=&quot;true&quot;&gt;&lt;jsonapi enabled=&quot;true&quot; /&gt;&lt;/httpd&gt;
+&lt;/deployment&gt;
+&quot;&quot;&quot;
+
+deploymentText = deploymentText.replace(&quot;##HOSTCOUNT##&quot;, sys.argv[1])
+deploymentText = deploymentText.replace(&quot;##K##&quot;, sys.argv[2])
+
+with open('/root/voltdb-ent/deployment.xml', 'w') as f:
+    f.write(deploymentText)
+
+os.execv(&quot;/root/voltdb-ent/bin/voltdb&quot;,
+        [&quot;voltdb&quot;,
+        &quot;create&quot;,
+        &quot;--deployment=/root/voltdb-ent/deployment.xml&quot;,
+        &quot;--host=&quot; + sys.argv[3]])
+EOF
+</code></pre>
+<p>Make <code>deploy.py</code> is executable.</p>
+<pre><code class="language-bash">chmod a+x deploy.py
+</code></pre>
+</li>
+<li>
+<p>Create a file named <code>Dockerfile</code> in the directory with the following contents:</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ cat &lt;&lt; EOF &gt; Dockerfile
+# VoltDB on top of Docker base JDK8 images
+FROM java:8
+WORKDIR /root
+COPY voltdb-ent/ voltdb-ent/
+COPY deploy.py voltdb-ent/
+WORKDIR /root/voltdb-ent
+# Ports
+# 21212 : Client Port
+# 21211 : Admin Port
+#  8080 : Web Interface Port
+#  3021 : Internal Server Port
+#  4560 : Log Port
+#  9090 : JMX Port
+#  5555 : Replication Port
+#  7181 : Zookeeper Port
+EXPOSE 21212 21211 8080 3021 4560 9090 5555 7181
+CMD /bin/bash
+EOF
+</code></pre>
+</li>
+<li>
+<p>Now build the Docker image:</p>
+<pre><code class="language-bash">voltdb-docker&gt;$ docker build -t gangliao/voltdb:8.4.2 .
+</code></pre>
+</li>
+<li>
+<p>You can find your VoltDB image:</p>
+<pre><code class="language-bash">$ docker image
+
+REPOSITORY            TAG         IMAGE ID            CREATED             SIZE
+gangliao/voltdb       8.4.2       d08f1b9a1569        6 minutes ago       773MB
+</code></pre>
+</li>
+<li>
+<p>Now we can start a 1 node (k=0) VoltDB cluster in this way:</p>
+<pre><code class="language-bash">$ docker run --name=volt1 --hostname=volt1 -d -p 8080:8080 -p 21212:21212 \
+gangliao/voltdb:8.4.2 /root/voltdb-ent/deploy.py 3 1 volt1
+</code></pre>
+<p>Find the IP of the first container using:</p>
+<pre><code class="language-bash">$ docker inspect --format '{{ .NetworkSettings.IPAddress }}' volt1
+
+172.17.0.3
+</code></pre>
+</li>
+<li>
+<p>we can use that IP as the leader for the second and third nodes:</p>
+<pre><code class="language-bash">$ export LEADERIP=172.17.0.3
+$ docker run --name=volt2 --hostname=volt2 -d -p 8081:8080 \
+    gangliao/voltdb:8.4.2 /root/voltdb-ent/deploy.py 3 1 $LEADERIP
+$ docker run --name=volt3 --hostname=volt3 -d -p 8082:8080 \
+    gangliao/voltdb:8.4.2 /root/voltdb-ent/deploy.py 3 1 $LEADERIP
+
+$ docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                    NAMES
+a3a4a96b2222        gangliao/voltdb:8.4.2   &quot;/root/voltdb-ent/de…&quot;   3 seconds ago       Up 3 seconds        0.0.0.0:8082-&gt;8080/tcp   volt3
+75e9b9190ce5        gangliao/voltdb:8.4.2   &quot;/root/voltdb-ent/de…&quot;   12 seconds ago      Up 11 seconds       0.0.0.0:8081-&gt;8080/tcp   volt2
+015db7c2dccb        gangliao/voltdb:8.4.2   &quot;/root/voltdb-ent/de…&quot;   3 minutes ago       Up 3 minutes        0.0.0.0:8080-&gt;8080/tcp   volt1
+</code></pre>
+<blockquote>
+<p>Note that the ports for the next two node's management consoles are mapped to 8081 and 8082.</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="references"><a class="header" href="#references">References</a></h1>
+<ol>
+<li>https://github.com/VoltDB/voltdb/wiki/Docker-&amp;-VoltDB-Clustering-Intro</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../setup/db/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../setup/db/postgres.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../setup/db/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../setup/db/postgres.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

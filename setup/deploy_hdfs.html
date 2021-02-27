@@ -1,0 +1,408 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Deploy FileScale - FileScale</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+        <link rel="stylesheet" href="../theme/docs.css">
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="spacer"></li><li class="chapter-item expanded "><a href="../filescale.html"><strong aria-hidden="true">1.</strong> FileScale</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../setup/index.html"><strong aria-hidden="true">2.</strong> Setting up Environment</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../setup/install_docker.html"><strong aria-hidden="true">2.1.</strong> Install Docker</a></li><li class="chapter-item expanded "><a href="../setup/db/index.html"><strong aria-hidden="true">2.2.</strong> Deploy Database Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../setup/db/voltdb.html"><strong aria-hidden="true">2.2.1.</strong> Recommend: VoltDB Cluster</a></li><li class="chapter-item expanded "><a href="../setup/db/postgres.html"><strong aria-hidden="true">2.2.2.</strong> Option: Postgres</a></li><li class="chapter-item expanded "><a href="../setup/db/cockroach.html"><strong aria-hidden="true">2.2.3.</strong> Option: Cockroach Cluster</a></li></ol></li><li class="chapter-item expanded "><a href="../setup/hadoop_image.html"><strong aria-hidden="true">2.3.</strong> Create Dev Image</a></li><li class="chapter-item expanded "><a href="../setup/build_code.html"><strong aria-hidden="true">2.4.</strong> Build Source Code</a></li><li class="chapter-item expanded "><a href="../setup/deploy_hdfs.html" class="active"><strong aria-hidden="true">2.5.</strong> Deploy FileScale</a></li><li class="chapter-item expanded "><a href="../setup/test.html"><strong aria-hidden="true">2.6.</strong> FileScale Benchmark</a></li><li class="chapter-item expanded "><a href="../setup/rebuild-optimization.html"><strong aria-hidden="true">2.7.</strong> Rebuild Code</a></li><li class="chapter-item expanded "><a href="../setup/proxy.html"><strong aria-hidden="true">2.8.</strong> Deploy Proxy Layer</a></li><li class="chapter-item expanded "><a href="../setup/flamegraph.html"><strong aria-hidden="true">2.9.</strong> Flame Graph</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">FileScale</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="deploy-filescale"><a class="header" href="#deploy-filescale">Deploy FileScale</a></h1>
+<p>After the build process is complete, the next step is to consider how to deploy FileScale. The deployment process is much more complicated since it involves multiple sub-components, e.g., Datanodes and Namenodes. Here we only show how to start them on the same machine. </p>
+<ol>
+<li>
+<p>add <strong>linuxkit-025000000001</strong> as an alias of localhost in <code>/etc/hosts</code>.</p>
+<pre><code class="language-bash"># set password
+xxx@linuxkit-025000000001:~$ sudo passwd xxx  # user: xxx@linuxkit-025000000001
+xxx@linuxkit-025000000001:~$ sudo passwd root # user: root
+xxx@linuxkit-025000000001:~$ cat /etc/hostname
+
+linuxkit-025000000001
+
+xxx@linuxkit-025000000001:~$ cat /etc/hosts
+
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+xxx@linuxkit-025000000001:~$ sudo vim /etc/hosts
+# add linuxkit-025000000001 into 127.0.0.1       localhost
+# 127.0.0.1       localhost linuxkit-025000000001
+
+xxx@linuxkit-025000000001:~$ cat /etc/hosts
+
+127.0.0.1       localhost linuxkit-025000000001
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+</code></pre>
+</li>
+<li>
+<p>create directories for various data generated by FileScale</p>
+<pre><code class="language-bash">xxx@linuxkit-025000000001:~$ mkdir -p $HOME/hadoop/tmp
+xxx@linuxkit-025000000001:~$ mkdir -p $HOME/hadoop/name
+xxx@linuxkit-025000000001:~$ mkdir -p $HOME/hadoop/data
+</code></pre>
+</li>
+<li>
+<p>change both <strong>core_site.xml</strong> and <strong>hdfs-site.xml</strong> under <code>hadoop-dist/target/hadoop-3.3.0-SNAPSHOT/etc/hadoop/</code></p>
+<ul>
+<li>
+<p><strong>core_site.xml</strong>:</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.defaultFS&lt;/name&gt;
+        &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;/home/gangl/hadoop/tmp&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Note: <code>/home/gangl</code> should be your <code>HOME</code> directory. <code>192.168.65.3</code> is retrieved by <code>/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'</code>.</p>
+</li>
+<li>
+<p><strong>hdfs-site.xml</strong>:</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+        &lt;value&gt;/home/gangl/hadoop/name&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;property&gt;
+        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+        &lt;value&gt;/home/gangl/hadoop/data&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+      &lt;name&gt;dfs.namenode.fs-limits.min-block-size&lt;/name&gt;
+      &lt;value&gt;10&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.webhdfs.enabled&lt;/name&gt;
+        &lt;value&gt;true&lt;/value&gt;
+        &lt;description&gt;web permission to acccess HDFS&lt;/description&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;ipc.maximum.data.length&lt;/name&gt;
+        &lt;value&gt;268435456&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Note: <code>/home/gangl</code> should be your <code>HOME</code> directory.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>generate a new SSH key</p>
+<pre><code class="language-bash">xxx@linuxkit-025000000001:~$ mkdir -p ~/.ssh
+xxx@linuxkit-025000000001:~$ ssh-keygen -t rsa -f ~/.ssh/id_dsa  
+xxx@linuxkit-025000000001:~$ cat ~/.ssh/id_dsa.pub &gt;&gt; ~/.ssh/authorized_keys  
+xxx@linuxkit-025000000001:~$ chmod 0600 ~/.ssh/authorized_keys
+xxx@linuxkit-025000000001:~$ ssh-copy-id -i  localhost
+xxx@linuxkit-025000000001:~$ sudo service ssh restart
+xxx@linuxkit-025000000001:~$ ssh localhost
+# exit
+</code></pre>
+</li>
+<li>
+<p>set environment variables</p>
+<ul>
+<li>
+<p>set env variables in <code>hadoop-dist/target/hadoop-3.3.0-SNAPSHOT/etc/hadoop/hadoop-env.sh</code>:</p>
+<pre><code class="language-bash"># 1. change env variables' value in hadoop-env.sh
+# note: `/home/gangl` should be your `HOME` directory.
+export HADOOP_ROOT_LOGGER=INFO,console
+export HADOOP_CLASSPATH=&quot;/home/gangl/commons-pool2-2.6.2/commons-pool2-2.6.2.jar:/home/gangl/java/postgresql-42.2.5.jar:/home/gangl/voltadb/voltdb-ent-8.4.2/voltdb/voltdb-8.4.2.jar:/home/gangl/voltadb/voltdb-ent-8.4.2/voltdb/voltdbclient-8.4.2.jar:&quot;
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+export DATABASE=&quot;VOLT&quot;
+export VOLTDB_SERVER=&quot;localhost&quot;
+export ENABLE_NN_PROXY=&quot;false&quot;
+export FILESCALE_FILES_PER_DIRECTORY=&quot;100000&quot;
+export UPDATE_DB_TIME_DELAY=&quot;1000&quot;
+export OBJECT_CACHE_SIZE=&quot;1000000000&quot;
+</code></pre>
+</li>
+<li>
+<p>set env variables in <code>/etc/environment</code>:</p>
+<pre><code class="language-bash"># add JAVA_HOME to sudo vim /etc/environment
+xxx@linuxkit-025000000001:~$ sudo vim /etc/environment
+
+# add the following line into /etc/environment 
+JAVA_HOME=&quot;/usr/lib/jvm/java-1.8.0-openjdk-amd64&quot;
+
+# set database
+DATABASE=&quot;COCKROACH&quot;
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>env <code>DATABASE</code>: connect to selected database system at runtime!</p>
+</blockquote>
+<ol start="6">
+<li>
+<p>deploy FileScale</p>
+<pre><code class="language-bash">cd $HADOOP_HOME
+
+# reformat namenode
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./bin/hdfs namenode -format
+
+# kill former namenode and datanode processes
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ kill $(jps | grep '[NameNode,DataNode]' | awk '{print $1}')
+
+# deploy HDFS
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ ./sbin/start-dfs.sh
+
+# check alive HDFS processes
+xxx@linuxkit-025000000001:~/.../hadoop-3.3.0-SNAPSHOT$ jps
+</code></pre>
+<p>Note: using <code>jps</code> to make sure all three processes are running!</p>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../setup/build_code.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../setup/test.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../setup/build_code.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../setup/test.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

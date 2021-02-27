@@ -1,0 +1,17 @@
+com.mysql.clusterj.connectstring = 172.31.46.8:1186
+com.mysql.clusterj.database = hops
+com.mysql.clusterj.connection.pool.size = 1
+com.mysql.clusterj.max.transactions = 1024
+
+#io.hops.metadata.ndb.mysqlserver.data_source_class_name = com.mysql.jdbc.jdbc2.optional.MysqlDataSource
+io.hops.metadata.ndb.mysqlserver.data_source_class_name = com.mysql.cj.jdbc.MysqlDataSource
+io.hops.metadata.ndb.mysqlserver.host = 172.31.46.8
+io.hops.metadata.ndb.mysqlserver.port = 3306
+io.hops.metadata.ndb.mysqlserver.username = root
+io.hops.metadata.ndb.mysqlserver.password = xxxxxxxx
+io.hops.metadata.ndb.mysqlserver.connection_pool_size = 10
+
+#size of the session pool. should be altreat as big as the number of active Tx in the system
+io.hops.session.pool.size = 1000
+#Session is reused n times and then it is GCed
+io.hops.session.reuse.count = 5000
