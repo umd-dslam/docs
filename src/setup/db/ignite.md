@@ -1,6 +1,6 @@
 
 ```docker
-docker run -d -p 10800:10800 -p 47500:47500 -p 49112:49112 -p 11211:11211 apacheignite/ignite
+docker run -d -p 10800:10800 -p 47500:47500 -p 49112:49112 -p 11211:11211 -v /root/hadoop/filescale_init/config/ignite-config.xml:/config-file.xml -e CONFIG_URI=/config-file.xml  apacheignite/ignite:2.10.0
 ```
 
 ```bash
