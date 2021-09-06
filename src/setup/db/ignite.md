@@ -16,7 +16,7 @@ export IGNITE_SERVER="172.31.32.188"
 ```
 
 ```bash
-
+ bash build_with_ignite.sh
 ```
 
 
