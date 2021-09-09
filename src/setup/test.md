@@ -43,10 +43,15 @@ $ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs 
 $ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op clean -keepResults -logLevel INFO
 ```
 
-### Recursive Delete a Directory
+### Rename Directory
 
 ```shell
 $ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op create -threads 1 -files 2 -filesPerDir 1000 -keepResults -logLevel INFO
 $ ./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -fs hdfs://localhost:9000 -op renameDir -keepResults -logLevel INFO
 ```
 
+### Chmod
+
+```shell
+./bin/hadoop org.apache.hadoop.hdfs.server.namenode.NNThroughputBenchmark -op chmodDir  -logLevel INFO &
+```
