@@ -12,6 +12,7 @@
         - [Recommend: VoltDB Cluster](./setup/db/voltdb.md)
         - [Option: Postgres](./setup/db/postgres.md)
         - [Option: Cockroach Cluster](./setup/db/cockroach.md)
+        - [Option: Apache Ignite](./setup/db/ignite.md)
     - [Create Dev Image](./setup/hadoop_image.md)
     - [Build Source Code](./setup/build_code.md)
     - [Deploy FileScale](./setup/deploy_hdfs.md)
