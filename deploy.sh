@@ -6,6 +6,7 @@ rev=$(git rev-parse --short HEAD)
 
 rm -rf book
 
+
 echo 'Building...'
 mdbook build
 
